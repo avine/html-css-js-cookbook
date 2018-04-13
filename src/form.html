@@ -5,6 +5,9 @@
   <meta charset="utf-8">
   <title>Inline text</title>
   <script src="./index.js"></script>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+  <link rel="stylesheet" href="./index.css">
 </head>
 
 <body>
@@ -81,12 +84,21 @@
   </form>
 
   <script>
-
     input.addEventListener('input', () => {
       meter.value = input.value;
       progress.value = input.value;
       output.value = input.value;
     });
+  </script>
+
+  <label for="myfile" style="cursor:pointer">Choose a file</label>
+  <input id="myfile" type="file" style="display:none">
+  <output id="myfileOutput" style="font-size:0.8em"></output>
+
+  <script>
+    myfile.addEventListener('change', function( event ) {
+      myfileOutput.value = '(' + this.value.replace(/\\/g, '/').split('/').pop() + ')';
+  });
   </script>
 
 </body>

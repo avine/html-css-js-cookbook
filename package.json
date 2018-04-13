@@ -1,0 +1,28 @@
+{
+  "name": "html-css-js-cookbook",
+  "version": "0.0.1",
+  "description": "Web cookbook",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel ./src/index.html --open",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avine/html-css-js-cookbook.git"
+  },
+  "keywords": [
+    "html",
+    "css",
+    "javascript"
+  ],
+  "author": "Stéphane Francel <contact@avine.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/avine/html-css-js-cookbook/issues"
+  },
+  "homepage": "https://github.com/avine/html-css-js-cookbook#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.7.0"
+  }
+}

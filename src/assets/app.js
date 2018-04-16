@@ -1,6 +1,7 @@
 function bootstrapApp() {
   const menu = Helper.createNode('<div class="app-menu">');
   menu.appendChild(Actions.toggleCss());
+  menu.appendChild(Actions.viewCode());
 
   const body = document.querySelector('body');
   body.appendChild(menu);
@@ -15,12 +16,16 @@ class Actions {
     const headCss = document.querySelectorAll('head .app-css');
     const bodyCss = document.querySelectorAll('body .app-css');
     return Helper.getAction('Disable CSS', () => {
-      headCss.forEach(css => toggle(css, head));
-      bodyCss.forEach(css => toggle(css, body));
+      headCss.forEach(css => Helper.toggleNode(css, head));
+      bodyCss.forEach(css => Helper.toggleNode(css, body));
     });
-    function toggle(css, parent) {
-      css.parentNode ? parent.removeChild(css) : parent.appendChild(css);
-    }
+  }
+
+  static viewCode() {
+    const body = document.querySelector('body');
+    const source = Helper.createNode('<pre class="app-code"><code></code></pre>');
+    source.firstChild.innerText = body.innerHTML.trim();
+    return Helper.getAction('View code', () => Helper.toggleNode(source, body));
   }
 }
 
@@ -28,7 +33,7 @@ class Helper {
   static createNode(node) {
     const wrap = document.createElement('div');
     wrap.innerHTML = node;
-    return wrap.firstChild;
+    return wrap.removeChild(wrap.firstChild);
   }
 
   static getAction(title, callback) {
@@ -39,5 +44,9 @@ class Helper {
       callback();
     })
     return action;
+  }
+
+  static toggleNode(node, parent) {
+    node.parentNode ? parent.removeChild(node) : parent.appendChild(node);
   }
 }

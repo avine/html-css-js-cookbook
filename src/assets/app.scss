@@ -1,0 +1,27 @@
+.app-menu {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: 1px solid #222;
+  background-color: #333;
+  font-family: monospace;
+  font-size: 11px;
+  line-height: 22px;
+
+  a {
+    display: block;
+    color: lightblue;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &.app-menu__action_active {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+}

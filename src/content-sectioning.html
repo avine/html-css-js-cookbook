@@ -4,14 +4,17 @@
 <head>
   <meta charset="utf-8">
   <title>Content sectioning</title>
-  <script src="./index.js"></script>
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
-  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="./assets/main.scss" class="app-css">
+
+  <link rel="stylesheet" href="./assets/app.scss">
+  <script src="./assets/app.js"></script>
 </head>
 
 <body>
-  <article>
+  <header>
+    <b>tags:</b>
     <code>address</code>
     <code>article</code>
     <code>aside</code>
@@ -21,42 +24,64 @@
     <code>hgroup</code>
     <code>nav</code>
     <code>section</code>
-  </article>
+  </header>
 
   <hgroup>
-    <h1>Title</h1>
-    <h2>Sub-Title</h2>
+    <h1>HTML elements reference</h1>
+    <h2>Quick overview</h2>
   </hgroup>
 
-  <h3>Section title</h3>
+  <nav>
+    <ul>
+      <li><a href="#document-metadata">Document metadata</a></li>
+      <li><a href="#sectioning-root">Sectioning root</a></li>
+    </ul>
+  </nav>
+
   <section>
-    <header>Header</header>
-    <footer>Footer</footer>
+    <h2 id="document-metadata">Document metadata</h2>
+    <header>Metadata contains information about the page. This includes information about styles, scripts and data to help software (search engines, browsers, etc.) use and render the page. Metadata for styles and scripts may be defined in the page or link to another file that has the information. </header>
+
+    <article>
+      <h3>&lt;link&gt;</h3>
+      <p>The HTML &lt;link&gt; element specifies relationships between the current document and an external resource. Possible uses for this element include defining a relational framework for navigation. This element is most used to link to style sheets.</p>
+    </article>
+
+    <article>
+      <h3>&lt;meta&gt;</h3>
+      <p>The HTML &lt;meta&gt; element represents metadata that cannot be represented by other HTML meta-related elements, like &lt;base&gt;, &lt;link&gt;, &lt;script&gt;, &lt;style&gt; or &lt;title&gt;.</p>
+    </article>
+    <article>
+      <h3>&lt;style&gt;</h3>
+      <p>The HTML &lt;style&gt; element contains style information for a document, or part of a document.</p>
+    </article>
+
+    <article>
+      <h3>&lt;title&gt;</h3>
+      <p>The HTML Title element (&lt;title&gt;) defines the title of the document, shown in a browser's title bar or on the page's tab.</p>
+    </article>
+
+    <footer>More details about <a href="#">document metadata</a>.</footer>
   </section>
 
-  <h3>Section title</h3>
   <section>
-    <header>Header</header>
-    <footer>Footer</footer>
+    <h2 id="sectioning-root">Sectioning root</h2>
+
+    <article>
+      <h3>&lt;body&gt;</h3>
+      <p>The HTML &lt;body&gt; Element represents the content of an HTML document. There can be only one &lt;body&gt; element in a document.</p>
+    </article>
   </section>
 
-  <address>address</address>
+  <address>Author: Stéphane Francel.</address>
 
-  <header>header</header>
-  <nav>nav</nav>
-  <section>section</section>
-  <article>article</article>
-  <aside>aside</aside>
-  <footer>footer</footer>
-
-  <hgroup>
-    <h1>h1</h1>
-    <h2>h2</h2>
-    <h3>h3</h3>
-    <h4>h4</h4>
-    <h5>h5</h5>
-    <h6>h6</h6>
-  </hgroup>
+  <aside>
+    <h4>Jump to:</h4>
+    <ul>
+      <li><a href="#">Introduction to HTML</a></li>
+      <li><a href="#">Multimedia and embedding</a></li>
+    </ul>
+  </aside>
 </body>
 
 </html>

@@ -8,30 +8,25 @@ function bootstrapApp() {
 
   const body = document.querySelector('body');
   body.appendChild(menu);
-};
+}
 
 window.addEventListener('DOMContentLoaded', bootstrapApp);
 
 class Actions {
   static toggleCss() {
-    const head = document.querySelector('head');
-    const body = document.querySelector('body');
-    const headCss = document.querySelectorAll('head .app-css');
-    const bodyCss = document.querySelectorAll('body .app-css');
+    const allCss = document.querySelectorAll('[app-css]');
     return Helper.getAction('Disable CSS', () => {
-      headCss.forEach(css => Helper.toggleNode(css, head));
-      bodyCss.forEach(css => Helper.toggleNode(css, body));
+      allCss.forEach(css => Helper.toggleNode(css));
     });
   }
 
   static viewCode() {
     const body = document.querySelector('body');
-
     const source = document.querySelector('[app-content]');
-    source.classList.add('app-content__source');
     const wrap = Helper.wrapNode(source, 'app-content__wrap');
-
     const code = Helper.createNode('<pre class="app-content__code language-html"><code></code></pre>');
+
+    source.classList.add('app-content__source');
     code.firstChild.innerHTML = highlight(source.innerHTML.trim(), languages.html, 'html');
 
     return Helper.getAction('View code', () => {
@@ -60,13 +55,37 @@ class Helper {
     const action = Helper.createNode(`<a href="#" class="app-menu__action">${title}</a>`);
     action.addEventListener('click', function (e) {
       e.preventDefault();
-      action.classList.toggle('app-menu__action_active');
+      sessionStorage.setItem(title, action.classList.toggle('app-menu__action_active'));
       callback();
-    })
+    });
+    if (sessionStorage.getItem(title) === 'true') action.click();
     return action;
   }
 
-  static toggleNode(node, parent) {
-    node.parentNode ? parent.removeChild(node) : parent.appendChild(node);
+  static toggleNode(node, parent = undefined) {
+    let id = node.getAttribute('app-toggle-id');
+    if (!id) {
+      id = Helper.getId();
+      node.setAttribute('app-toggle-id', id);
+      if (!node.parentNode) {
+        parent.appendChild(node); // `parent` required to insert `node` the first time
+        return;
+      }
+    }
+    let placeholder;
+    if (node.parentNode) {
+      placeholder = Helper.createNode(`<script type="placeholder" app-toggle-id="${id}">`);
+      node.parentNode.insertBefore(placeholder, node);
+      node.parentNode.removeChild(node);
+    } else {
+      placeholder = document.querySelector(`[app-toggle-id="${id}"]`);
+      placeholder.parentNode.insertBefore(node, placeholder);
+      placeholder.parentNode.removeChild(placeholder);
+    }
   }
 }
+
+Helper.getId = (function () {
+  let id = 1;
+  return () => id++;
+}());

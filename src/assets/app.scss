@@ -20,7 +20,7 @@
       text-decoration: underline;
     }
 
-    &.app-menu__action_active {
+    &.app-menu__link_active {
       color: #fff;
       text-decoration: none;
     }
@@ -33,14 +33,16 @@
   .app-content__wrap {
     display: flex;
     justify-content: space-between;
+  }
 
-    > * {
-      box-sizing: border-box;
-      width: 49%;
-      max-height: 80vh;
-      overflow: auto;
-      padding: 1rem;
-    }
+  .app-content__source,
+  .app-content__code {
+    box-sizing: border-box;
+    width: 49%;
+    max-height: 80vh;
+    overflow: auto;
+    margin: 0;
+    padding: 1rem;
   }
 
   .app-content__source {
@@ -48,7 +50,6 @@
   }
 
   .app-content__code {
-    margin: 0;
     border-radius: 0;
     border: none;
     line-height: 1em;

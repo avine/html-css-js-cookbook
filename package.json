@@ -24,6 +24,7 @@
   "homepage": "https://github.com/avine/html-css-js-cookbook#readme",
   "devDependencies": {
     "node-sass": "^4.8.3",
+    "node-treeview": "^1.2.0",
     "parcel-bundler": "^1.7.0"
   },
   "dependencies": {

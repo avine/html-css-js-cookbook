@@ -1,6 +1,5 @@
 <!doctype html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <title>Text content</title>
@@ -10,63 +9,69 @@
 
   <link rel="stylesheet" href="./assets/app.scss">
   <script src="./assets/app.js"></script>
+
+  <link href="../node_modules/prismjs/themes/prism.css" rel="stylesheet">
+  <script src="../node_modules/prismjs/prism.js" data-manual></script>
 </head>
-
 <body>
-  <header>
-    <b>tags:</b>
-    <code>blockquote</code>
-    <code>dd</code>
-    <code>div</code>
-    <code>dl</code>
-    <code>dt</code>
-    <code>figcaption</code>
-    <code>figure</code>
-    <code>hr</code>
-    <code>li</code>
-    <code>main</code>
-    <code>ol</code>
-    <code>p</code>
-    <code>pre</code>
-    <code>ul</code>
-  </header>
 
-  <h1>Text content</h1>
+<header>
+  <b>tags:</b>
+  <code>blockquote</code>
+  <code>dd</code>
+  <code>div</code>
+  <code>dl</code>
+  <code>dt</code>
+  <code>figcaption</code>
+  <code>figure</code>
+  <code>hr</code>
+  <code>li</code>
+  <code>main</code>
+  <code>ol</code>
+  <code>p</code>
+  <code>pre</code>
+  <code>ul</code>
+</header>
 
-  <blockquote>blockquote</blockquote>
+<div app-content>
 
-  <dl>
-    <dt>dt</dt>
-    <dd>dd</dd>
+<h1>Text content</h1>
 
-    <dt>dt</dt>
-    <dd>dd</dd>
-  </dl>
+<blockquote>blockquote</blockquote>
 
-  <div>div</div>
+<dl>
+  <dt>dt</dt>
+  <dd>dd</dd>
 
-  <figure>
-    <img src="https://developer.cdn.mozilla.net/media/img/mdn-logo-sm.png" alt="An awesome picture">
-    <figcaption>MDN Logo</figcaption>
-  </figure>
+  <dt>dt</dt>
+  <dd>dd</dd>
+</dl>
 
-  <hr>
+<div>div</div>
 
-  <ul>
-    <li>ul li</li>
-    <li>ul li</li>
-  </ul>
+<figure>
+  <img src="https://developer.cdn.mozilla.net/media/img/mdn-logo-sm.png" alt="An awesome picture">
+  <figcaption>MDN Logo</figcaption>
+</figure>
 
-  <ol>
-    <li>ol li</li>
-    <li>ol li</li>
-  </ol>
+<hr>
 
-  <main>main</main>
+<ul>
+  <li>ul li</li>
+  <li>ul li</li>
+</ul>
 
-  <p>p</p>
+<ol>
+  <li>ol li</li>
+  <li>ol li</li>
+</ol>
 
-  <pre>pre</pre>
+<main>main</main>
+
+<p>p</p>
+
+<pre>pre</pre>
+
+</div>
 </body>
-
 </html>

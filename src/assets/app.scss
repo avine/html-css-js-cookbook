@@ -27,12 +27,30 @@
   }
 }
 
-.app-code {
-  z-index: 10;
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  max-width: 80vw;
-  max-height: 80vh;
-  margin: 0;
+.app-content {
+  max-width: initial;
+
+  .app-content__wrap {
+    display: flex;
+    justify-content: space-between;
+
+    > * {
+      box-sizing: border-box;
+      width: 49%;
+      max-height: 80vh;
+      overflow: auto;
+      padding: 1rem;
+    }
+  }
+
+  .app-content__source {
+    background-color: #f5f5f5;
+  }
+
+  .app-content__code {
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    line-height: 1em;
+  }
 }

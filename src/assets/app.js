@@ -1,3 +1,6 @@
+
+import { highlight, languages } from 'prismjs';
+
 function bootstrapApp() {
   const menu = Helper.createNode('<div class="app-menu">');
   menu.appendChild(Actions.toggleCss());
@@ -23,9 +26,18 @@ class Actions {
 
   static viewCode() {
     const body = document.querySelector('body');
-    const source = Helper.createNode('<pre class="app-code"><code></code></pre>');
-    source.firstChild.innerText = body.innerHTML.trim();
-    return Helper.getAction('View code', () => Helper.toggleNode(source, body));
+
+    const source = document.querySelector('[app-content]');
+    source.classList.add('app-content__source');
+    const wrap = Helper.wrapNode(source, 'app-content__wrap');
+
+    const code = Helper.createNode('<pre class="app-content__code language-html"><code></code></pre>');
+    code.firstChild.innerHTML = highlight(source.innerHTML.trim(), languages.html, 'html');
+
+    return Helper.getAction('View code', () => {
+      body.classList.toggle('app-content');
+      Helper.toggleNode(code, wrap);
+    });
   }
 }
 
@@ -34,6 +46,14 @@ class Helper {
     const wrap = document.createElement('div');
     wrap.innerHTML = node;
     return wrap.removeChild(wrap.firstChild);
+  }
+
+  static wrapNode(node, css = '') {
+    const wrap = Helper.createNode('<div>');
+    if (css) wrap.classList.add(css);
+    node.parentNode.insertBefore(wrap, node);
+    wrap.appendChild(node);
+    return wrap;
   }
 
   static getAction(title, callback) {

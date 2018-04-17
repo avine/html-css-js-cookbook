@@ -25,5 +25,9 @@
   "devDependencies": {
     "node-sass": "^4.8.3",
     "parcel-bundler": "^1.7.0"
+  },
+  "dependencies": {
+    "Prism": "^2.0.0",
+    "prismjs": "^1.14.0"
   }
 }

@@ -4,11 +4,13 @@
   <meta charset="utf-8">
   <title>{{title}}</title>
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
-  <link rel="stylesheet" href="./assets/main.scss" app-css>
+  <base href="{{baseHref}}">
 
-  <link rel="stylesheet" href="./assets/app.scss">
-  <script src="./assets/app.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+  <link rel="stylesheet" href="assets/main.scss" app-css>
+
+  <link rel="stylesheet" href="assets/app.scss">
+  <script src="assets/app.js"></script>
 
   <link href="../node_modules/prismjs/themes/prism.css" rel="stylesheet">
   <script src="../node_modules/prismjs/prism.js" data-manual></script>
@@ -17,6 +19,7 @@
 <div app-content>
 
 {{content}}
+
 </div>
 </body>
 </html>

@@ -5,7 +5,7 @@ export function createNode(node) {
 }
 
 export function wrapNode(node, css = '') {
-  const wrap = createNode('<div>');
+  const wrap = document.createElement('div');
   if (css) wrap.classList.add(css);
   node.parentNode.insertBefore(wrap, node);
   wrap.appendChild(node);

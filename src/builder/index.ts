@@ -9,7 +9,7 @@ const TMPL_NAME = '_template.html';
 
 const ROOT_PATH = resolve('./');
 const PAGES_PATH = resolve('./src/pages');
-const WWW_PATH = resolve('./www');
+const BUILD_PATH = resolve('./build');
 
 function filenameToTitle(filename: string) {
   const title = filename
@@ -32,7 +32,7 @@ function getTmplGenerator(tree: TreeNode[]): ProcessTmpl {
       .replace('{{title}}', filenameToTitle(filename))
       .replace('{{content}}', content || '');
 
-    writeFileSync(resolve(WWW_PATH, path, filename), pageContent, 'utf8');
+    writeFileSync(resolve(BUILD_PATH, path, filename), pageContent, 'utf8');
     console.log('change:', relative(ROOT_PATH, resolve(PAGES_PATH, path, filename)));
   };
 }

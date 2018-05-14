@@ -10,4 +10,21 @@ function bootstrapApp() {
   body.appendChild(menu);
 }
 
-window.addEventListener('DOMContentLoaded', bootstrapApp);
+function handleSpa() {
+  const content = document.querySelector('[app-content]');
+  document.addEventListener('click', function (event) {
+    if (event.target.nodeName.toLowerCase() === 'a' && event.target.getAttribute('app-link') !== null) {
+      event.preventDefault();
+      const href = event.target.href;
+
+      fetch(href).then(response => response.text()).then(html => {
+        content.innerHTML = html;
+      });
+    }
+  });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  bootstrapApp();
+  handleSpa();
+});

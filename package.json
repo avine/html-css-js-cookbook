@@ -4,10 +4,7 @@
   "description": "Web cookbook",
   "main": "index.js",
   "scripts": {
-    "clean": "shx rm -rf ./build ./dist",
-    "prebuild": "shx mkdir -p ./build && shx cp -R ./src/assets ./build/assets",
-    "build": "shx mkdir -p ./build && ts-node ./src/builder/index",
-    "start": "parcel ./build/index.html",
+    "start": "parcel ./src/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -28,7 +25,6 @@
   "devDependencies": {
     "@types/node": "^10.0.8",
     "node-sass": "^4.9.0",
-    "node-treeview": "^1.4.8",
     "parcel-bundler": "^1.8.1",
     "shx": "^0.2.2",
     "ts-node": "^6.0.3",

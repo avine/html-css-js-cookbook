@@ -37,7 +37,7 @@ hgroup {
   }
 }
 
-a {
+a, .app-link {
   cursor: pointer;
   color: var(--link-color);
   text-decoration: none;

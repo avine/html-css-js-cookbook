@@ -1,4 +1,4 @@
-.app-menu {
+.app-tool {
   z-index: 11;
   position: fixed;
   right: 10px;
@@ -20,7 +20,7 @@
       text-decoration: underline;
     }
 
-    &.app-menu__link_active {
+    &.app-tool__link_active {
       color: #fff;
       text-decoration: none;
     }

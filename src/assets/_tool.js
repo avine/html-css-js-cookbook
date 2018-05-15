@@ -22,11 +22,11 @@ export function viewCode() {
   }).link;
 }
 
-export function bootstrapMenu() {
-  const menu = createNode('<div class="app-menu">');
-  menu.appendChild(toggleCss());
-  menu.appendChild(viewCode());
+export function bootstrapTool() {
+  const tool = createNode('<div class="app-tool">');
+  tool.appendChild(toggleCss());
+  tool.appendChild(viewCode());
 
   const body = document.querySelector('body');
-  body.appendChild(menu);
+  body.appendChild(tool);
 }

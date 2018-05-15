@@ -41,10 +41,10 @@ export function toggleNode(node, parent = undefined) {
 }
 
 export function getAction(title, callback) {
-  const link = createNode(`<a href="#" class="app-menu__link">${title}</a>`);
+  const link = createNode(`<a href="#" class="app-tool__link">${title}</a>`);
   const handler = (e) => {
     if (e) e.preventDefault();
-    sessionStorage.setItem(title, link.classList.toggle('app-menu__link_active'));
+    sessionStorage.setItem(title, link.classList.toggle('app-tool__link_active'));
     callback();
   };
   link.addEventListener('click', handler);

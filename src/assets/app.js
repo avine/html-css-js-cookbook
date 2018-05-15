@@ -1,7 +1,7 @@
-import { bootstrapMenu } from './_actions';
+import { bootstrapTool } from './_tool';
 import { bootstrapRouter } from './_router';
 
 window.addEventListener('DOMContentLoaded', () => {
-  bootstrapMenu();
+  bootstrapTool();
   bootstrapRouter();
 });

@@ -50,3 +50,9 @@ let id = 1;
 export function getId() {
   return id++;
 }
+
+export function getUrl(href) {
+  const a = document.createElement('a');
+  a.setAttribute('href', href);
+  return a.href;
+}

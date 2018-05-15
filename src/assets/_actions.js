@@ -21,3 +21,12 @@ export function viewCode() {
     toggleNode(code, wrap);
   }).link;
 }
+
+export function bootstrapMenu() {
+  const menu = createNode('<div class="app-menu">');
+  menu.appendChild(toggleCss());
+  menu.appendChild(viewCode());
+
+  const body = document.querySelector('body');
+  body.appendChild(menu);
+}

@@ -17,28 +17,44 @@
 </head>
 <body>
 
-<h1>Web exploration</h1>
+<div class="app-grid">
+  <div class="app-grid__header">
+    Header
+  </div>
 
-<nav>
-  <ul>
-    <li><span class="app-link" app-link="./">Index</span></li>
-    <li><a app-link="pages/content-sectioning.html">Content sectioning</a></li>
-    <li><a app-link href="pages/text-content.html">Text content</a></li>
-    <li><a app-link href="pages/inline-text.html">Inline text</a></li>
-    <li><a app-link href="pages/demarcating-edits.html">Demarcating edits</a></li>
-    <li><a app-link href="pages/table.html">Table</a></li>
-    <li><a app-link href="pages/form.html">Form</a></li>
-    <li><a app-link href="pages/interactive-elements.html">Interactive elements</a></li>
-  </ul>
-</nav>
+  <div class="app-grid__menu">
+    <h1>Web exploration</h1>
 
-<address>
-  Based on
-  <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">
-    Mozilla HTML elements reference</a>.
-</address>
+    <nav>
+      <ul>
+        <li><span class="app-link" app-link="./">Index</span></li>
+        <li><a app-link="pages/content-sectioning.html">Content sectioning</a></li>
+        <li><a app-link href="pages/text-content.html">Text content</a></li>
+        <li><a app-link href="pages/inline-text.html">Inline text</a></li>
+        <li><a app-link href="pages/demarcating-edits.html">Demarcating edits</a></li>
+        <li><a app-link href="pages/table.html">Table</a></li>
+        <li><a app-link href="pages/form.html">Form</a></li>
+        <li><a app-link href="pages/interactive-elements.html">Interactive elements</a></li>
+      </ul>
+    </nav>
 
-<div app-content></div>
+    <address>
+      Based on
+      <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">
+        Mozilla HTML elements reference</a>.
+    </address>
+  </div>
+
+  <div class="app-grid__content">
+    <div app-content>
+      <h1>Welcome to Web exploration!</h1>
+    </div>
+  </div>
+
+  <div class="app-grid__footer">
+    Footer
+  </div>
+</div>
 
 </body>
 </html>

@@ -1,6 +1,7 @@
 import { highlight, languages } from 'prismjs';
 
 import { createNode, getAction, toggleNode, wrapNode } from './_helper';
+import { ON_NAVIGATE } from './_router';
 
 export function toggleCss() {
   const allCss = document.querySelectorAll('[app-css]');
@@ -15,9 +16,13 @@ export function viewCode() {
   const wrap = wrapNode(source, 'app-content__wrap');
   const code = createNode('<pre class="app-content__code language-html"><code></code></pre>');
   source.classList.add('app-content__source');
+  const refresh = () => {
+    code.firstChild.innerHTML = highlight(source.innerHTML.trim(), languages.html, 'html');
+  };
+  window.addEventListener(ON_NAVIGATE, refresh);
   return getAction('View code', () => {
     body.classList.toggle('app-content');
-    code.firstChild.innerHTML = highlight(source.innerHTML.trim(), languages.html, 'html');
+    refresh();
     toggleNode(code, wrap);
   }).link;
 }

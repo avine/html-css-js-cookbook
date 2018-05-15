@@ -1,7 +1,10 @@
 import { getUrl } from './_helper';
 
-let defaultUrl;
 let content;
+let defaultContent;
+let defaultUrl;
+
+export const ON_NAVIGATE = 'app-navigate';
 
 export function pushState(url) {
   window.history.pushState({ appUrl: url }, null, url);
@@ -21,14 +24,22 @@ export function bootstrapScripts() {
   });
 }
 
+export function emit(appUrl) {
+  const event = new CustomEvent(ON_NAVIGATE, { detail: { appUrl } });
+  window.dispatchEvent(event);
+}
+
 export function navigate(url) {
   if (url && url !== defaultUrl) {
     fetch(url).then(response => response.text()).then((html) => {
       content.innerHTML = html;
       bootstrapScripts();
+      emit(url);
     });
   } else {
-    content.innerHTML = '';
+    content.innerHTML = defaultContent;
+    bootstrapScripts();
+    emit(defaultUrl);
   }
 }
 
@@ -60,8 +71,9 @@ export function linkHandler(event) {
 
 export function bootstrapRouter() {
   // Init
-  defaultUrl = window.location.href;
   content = document.querySelector('[app-content]');
+  defaultContent = content.innerHTML;
+  defaultUrl = window.location.href;
 
   // On first load (for Chrome)
   replaceState(defaultUrl);

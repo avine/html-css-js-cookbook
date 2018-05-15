@@ -1,3 +1,9 @@
+let id = 0;
+export function getId() {
+  id += 1;
+  return id;
+}
+
 export function createNode(node) {
   const wrap = document.createElement('div');
   wrap.innerHTML = node;
@@ -13,10 +19,10 @@ export function wrapNode(node, css = '') {
 }
 
 export function toggleNode(node, parent = undefined) {
-  let id = node.getAttribute('app-toggle-id');
-  if (!id) {
-    id = getId();
-    node.setAttribute('app-toggle-id', id);
+  let toggleId = node.getAttribute('app-toggle-id');
+  if (!toggleId) {
+    toggleId = getId();
+    node.setAttribute('app-toggle-id', toggleId);
     if (!node.parentNode) {
       parent.appendChild(node); // `parent` required to insert `node` the first time
       return;
@@ -36,7 +42,7 @@ export function toggleNode(node, parent = undefined) {
 
 export function getAction(title, callback) {
   const link = createNode(`<a href="#" class="app-menu__link">${title}</a>`);
-  const handler = function (e) {
+  const handler = (e) => {
     if (e) e.preventDefault();
     sessionStorage.setItem(title, link.classList.toggle('app-menu__link_active'));
     callback();
@@ -44,11 +50,6 @@ export function getAction(title, callback) {
   link.addEventListener('click', handler);
   if (sessionStorage.getItem(title) === 'true') handler();
   return { link, handler };
-}
-
-let id = 1;
-export function getId() {
-  return id++;
 }
 
 export function getUrl(href) {

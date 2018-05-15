@@ -1,8 +1,8 @@
-import { createNode, getUrl } from './_helper';
+import { createNode } from './_helper';
 import { toggleCss, viewCode } from './_actions';
 import { bootstrapRouter } from './_router';
 
-function bootstrapApp() {
+function bootstrapMenu() {
   const menu = createNode('<div class="app-menu">');
   menu.appendChild(toggleCss());
   menu.appendChild(viewCode());
@@ -11,7 +11,8 @@ function bootstrapApp() {
   body.appendChild(menu);
 }
 
+
 window.addEventListener('DOMContentLoaded', () => {
-  // bootstrapApp();
+  // bootstrapMenu();
   bootstrapRouter();
 });

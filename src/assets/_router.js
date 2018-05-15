@@ -4,11 +4,32 @@ let defaultUrl;
 let content;
 
 export function pushState(url) {
-  history.pushState({ appUrl: url }, null, url);
+  window.history.pushState({ appUrl: url }, null, url);
 }
 
 export function replaceState(url) {
-  history.replaceState({ appUrl: url }, null, url);
+  window.history.replaceState({ appUrl: url }, null, url);
+}
+
+export function bootstrapScripts() {
+  content.querySelectorAll('script').forEach((dummy) => {
+    dummy.parentNode.removeChild(dummy);
+    const script = document.createElement('script');
+    script.setAttribute('app-script-alive', '');
+    script.innerHTML = dummy.innerHTML;
+    content.appendChild(script);
+  });
+}
+
+export function navigate(url) {
+  if (url && url !== defaultUrl) {
+    fetch(url).then(response => response.text()).then((html) => {
+      content.innerHTML = html;
+      bootstrapScripts();
+    });
+  } else {
+    content.innerHTML = '';
+  }
 }
 
 export function stateHandler(event) {
@@ -17,29 +38,8 @@ export function stateHandler(event) {
   }
 }
 
-export function navigate(url) {
-  if (url && url !== defaultUrl) {
-    fetch(url).then(response => response.text()).then(html => {
-      content.innerHTML = html;
-      bootstrapScript();
-    });
-  } else {
-    content.innerHTML = '';
-  }
-}
-
-export function bootstrapScript() {
-  content.querySelectorAll('script').forEach(dummy => {
-    dummy.parentNode.removeChild(dummy)
-    const script = document.createElement('script');
-    script.setAttribute('app-script-alive', '');
-    script.innerHTML = dummy.innerHTML;
-    content.appendChild(script);
-  });
-}
-
 export function linkHandler(event) {
-  let link = event.target.getAttribute('app-link');
+  const link = event.target.getAttribute('app-link');
   if (link !== null) {
     let url;
     if (link) {

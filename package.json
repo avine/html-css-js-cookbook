@@ -23,7 +23,10 @@
   },
   "homepage": "https://github.com/avine/html-css-js-cookbook#readme",
   "devDependencies": {
-    "@types/node": "^10.0.8",
+    "@types/node": "^10.0.9",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
     "node-sass": "^4.9.0",
     "parcel-bundler": "^1.8.1",
     "shx": "^0.2.2",

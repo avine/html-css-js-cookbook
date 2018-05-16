@@ -1,3 +1,3 @@
-# html-css-js-cookbook
+# web-explorer
 
 Web cookbook

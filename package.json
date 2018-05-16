@@ -1,6 +1,6 @@
 {
-  "name": "html-css-js-cookbook",
-  "version": "0.0.1",
+  "name": "web-explorer",
+  "version": "0.5.0",
   "description": "Web cookbook",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/avine/html-css-js-cookbook.git"
+    "url": "git+https://github.com/avine/web-explorer.git"
   },
   "keywords": [
     "html",
@@ -21,9 +21,9 @@
   "author": "Stéphane Francel <contact@avine.io>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/avine/html-css-js-cookbook/issues"
+    "url": "https://github.com/avine/web-explorer/issues"
   },
-  "homepage": "https://github.com/avine/html-css-js-cookbook#readme",
+  "homepage": "https://github.com/avine/web-explorer#readme",
   "devDependencies": {
     "@types/node": "^10.0.9",
     "eslint": "^4.19.1",

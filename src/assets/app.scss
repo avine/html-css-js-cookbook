@@ -1,5 +1,5 @@
 .app-grid {
-  --grid-gap: 2em;
+  --grid-gap: 1.25em;
   height: 100%;
   display: grid;
   grid-template-columns: 280px 1fr;
@@ -37,6 +37,22 @@
   grid-area: footer;
   padding: 1rem var(--grid-gap);
   background-color: #eee;
+}
+
+.app-grid_hide-menu {
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header"
+    "content"
+    "footer";
+
+  .app-grid__menu {
+    display: none;
+  }
+
+  .app-grid__content {
+    margin-left: var(--grid-gap);
+  }
 }
 
 .app-content {

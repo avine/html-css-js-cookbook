@@ -1,11 +1,28 @@
 import { highlight, languages } from 'prismjs';
 
-import { createNode, getAction, toggleNode, wrapNode } from './_helper';
+import { createNode, toggleNode, wrapNode } from './_helper';
 import { ON_NAVIGATE } from './_router';
 
-export function toggleCss() {
-  const allCss = document.querySelectorAll('[app-css]');
-  return getAction('Disable CSS', () => {
+export function getAction(title, callback) {
+  const link = createNode(`<a href="#" class="app-tool__link">${title}</a>`);
+  const action = {
+    link,
+    active: false,
+    handler: (e) => {
+      if (e) e.preventDefault();
+      action.active = link.classList.toggle('app-tool__link_active');
+      sessionStorage.setItem(title, action.active);
+      callback();
+    },
+  };
+  if (sessionStorage.getItem(title) === 'true') action.handler();
+  link.addEventListener('click', action.handler);
+  return action;
+}
+
+export function toggleCss(selector) {
+  const allCss = document.querySelectorAll(selector);
+  return getAction('<i class="fa fa-image"></i> Disable CSS', () => {
     allCss.forEach(css => toggleNode(css));
   }).link;
 }
@@ -20,7 +37,7 @@ export function viewCode() {
     code.firstChild.innerHTML = highlight(source.innerHTML.trim(), languages.html, 'html');
   };
   window.addEventListener(ON_NAVIGATE, refresh);
-  return getAction('View code', () => {
+  return getAction('<i class="fa fa-code"></i> View code', () => {
     body.classList.toggle('app-content');
     refresh();
     toggleNode(code, wrap);
@@ -29,7 +46,7 @@ export function viewCode() {
 
 export function bootstrapTool() {
   const tool = createNode('<div class="app-tool">');
-  tool.appendChild(toggleCss());
+  tool.appendChild(toggleCss('[app-css]'));
   tool.appendChild(viewCode());
 
   const body = document.querySelector('body');

@@ -40,20 +40,24 @@ export function toggleNode(node, parent = undefined) {
   }
 }
 
-export function getAction(title, callback) {
-  const link = createNode(`<a href="#" class="app-tool__link">${title}</a>`);
-  const handler = (e) => {
-    if (e) e.preventDefault();
-    sessionStorage.setItem(title, link.classList.toggle('app-tool__link_active'));
-    callback();
-  };
-  link.addEventListener('click', handler);
-  if (sessionStorage.getItem(title) === 'true') handler();
-  return { link, handler };
-}
-
 export function getUrl(href) {
   const a = document.createElement('a');
   a.setAttribute('href', href);
   return a.href;
+}
+
+export function insertHtml(html, node) {
+  node.innerHTML = html; // eslint-disable-line no-param-reassign
+  node.querySelectorAll('script').forEach((dummy) => {
+    dummy.parentNode.removeChild(dummy);
+    const script = document.createElement('script');
+    script.setAttribute('app-script-alive', '');
+    script.innerHTML = dummy.innerHTML;
+    node.appendChild(script);
+  });
+  return node.innerHTML;
+}
+
+export function fetchContent(url, node) {
+  return fetch(url).then(response => response.text()).then(html => insertHtml(html, node));
 }

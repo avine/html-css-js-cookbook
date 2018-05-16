@@ -1,4 +1,4 @@
-import { getUrl } from './_helper';
+import { getUrl, fetchContent, insertHtml } from './_helper';
 
 let content;
 let defaultContent;
@@ -14,16 +14,6 @@ export function replaceState(url) {
   window.history.replaceState({ appUrl: url }, null, url);
 }
 
-export function bootstrapScripts() {
-  content.querySelectorAll('script').forEach((dummy) => {
-    dummy.parentNode.removeChild(dummy);
-    const script = document.createElement('script');
-    script.setAttribute('app-script-alive', '');
-    script.innerHTML = dummy.innerHTML;
-    content.appendChild(script);
-  });
-}
-
 export function emit(appUrl) {
   const event = new CustomEvent(ON_NAVIGATE, { detail: { appUrl } });
   window.dispatchEvent(event);
@@ -31,14 +21,9 @@ export function emit(appUrl) {
 
 export function navigate(url) {
   if (url && url !== defaultUrl) {
-    fetch(url).then(response => response.text()).then((html) => {
-      content.innerHTML = html;
-      bootstrapScripts();
-      emit(url);
-    });
+    fetchContent(url, content).then(() => emit(url));
   } else {
-    content.innerHTML = defaultContent;
-    bootstrapScripts();
+    insertHtml(defaultContent, content);
     emit(defaultUrl);
   }
 }

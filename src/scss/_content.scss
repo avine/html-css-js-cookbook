@@ -1,0 +1,25 @@
+.app-content {
+  max-width: initial;
+
+  .app-content__wrap {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .app-content__source,
+  .app-content__code {
+    box-sizing: border-box;
+    width: 49%;
+    overflow: auto;
+    margin: 0;
+  }
+
+  //.app-content__source {}
+
+  .app-content__code {
+    padding: 1rem;
+    border-radius: 0;
+    border: none;
+    line-height: 1em;
+  }
+}

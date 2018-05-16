@@ -1,0 +1,20 @@
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  line-height: 3rem;
+  background-color: #333;
+  color: #fff;
+}
+
+.app-header__toggle-menu {
+  margin-right: 2rem;
+  cursor: pointer;
+
+  .fas {
+    vertical-align: middle;
+  }
+}
+
+.app-header__brand {
+  font-size: 1.25rem;
+}

@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   <meta name=viewport content="width=device-width,initial-scale=1">
 
-  <title>Web exploration</title>
+  <title>Web explorer</title>
 
   <base href="./">
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="assets/main.scss" app-css>
+  <link rel="stylesheet" href="scss/main.scss" app-css>
 
-  <link rel="stylesheet" href="assets/app.scss">
-  <script src="assets/app.js"></script>
+  <link rel="stylesheet" href="scss/app.scss">
+  <script src="js/app.js"></script>
 
   <link href="../node_modules/prismjs/themes/prism.css" rel="stylesheet">
   <script src="../node_modules/prismjs/prism.js" data-manual></script>
@@ -22,12 +22,18 @@
 <body>
 
 <div class="app-grid">
-  <header class="app-grid__header">
-    <i class="fa fa-bars" app-menu-toggle></i> &nbsp; Web exploration
+  <header class="app-grid__header app-header">
+    <div class="app-header__toggle-menu" app-menu-toggle>
+      <i class="fas fa-bars fa-fw fa-lg"></i>
+    </div>
+
+    <div class="app-header__brand">
+      Web explorer
+    </div>
   </header>
 
-  <aside class="app-grid__menu" app-menu>
-    <nav>
+  <aside class="app-grid__menu app-menu" app-menu>
+    <nav class="app-menu__nav">
       <ul>
         <li><span class="app-link" app-link="./">Index</span></li>
         <li><a app-link href="pages/content-sectioning.html">Content sectioning</a></li>
@@ -49,7 +55,7 @@
 
   <main class="app-grid__content">
     <div app-content>
-      <h1><i class="fa fa-shield-alt"></i> &nbsp; Welcome to Web exploration!</h1>
+      <h1><i class="fa fa-shield-alt"></i> &nbsp; Welcome to Web explorer!</h1>
     </div>
   </main>
 

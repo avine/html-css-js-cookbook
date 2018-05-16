@@ -65,4 +65,15 @@ export function bootstrapRouter() {
 
   window.addEventListener('popstate', stateHandler);
   document.addEventListener('click', linkHandler);
+
+  // TODO: refactorize...
+  window.addEventListener(ON_NAVIGATE, (event) => {
+    document.querySelectorAll('[app-link]').forEach(((link) => {
+      if (getUrl(link.getAttribute('app-link') || link.href) === event.detail.appUrl) {
+        link.classList.add('app-link__active');
+      } else {
+        link.classList.remove('app-link__active');
+      }
+    }));
+  });
 }

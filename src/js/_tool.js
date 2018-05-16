@@ -3,10 +3,18 @@ import { highlight, languages } from 'prismjs';
 import { createNode, getActionFromText, toggleNode, wrapNode } from './_helper';
 import { ON_NAVIGATE } from './_router';
 
+// FIXME: not working properly...
 export function toggleCss(selector) {
   const allCss = document.querySelectorAll(selector);
+  let contentCss;
+
+  window.addEventListener(ON_NAVIGATE, () => {
+    contentCss = document.querySelector('[app-content]').querySelectorAll(selector);
+  });
+
   return getActionFromText('toggle_css', '<i class="fas fa-eye-slash fa-fw fa-lg"></i>', () => {
     allCss.forEach(css => toggleNode(css));
+    if (contentCss) contentCss.forEach(css => toggleNode(css));
   }).link;
 }
 
@@ -40,6 +48,6 @@ export function initTool() {
   const tool = document.querySelector('[app-tool]');
   tool.classList.add('app-tool');
 
-  tool.appendChild(toggleCss('[app-css-toggle]'));
+  // tool.appendChild(toggleCss('[app-css-toggle]'));
   tool.appendChild(viewCode());
 }

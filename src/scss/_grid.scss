@@ -33,6 +33,7 @@
 .app-grid__footer {
   grid-area: footer;
   padding: 0 var(--grid-gap);
+  border-top: 1px solid var(--bg-color-light);
 }
 
 .app-grid_hide-menu {
@@ -48,5 +49,29 @@
 
   .app-grid__content {
     margin-left: var(--grid-gap);
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .app-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr auto;
+    grid-column-gap: 0;
+    grid-row-gap: 0;
+    grid-template-areas:
+      "header"
+      "menu"
+      "content"
+      "footer";
+  }
+
+  .app-grid__menu {
+    margin: 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .app-grid__content {
+    margin: 0 !important;
+    padding: var(--grid-gap);
   }
 }

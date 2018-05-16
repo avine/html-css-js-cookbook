@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="scss/main.scss" app-css>
+  <link rel="stylesheet" href="scss/main.scss" app-css-toggle>
 
   <link rel="stylesheet" href="scss/app.scss">
   <script src="js/app.js"></script>
@@ -27,42 +27,33 @@
       <i class="fas fa-bars fa-fw fa-lg"></i>
     </div>
 
-    <div class="app-header__brand">
+    <a href="./" class="app-header__brand">
       WebExplorer
-    </div>
+    </a>
   </header>
 
-  <aside class="app-grid__menu app-menu" app-menu>
-    <nav class="app-menu__nav">
-      <ul>
-        <li><span class="app-link" app-link="./">Index</span></li>
-        <li><a app-link href="pages/content-sectioning.html">Content sectioning</a></li>
-        <li><a app-link href="pages/text-content.html">Text content</a></li>
-        <li><a app-link href="pages/inline-text.html">Inline text</a></li>
-        <li><a app-link href="pages/demarcating-edits.html">Demarcating edits</a></li>
-        <li><a app-link href="pages/table.html">Table</a></li>
-        <li><a app-link href="pages/form.html">Form</a></li>
-        <li><a app-link href="pages/interactive-elements.html">Interactive elements</a></li>
-      </ul>
-    </nav>
-
-    <address>
-      Based on
-      <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">
-        Mozilla HTML elements reference</a>.
-    </address>
-  </aside>
+  <aside class="app-grid__menu app-menu" app-menu></aside>
 
   <main class="app-grid__content">
     <div app-content>
-      <h1><i class="fa fa-shield-alt"></i> &nbsp; Welcome to WebExplorer!</h1>
+
+<h1>
+  <i class="fa fa-shield-alt"></i> &nbsp; Welcome to WebExplorer
+</h1>
+
+<address>
+  Based on
+  <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">Mozilla HTML elements reference</a>.
+</address>
+
     </div>
   </main>
 
   <footer class="app-grid__footer">
-    &copy; avine.io &nbsp; <i class="fa fa-code"></i> &nbsp; <i class="fa fa-image"></i>
+    <div app-tool></div>
   </footer>
 </div>
 
+  <a href="pages/menu.html"><!-- Just because "Parcel" need to add all pages in its graph dependencies --></a>
 </body>
 </html>

@@ -1,28 +1,20 @@
 .app-tool {
-  z-index: 11;
-  position: fixed;
-  right: 10px;
-  bottom: 10px;
-  padding: 5px 10px;
-  border-radius: 3px;
-  border: 1px solid #222;
-  background-color: #333;
-  font-family: monospace;
-  font-size: 11px;
-  line-height: 22px;
+  display: flex;
+  justify-content: center;
+  line-height: 3rem;
 
   a {
-    display: block;
-    color: lightblue;
+    padding: 0 0.5rem;
     text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
+    color: var(--text-color);
+    transition: all var(--transition-duration) ease;
 
     &.app-tool__link_active {
-      color: #fff;
-      text-decoration: none;
+      color: var(--link-color);
+    }
+
+    .fas {
+      vertical-align: middle;
     }
   }
 }

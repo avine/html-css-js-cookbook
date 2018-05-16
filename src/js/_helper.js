@@ -41,6 +41,7 @@ export function toggleNode(node, parent = undefined) {
 }
 
 export function getUrl(href) {
+  if (href === undefined || href === null) return undefined;
   const a = document.createElement('a');
   a.setAttribute('href', href);
   return a.href;

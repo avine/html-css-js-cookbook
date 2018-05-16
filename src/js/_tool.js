@@ -22,33 +22,30 @@ export function getAction(title, callback) {
 
 export function toggleCss(selector) {
   const allCss = document.querySelectorAll(selector);
-  return getAction('<i class="fa fa-image"></i> Disable CSS', () => {
+  return getAction('<i class="fas fa-image fa-fw fa-lg"></i>', () => {
     allCss.forEach(css => toggleNode(css));
   }).link;
 }
 
 export function viewCode() {
-  const body = document.querySelector('body');
   const source = document.querySelector('[app-content]');
-  const wrap = wrapNode(source, 'app-content__wrap');
-  const code = createNode('<pre class="app-content__code language-html"><code></code></pre>');
-  source.classList.add('app-content__source');
+  const wrap = wrapNode(source, 'app-code');
+  const code = createNode('<pre class="app-code__target language-html"><code></code></pre>');
+  source.classList.add('app-code__source');
   const refresh = () => {
     code.firstChild.innerHTML = highlight(source.innerHTML.trim(), languages.html, 'html');
   };
   window.addEventListener(ON_NAVIGATE, refresh);
-  return getAction('<i class="fa fa-code"></i> View code', () => {
-    body.classList.toggle('app-content');
+  return getAction('<i class="fas fa-code fa-fw fa-lg"></i>', () => {
+    wrap.classList.toggle('app-code_active');
     refresh();
     toggleNode(code, wrap);
   }).link;
 }
 
 export function bootstrapTool() {
-  const tool = createNode('<div class="app-tool">');
-  tool.appendChild(toggleCss('[app-css]'));
+  const tool = document.querySelector('[app-tool]');
+  tool.classList.add('app-tool');
+  // tool.appendChild(toggleCss('[app-css-toggle]'));
   tool.appendChild(viewCode());
-
-  const body = document.querySelector('body');
-  body.appendChild(tool);
 }

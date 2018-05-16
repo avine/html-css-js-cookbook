@@ -1,25 +1,25 @@
-.app-content {
-  max-width: initial;
-
-  .app-content__wrap {
+.app-code_active {
+  &.app-code {
     display: flex;
     justify-content: space-between;
   }
 
-  .app-content__source,
-  .app-content__code {
+  .app-code__source,
+  .app-code__target {
     box-sizing: border-box;
     width: 49%;
     overflow: auto;
     margin: 0;
   }
 
-  //.app-content__source {}
+  //.app-code__source {}
 
-  .app-content__code {
+  .app-code__target {
     padding: 1rem;
     border-radius: 0;
     border: none;
+    border-left: 1px solid var(--border-color);
+    background-color: transparent;
     line-height: 1em;
   }
 }

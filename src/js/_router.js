@@ -54,6 +54,17 @@ export function linkHandler(event) {
   }
 }
 
+export function activeLinkHandler(event) {
+  document.querySelectorAll('[app-link]').forEach(((link) => {
+    const linkUrl = getUrl(link.getAttribute('app-link') || link.href);
+    if (linkUrl === event.detail.appUrl) {
+      link.classList.add('app-link__active');
+    } else {
+      link.classList.remove('app-link__active');
+    }
+  }));
+}
+
 export function bootstrapRouter() {
   // Init
   content = document.querySelector('[app-content]');
@@ -64,16 +75,6 @@ export function bootstrapRouter() {
   replaceState(defaultUrl);
 
   window.addEventListener('popstate', stateHandler);
-  document.addEventListener('click', linkHandler);
-
-  // TODO: refactorize...
-  window.addEventListener(ON_NAVIGATE, (event) => {
-    document.querySelectorAll('[app-link]').forEach(((link) => {
-      if (getUrl(link.getAttribute('app-link') || link.href) === event.detail.appUrl) {
-        link.classList.add('app-link__active');
-      } else {
-        link.classList.remove('app-link__active');
-      }
-    }));
-  });
+  window.addEventListener('click', linkHandler);
+  window.addEventListener(ON_NAVIGATE, activeLinkHandler);
 }

@@ -4,7 +4,7 @@
 
 .app-menu__nav {
   ul {
-    margin: 0 0 1.5rem 0;
+    margin: 0;
     padding: 0;
     list-style: none;
   }
@@ -12,14 +12,14 @@
   li {
     &:hover {
       background-color: var(--link-bg-color-hover);
-      transition: all 100ms ease;
+      transition: all var(--transition-duration) ease;
     }
 
     a, .app-link {
       padding: 0.5rem 0.75rem;
       display: block;
       text-decoration: none;
-      transition: all 100ms ease;
+      transition: all var(--transition-duration) ease;
     }
   }
 

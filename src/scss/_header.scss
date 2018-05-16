@@ -2,8 +2,8 @@
   display: flex;
   justify-content: space-between;
   line-height: 3rem;
-  background-color: #333;
-  color: #fff;
+  background-color: var(--reverse-bg-color);
+  color: var(--reverse-color);
 }
 
 .app-header__toggle-menu {

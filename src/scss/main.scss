@@ -1,7 +1,14 @@
 :root {
   --line-height: 1.5em;
   --border-color: #ddd;
+  --bg-color: #fff;
+  --text-color: #333;
+
+  --link-bg-color-hover: whitesmoke;
   --link-color: dodgerblue;
+
+  --reverse-bg-color: #333;
+  --reverse-color: #ddd;
 }
 
 html, body {
@@ -11,6 +18,8 @@ html, body {
 html {
   font-family: 'Open Sans', sans-serif;
   line-height: var(--line-height);
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 body {

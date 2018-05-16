@@ -1,4 +1,4 @@
-import { getUrl, fetchContent, insertHtml } from './_helper';
+import { resolveUrl, fetchContent, insertHtml } from './_helper';
 
 let content;
 let defaultContent;
@@ -6,15 +6,15 @@ let defaultUrl;
 
 export const ON_NAVIGATE = 'app-navigate';
 
-export function pushState(url) {
+function pushState(url) {
   window.history.pushState({ appUrl: url }, null, url);
 }
 
-export function replaceState(url) {
+function replaceState(url) {
   window.history.replaceState({ appUrl: url }, null, url);
 }
 
-export function emit(appUrl) {
+function emit(appUrl) {
   const event = new CustomEvent(ON_NAVIGATE, { detail: { appUrl } });
   window.dispatchEvent(event);
 }
@@ -28,18 +28,18 @@ export function navigate(url) {
   }
 }
 
-export function stateHandler(event) {
+function stateHandler(event) {
   if (event.state && event.state.appUrl) {
     navigate(event.state.appUrl);
   }
 }
 
-export function linkHandler(event) {
+function linkHandler(event) {
   const link = event.target.getAttribute('app-link');
   if (link !== null) {
     let url;
     if (link) {
-      url = getUrl(link);
+      url = resolveUrl(link);
     }
     if (event.target.nodeName.toLowerCase() === 'a') {
       event.preventDefault();
@@ -54,18 +54,18 @@ export function linkHandler(event) {
   }
 }
 
-export function activeLinkHandler(event) {
+export function updateActiveLink(appUrl) {
   document.querySelectorAll('[app-link]').forEach(((link) => {
-    const linkUrl = getUrl(link.getAttribute('app-link') || link.href);
-    if (linkUrl === event.detail.appUrl) {
-      link.classList.add('app-link__active');
-    } else {
-      link.classList.remove('app-link__active');
-    }
+    const linkUrl = resolveUrl(link.getAttribute('app-link') || link.href);
+    link.classList[linkUrl === appUrl ? 'add' : 'remove']('app-link__active');
   }));
 }
 
-export function bootstrapRouter() {
+function activeLinkHandler(event) {
+  updateActiveLink(event.detail.appUrl);
+}
+
+export function initRouter() {
   // Init
   content = document.querySelector('[app-content]');
   defaultContent = content.innerHTML;

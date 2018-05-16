@@ -3,13 +3,13 @@
   justify-content: center;
   line-height: 3rem;
 
-  a {
+  a.app-action {
     padding: 0 0.5rem;
     text-decoration: none;
     color: var(--text-color);
     transition: all var(--transition-duration) ease;
 
-    &.app-tool__link_active {
+    &.app-action_active {
       color: var(--link-color);
     }
 

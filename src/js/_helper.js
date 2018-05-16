@@ -13,8 +13,10 @@ export function createNode(node) {
 export function wrapNode(node, css = '') {
   const wrap = document.createElement('div');
   if (css) wrap.classList.add(css);
+
   node.parentNode.insertBefore(wrap, node);
   wrap.appendChild(node);
+
   return wrap;
 }
 
@@ -28,6 +30,7 @@ export function toggleNode(node, parent = undefined) {
       return;
     }
   }
+
   let placeholder;
   if (node.parentNode) {
     placeholder = createNode(`<script type="placeholder" app-toggle-id="${toggleId}">`);
@@ -44,10 +47,13 @@ export function insertHtml(html, node) {
   node.innerHTML = html; // eslint-disable-line no-param-reassign
   node.querySelectorAll('script').forEach((dummy) => {
     dummy.parentNode.removeChild(dummy);
-    const isHidden = dummy.getAttribute('app-code-hidden') !== null;
+
     const script = document.createElement('script');
     script.setAttribute('app-script-alive', '');
+
+    const isHidden = dummy.getAttribute('app-code-hidden') !== null;
     if (isHidden) script.setAttribute('app-code-hidden', '');
+
     script.innerHTML = dummy.innerHTML;
     node.appendChild(script);
   });
@@ -78,8 +84,10 @@ export function getActionFromText(name, title, callback) {
 
 export function resolveUrl(href) {
   if (href === undefined || href === null) return undefined;
+
   const a = document.createElement('a');
   a.setAttribute('href', href);
+
   return a.href;
 }
 

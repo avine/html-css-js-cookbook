@@ -20,11 +20,15 @@ export function viewCode() {
   const source = document.querySelector('[app-content]');
   const wrap = wrapNode(source, 'app-code');
   const code = createNode('<pre class="app-code__target language-html"><code></code></pre>');
+
   source.classList.add('app-code__source');
+
   const refresh = () => {
     code.firstChild.innerHTML = highlight(formatHtml(source), languages.html, 'html');
   };
+
   window.addEventListener(ON_NAVIGATE, refresh);
+
   return getActionFromText('view_code', '<i class="fas fa-code fa-fw fa-lg"></i>', () => {
     wrap.classList.toggle('app-code_active');
     refresh();
@@ -35,6 +39,7 @@ export function viewCode() {
 export function initTool() {
   const tool = document.querySelector('[app-tool]');
   tool.classList.add('app-tool');
+
   tool.appendChild(toggleCss('[app-css-toggle]'));
   tool.appendChild(viewCode());
 }

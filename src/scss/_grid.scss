@@ -45,7 +45,7 @@ body {
   border-top: 1px solid var(--bg-color-light);
 }
 
-.app-grid_hide-menu {
+.app-grid--hide-menu {
   grid-template-columns: 1fr;
   grid-template-areas:
     "header"

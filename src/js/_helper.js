@@ -67,7 +67,7 @@ export function getAction(name, link, callback) {
     active: false,
     handler: (event) => {
       if (event) event.preventDefault();
-      action.active = link.classList.toggle('app-action_active');
+      action.active = link.classList.toggle('app-action--active');
       sessionStorage.setItem(name, action.active);
       callback();
     },

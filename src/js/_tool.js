@@ -38,7 +38,7 @@ export function viewCode() {
   window.addEventListener(ON_NAVIGATE, refresh);
 
   return getActionFromText('view_code', '<i class="fas fa-code fa-fw fa-lg"></i>', () => {
-    wrap.classList.toggle('app-code_active');
+    wrap.classList.toggle('app-code--active');
     refresh();
     toggleNode(code, wrap);
   }).link;

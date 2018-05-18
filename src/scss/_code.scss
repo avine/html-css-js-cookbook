@@ -1,8 +1,6 @@
-.app-code_active {
-  &.app-code {
-    display: flex;
-    justify-content: space-between;
-  }
+.app-code--active {
+  display: flex;
+  justify-content: space-between;
 
   .app-code__source,
   .app-code__target {
@@ -11,8 +9,6 @@
     overflow: auto;
     margin: 0;
   }
-
-  //.app-code__source {}
 
   .app-code__target {
     padding: 1rem;

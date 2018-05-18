@@ -9,7 +9,7 @@
     color: var(--text-color);
     transition: all var(--transition-duration) ease;
 
-    &.app-action_active {
+    &.app-action--active {
       color: var(--link-color);
     }
 

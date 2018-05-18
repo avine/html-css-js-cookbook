@@ -1,13 +1,17 @@
-html, body {
-  height: 100%;
-}
-
 body {
   margin: 0;
-  overflow: auto;
 }
 
-.app-grid {
+.app-grid--fixed {
+  height: 100%;
+
+  body {
+    height: 100%;
+    overflow: auto;
+  }
+}
+
+.app-grid__wrap {
   --grid-gap: 1.25em;
   height: 100%;
   display: grid;
@@ -45,7 +49,7 @@ body {
   border-top: 1px solid var(--bg-color-light);
 }
 
-.app-grid--hide-menu {
+.app-grid__wrap--menu-hidden {
   grid-template-columns: 1fr;
   grid-template-areas:
     "header"

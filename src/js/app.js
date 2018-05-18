@@ -1,11 +1,14 @@
 import { initMenu, initToggleMenu } from './_menu';
-import { initTool } from './_tool';
 import { initRouter } from './_router';
+import { initTool } from './_tool';
 
 window.addEventListener('DOMContentLoaded', () => {
   initMenu({ hidden: true });
   initToggleMenu();
   initTool();
+
+  // Init the router at the end to let the previous
+  // modules react to the first `ON_NAVIGATE` event.
   initRouter();
 });
 

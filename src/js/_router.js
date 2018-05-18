@@ -1,8 +1,12 @@
 import { resolveUrl, fetchContent, insertHtml } from './_helper';
 
 let content;
-let defaultContent;
-let defaultUrl;
+let baseContent;
+let baseUrl;
+
+export function getBaseHref() {
+  return resolveUrl(document.querySelector('base').href);
+}
 
 export const ON_NAVIGATE = 'app-navigate';
 
@@ -14,17 +18,17 @@ function replaceState(url) {
   window.history.replaceState({ appUrl: url }, null, url);
 }
 
-function emit(appUrl) {
+function triggerEvent(appUrl) {
   const event = new CustomEvent(ON_NAVIGATE, { detail: { appUrl } });
   window.dispatchEvent(event);
 }
 
 export function navigate(url) {
-  if (url && url !== defaultUrl) {
-    fetchContent(url, content).then(() => emit(url));
+  if (url && url !== baseUrl) {
+    fetchContent(url, content).then(() => triggerEvent(url));
   } else {
-    insertHtml(defaultContent, content);
-    emit(defaultUrl);
+    insertHtml(baseContent, content);
+    triggerEvent(baseUrl);
   }
 }
 
@@ -54,25 +58,25 @@ function linkHandler(event) {
   }
 }
 
-export function updateActiveLink(appUrl) {
+export function updateActiveLink() {
   document.querySelectorAll('[app-link]').forEach(((link) => {
     const linkUrl = resolveUrl(link.getAttribute('app-link') || link.href);
-    link.classList[linkUrl === appUrl ? 'add' : 'remove']('app-link__active');
+    link.classList[linkUrl === window.location.href ? 'add' : 'remove']('app-link__active');
   }));
 }
 
-function activeLinkHandler(event) {
-  updateActiveLink(event.detail.appUrl);
-}
+// The "handler" version is the same because we don't rely on the provided "event" parameter...
+const activeLinkHandler = updateActiveLink;
 
 export function initRouter() {
   // Init
   content = document.querySelector('[app-content]');
-  defaultContent = content.innerHTML;
-  defaultUrl = window.location.href;
+  baseContent = content.innerHTML;
+  baseUrl = getBaseHref();
 
-  // On first load (for Chrome)
-  replaceState(defaultUrl);
+  // Bootstrap
+  replaceState(baseUrl);
+  triggerEvent(baseUrl);
 
   window.addEventListener('popstate', stateHandler);
   window.addEventListener('click', linkHandler);

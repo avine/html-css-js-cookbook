@@ -27,7 +27,7 @@ export function toggleNode(node, parent = undefined) {
     node.setAttribute('app-toggle-id', toggleId);
     if (!node.parentNode) {
       parent.appendChild(node); // `parent` required to insert `node` the first time
-      return;
+      return toggleId;
     }
   }
 
@@ -41,6 +41,7 @@ export function toggleNode(node, parent = undefined) {
     placeholder.parentNode.insertBefore(node, placeholder);
     placeholder.parentNode.removeChild(placeholder);
   }
+  return toggleId;
 }
 
 export function insertHtml(html, node) {
@@ -75,11 +76,6 @@ export function getAction(name, link, callback) {
   if (sessionStorage.getItem(name) === 'true') action.handler();
   link.addEventListener('click', action.handler);
   return action;
-}
-
-export function getActionFromText(name, title, callback) {
-  const link = createNode(`<a href="#" class="app-action">${title}</a>`);
-  return getAction(name, link, callback);
 }
 
 export function resolveUrl(href) {

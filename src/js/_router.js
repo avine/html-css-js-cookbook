@@ -1,4 +1,4 @@
-import { resolveUrl, fetchContent, insertHtml } from './_helper';
+import { addUrlPathnamePrefix, resolveUrl, fetchContent, insertHtml } from './_helper';
 
 let content;
 let baseContent;
@@ -10,12 +10,16 @@ export function getBaseHref() {
 
 export const ON_NAVIGATE = 'app-navigate';
 
+export const DYNAMIC_PATHNAME_PREFIX = '/dynamic';
+
 function pushState(url) {
-  window.history.pushState({ appUrl: url }, null, url);
+  const prefixedUrl = addUrlPathnamePrefix(url, DYNAMIC_PATHNAME_PREFIX);
+  window.history.pushState({ appUrl: url }, null, prefixedUrl);
 }
 
 function replaceState(url) {
-  window.history.replaceState({ appUrl: url }, null, url);
+  const prefixedUrl = addUrlPathnamePrefix(url, DYNAMIC_PATHNAME_PREFIX);
+  window.history.replaceState({ appUrl: url }, null, prefixedUrl);
 }
 
 function triggerEvent(appUrl) {

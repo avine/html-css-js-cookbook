@@ -39,8 +39,8 @@ function stateHandler(event) {
 }
 
 function linkHandler(event) {
-  const link = event.target.getAttribute('app-link');
-  if (link !== null) {
+  if (event.target.hasAttribute('app-link')) {
+    const link = event.target.getAttribute('app-link');
     let url;
     if (link) {
       url = resolveUrl(link);

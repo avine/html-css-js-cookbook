@@ -46,11 +46,9 @@ export function viewCode() {
     toggleNode(code, wrap);
   });
 
-  const refresh = () => {
+  window.addEventListener(ON_NAVIGATE, () => {
     code.firstChild.innerHTML = highlight(formatHtml(source), languages.html, 'html');
-  };
-
-  window.addEventListener(ON_NAVIGATE, refresh);
+  });
 
   return action.link;
 }

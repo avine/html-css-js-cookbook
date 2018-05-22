@@ -44,19 +44,19 @@ export function toggleNode(node, parent = undefined) {
   return toggleId;
 }
 
+export function cloneScript(dummy) {
+  const script = document.createElement('script');
+  [].forEach.call(dummy.attributes, attr => script.setAttribute(attr.name, attr.value));
+  script.innerHTML = dummy.innerHTML;
+  return script;
+}
+
 export function insertHtml(html, node) {
   node.innerHTML = html; // eslint-disable-line no-param-reassign
   node.querySelectorAll('script').forEach((dummy) => {
+    if (dummy.hasAttribute('app-script-defer')) return;
+    dummy.parentNode.insertBefore(cloneScript(dummy), dummy);
     dummy.parentNode.removeChild(dummy);
-
-    const script = document.createElement('script');
-    script.setAttribute('app-script-alive', '');
-
-    const isHidden = dummy.getAttribute('app-code-hidden') !== null;
-    if (isHidden) script.setAttribute('app-code-hidden', '');
-
-    script.innerHTML = dummy.innerHTML;
-    node.appendChild(script);
   });
   return node.innerHTML;
 }

@@ -1,4 +1,4 @@
-import { addUrlPathnamePrefix, resolveUrl, fetchContent, insertHtml } from './_helper';
+import { resolveUrl, fetchContent, insertHtml } from './_helper';
 
 let content;
 let baseContent;
@@ -10,16 +10,28 @@ export function getBaseHref() {
 
 export const ON_NAVIGATE = 'app-navigate';
 
-export const DYNAMIC_PATHNAME_PREFIX = '/dynamic';
+export const STATE_PREFIX = '/content';
+
+export function addStatePrefix(url) {
+  const a = document.createElement('a');
+  a.setAttribute('href', url);
+  if (a.pathname !== '/') a.pathname = STATE_PREFIX + a.pathname;
+  return a.href;
+}
+
+export function removeStatePrefix(url) {
+  const a = document.createElement('a');
+  a.setAttribute('href', url);
+  a.pathname = a.pathname.replace(new RegExp(`^${STATE_PREFIX}`), '');
+  return a.href;
+}
 
 function pushState(url) {
-  const prefixedUrl = addUrlPathnamePrefix(url, DYNAMIC_PATHNAME_PREFIX);
-  window.history.pushState({ appUrl: url }, null, prefixedUrl);
+  window.history.pushState({ appUrl: url }, null, addStatePrefix(url, STATE_PREFIX));
 }
 
 function replaceState(url) {
-  const prefixedUrl = addUrlPathnamePrefix(url, DYNAMIC_PATHNAME_PREFIX);
-  window.history.replaceState({ appUrl: url }, null, prefixedUrl);
+  window.history.replaceState({ appUrl: url }, null, addStatePrefix(url, STATE_PREFIX));
 }
 
 function triggerEvent(appUrl) {
@@ -55,7 +67,7 @@ function linkHandler(event) {
         url = event.target.href;
       }
     }
-    if (url && url !== window.location.href) {
+    if (url && url !== removeStatePrefix(window.location.href)) {
       pushState(url);
       navigate(url);
     }
@@ -65,7 +77,7 @@ function linkHandler(event) {
 export function updateActiveLink() {
   document.querySelectorAll('[app-link]').forEach(((link) => {
     const linkUrl = resolveUrl(link.getAttribute('app-link') || link.href);
-    link.classList[linkUrl === window.location.href ? 'add' : 'remove']('app-link__active');
+    link.classList[linkUrl === removeStatePrefix(window.location.href) ? 'add' : 'remove']('app-link__active');
   }));
 }
 
@@ -79,8 +91,7 @@ export function initRouter() {
   baseUrl = getBaseHref();
 
   // Bootstrap
-  replaceState(baseUrl);
-  triggerEvent(baseUrl);
+  navigate(removeStatePrefix(window.location.href));
 
   window.addEventListener('popstate', stateHandler);
   window.addEventListener('click', linkHandler);

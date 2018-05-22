@@ -4,9 +4,8 @@
   "description": "Web cookbook",
   "main": "index.js",
   "scripts": {
-    "prebuild": "shx rm -rf ./dist",
-    "build": "shx mkdir -p ./dist && cp -R ./src/pages ./dist/pages",
-    "start": "parcel ./src/index.html",
+    "watch": "parcel watch ./src/index.html",
+    "start": "node ./server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

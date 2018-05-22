@@ -87,13 +87,6 @@ export function resolveUrl(href) {
   return a.href;
 }
 
-export function addUrlPathnamePrefix(href, prefix) {
-  const a = document.createElement('a');
-  a.setAttribute('href', href);
-  if (a.pathname) a.pathname = prefix + a.pathname;
-  return a.href;
-}
-
 export function fetchContent(url, node) {
   return fetch(url).then(response => response.text()).then(html => insertHtml(html, node));
 }

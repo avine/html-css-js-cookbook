@@ -22,8 +22,18 @@ module.exports = {
     filename: devMode ? '[name].js' : '[name].[hash].js',
   },
 
+  resolve: {
+    extensions: ['.ts', '.js'],
+  },
+
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+
       {
         test: /\.css$/,
         use: [

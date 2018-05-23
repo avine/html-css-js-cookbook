@@ -41,11 +41,11 @@ function triggerEvent(appUrl) {
 
 export function navigate(url) {
   if (url && url !== baseUrl) {
-    fetchContent(url, content).then(() => triggerEvent(url));
-  } else {
-    insertHtml(baseContent, content);
-    triggerEvent(baseUrl);
+    return fetchContent(url, content).then(() => triggerEvent(url));
   }
+  insertHtml(baseContent, content);
+  triggerEvent(baseUrl);
+  return Promise.resolve();
 }
 
 function stateHandler(event) {
@@ -91,7 +91,7 @@ export function initRouter() {
   baseUrl = getBaseHref();
 
   // Bootstrap
-  navigate(removeStatePrefix(window.location.href));
+  navigate(removeStatePrefix(window.location.href)).then(() => content.classList.add('app-content--active'));
 
   window.addEventListener('popstate', stateHandler);
   window.addEventListener('click', linkHandler);

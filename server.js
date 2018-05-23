@@ -34,4 +34,6 @@ http
         }
       });
     }
-  }).listen(1234);
+  }).listen(1234, undefined, undefined, () => {
+    console.log('Server is listening on port 1234'); // eslint-disable-line no-console
+  });

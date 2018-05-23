@@ -4,8 +4,9 @@
   "description": "Web cookbook",
   "main": "index.js",
   "scripts": {
-    "watch": "parcel watch ./src/index.html",
-    "start": "node ./server.js",
+    "build": "parcel build --out-dir dist/front src/front/index.html",
+    "watch": "parcel watch --out-dir dist/front src/front/index.html",
+    "start": "node src/back/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

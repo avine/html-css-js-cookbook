@@ -85,10 +85,11 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, './dist/front'),
     compress: true,
+    host: '127.0.0.1',
     port: 1234,
     historyApiFallback: {
       rewrites: [
-        { from: /./, to: '/index.html' },
+        { from: /^\/content/, to: '/index.html' },
       ],
     },
   },

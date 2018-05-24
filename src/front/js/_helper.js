@@ -87,6 +87,17 @@ export function resolveUrl(href) {
   return a.href;
 }
 
+export function fetchContent404() {
+  return fetch(resolveUrl('/pages/error404.html')).then(response => response.text());
+}
+
 export function fetchContent(url, node) {
-  return fetch(url).then(response => response.text()).then(html => insertHtml(html, node));
+  return fetch(url)
+    .then((response) => {
+      if (response.status !== 200) {
+        return fetchContent404().then(html => html.replace('{{url}}', url));
+      }
+      return response.text();
+    })
+    .then(html => insertHtml(html, node));
 }

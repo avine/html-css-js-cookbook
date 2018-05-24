@@ -13,8 +13,10 @@ http
         content.fillResponse(response, data);
       }).catch(() => {
         response.statusCode = 404;
-        const error404 = content.getPathfile('/pages/404.html');
-        content.getResource(error404).then(data => content.fillResponse(response, data));
+        content.getResource404().then((data) => {
+          data.content = data.content.replace('{{url}}', url); // eslint-disable-line no-param-reassign
+          content.fillResponse(response, data);
+        });
       });
     } else {
       const pathfile = content.getPathfile('/index.html');

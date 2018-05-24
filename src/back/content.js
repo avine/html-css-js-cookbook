@@ -3,9 +3,9 @@ const path = require('path');
 
 const getContentType = require('./contentTypes');
 
-const FRONT_ROOT = path.resolve(__dirname, '../../dist/front');
+const FRONT_ROOT = path.join(__dirname, '../../dist/front');
 
-exports.getPathfile = requestUrl => path.resolve(FRONT_ROOT, requestUrl.replace(/^\//, ''));
+exports.getPathfile = requestUrl => path.join(FRONT_ROOT, requestUrl.replace(/^\//, ''));
 
 exports.getResource = pathfile => new Promise((resolve, reject) => {
   fs.readFile(pathfile, { encoding: 'utf8' }, (err, content) => {
@@ -18,6 +18,8 @@ exports.getResource = pathfile => new Promise((resolve, reject) => {
     }
   });
 });
+
+exports.getResource404 = () => exports.getResource(path.join(__dirname, './error404.html'));
 
 exports.fillResponse = (response, data) => {
   response.setHeader('Content-Type', data.contentType);

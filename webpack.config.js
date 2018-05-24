@@ -18,7 +18,7 @@ module.exports = {
   },
 
   output: {
-    path: path.resolve(__dirname, './dist/front'),
+    path: path.join(__dirname, './dist/front'),
     filename: devMode ? '[name].js' : '[name].[hash].js',
   },
 
@@ -29,7 +29,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.ts$/,
         use: 'ts-loader',
         exclude: /node_modules/,
       },
@@ -68,8 +68,6 @@ module.exports = {
     new HtmlPlugin({ template: './src/front/index.html' }),
   ],
 
-  devtool: 'source-map',
-
   optimization: {
     splitChunks: {
       cacheGroups: {
@@ -79,6 +77,19 @@ module.exports = {
           chunks: 'all',
         },
       },
+    },
+  },
+
+  devtool: 'source-map',
+
+  devServer: {
+    contentBase: path.join(__dirname, './dist/front'),
+    compress: true,
+    port: 1234,
+    historyApiFallback: {
+      rewrites: [
+        { from: /./, to: '/index.html' },
+      ],
     },
   },
 };

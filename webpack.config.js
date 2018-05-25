@@ -14,7 +14,7 @@ module.exports = {
   target: 'web',
 
   entry: {
-    app: './src/app.ts',
+    app: './src/front.ts',
   },
 
   output: {

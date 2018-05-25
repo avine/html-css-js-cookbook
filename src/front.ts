@@ -5,4 +5,4 @@ import './front/scss/settings.scss';
 import './front/scss/main.scss';
 import './front/scss/app.scss';
 
-import './front/js/app';
+import './front/ts/app';

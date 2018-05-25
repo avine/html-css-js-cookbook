@@ -1,15 +1,10 @@
 import { highlight, languages } from 'prismjs';
 
-import { createNode, getAction, toggleNode, wrapNode } from './_helper';
+import { createNode, getAction, querySelectorAll, toggleNode, wrapNode } from './_helper';
 import { ON_NAVIGATE } from './_router';
 
 function getLinkIcon(icon: string, href = '#') {
   return createNode(`<a href="${href}"><i class="fas fa-${icon} fa-fw fa-lg"></i></a>`);
-}
-
-// TODO: MOVE THIS IN `_helper`...
-export function querySelectorAll<T>(selector: string, element?: Element): T[] {
-  return [].slice.call((element || document).querySelectorAll(selector));
 }
 
 export function toggleCss() {
@@ -42,9 +37,7 @@ function formatSource(source: Element) {
 }
 
 export function viewCode() {
-  const source = document.querySelector('[app-content]');
-  if (!source) return;
-
+  const source = document.querySelector('[app-content]') as Element;
   source.classList.add('app-code__source');
   const wrap = wrapNode(source, 'app-code');
   const code = createNode('<pre class="app-code__target language-html"><code></code></pre>');
@@ -55,7 +48,7 @@ export function viewCode() {
   });
 
   window.addEventListener(ON_NAVIGATE, () => {
-    code.firstChild.innerHTML = highlight(formatSource(source), languages.html, languages.html);
+    (code.firstChild as Element).innerHTML = highlight(formatSource(source), languages.html, languages.html);
   });
 
   return action.link;

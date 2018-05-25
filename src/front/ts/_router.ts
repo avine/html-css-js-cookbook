@@ -1,45 +1,45 @@
-import { resolveUrl, fetchContent, insertHtml } from './_helper';
+import { fetchContent, insertHtml, querySelectorAll, resolveUrl } from './_helper';
 
-let content;
-let baseContent;
-let baseUrl;
+let content: Element;
+let baseContent: string;
+let baseUrl: string;
 
 export function getBaseHref() {
-  return resolveUrl(document.querySelector('base').href);
+  return resolveUrl((document.querySelector('base') as HTMLBaseElement).href) as string;
 }
 
 export const ON_NAVIGATE = 'app-navigate';
 
 export const STATE_PREFIX = '/content';
 
-export function addStatePrefix(url) {
+export function addStatePrefix(url: string) {
   const a = document.createElement('a');
   a.setAttribute('href', url);
   if (a.pathname !== '/') a.pathname = STATE_PREFIX + a.pathname;
   return a.href;
 }
 
-export function removeStatePrefix(url) {
+export function removeStatePrefix(url: string) {
   const a = document.createElement('a');
   a.setAttribute('href', url);
   a.pathname = a.pathname.replace(new RegExp(`^${STATE_PREFIX}`), '');
   return a.href;
 }
 
-function pushState(url) {
-  window.history.pushState({ appUrl: url }, null, addStatePrefix(url, STATE_PREFIX));
+function pushState(url: string) {
+  window.history.pushState({ appUrl: url }, undefined, addStatePrefix(url));
 }
 
-function replaceState(url) {
-  window.history.replaceState({ appUrl: url }, null, addStatePrefix(url, STATE_PREFIX));
+function replaceState(url: string) {
+  window.history.replaceState({ appUrl: url }, undefined, addStatePrefix(url));
 }
 
-function triggerEvent(appUrl) {
+function triggerEvent(appUrl: string) {
   const event = new CustomEvent(ON_NAVIGATE, { detail: { appUrl } });
   window.dispatchEvent(event);
 }
 
-export function navigate(url) {
+export function navigate(url: string) {
   if (url && url !== baseUrl) {
     return fetchContent(url, content).then(() => triggerEvent(url));
   }
@@ -48,23 +48,24 @@ export function navigate(url) {
   return Promise.resolve();
 }
 
-function stateHandler(event) {
+function stateHandler(event: PopStateEvent) {
   if (event.state && event.state.appUrl) {
     navigate(event.state.appUrl);
   }
 }
 
-function linkHandler(event) {
-  if (event.target.hasAttribute('app-link')) {
-    const link = event.target.getAttribute('app-link');
+function linkHandler(event: Event) {
+  const target = event.target as Element;
+  if (target.hasAttribute('app-link')) {
+    const link = target.getAttribute('app-link');
     let url;
     if (link) {
       url = resolveUrl(link);
     }
-    if (event.target.nodeName.toLowerCase() === 'a') {
+    if (target.nodeName.toLowerCase() === 'a') {
       event.preventDefault();
-      if (!link && event.target.href) {
-        url = event.target.href;
+      if (!link && (target as HTMLAnchorElement).href) {
+        url = (target as HTMLAnchorElement).href;
       }
     }
     if (url && url !== removeStatePrefix(window.location.href)) {
@@ -75,8 +76,8 @@ function linkHandler(event) {
 }
 
 export function updateActiveLink() {
-  document.querySelectorAll('[app-link]').forEach(((link) => {
-    const linkUrl = resolveUrl(link.getAttribute('app-link') || link.href);
+  querySelectorAll<Element>('[app-link]').forEach(((link) => {
+    const linkUrl = resolveUrl(link.getAttribute('app-link') || (link as HTMLAnchorElement).href);
     link.classList[linkUrl === removeStatePrefix(window.location.href) ? 'add' : 'remove']('app-link__active');
   }));
 }
@@ -86,7 +87,7 @@ const activeLinkHandler = updateActiveLink;
 
 export function initRouter() {
   // Init
-  content = document.querySelector('[app-content]');
+  content = document.querySelector('[app-content]') as Element;
   baseContent = content.innerHTML;
   baseUrl = getBaseHref();
 

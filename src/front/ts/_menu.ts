@@ -5,7 +5,8 @@ import { updateActiveLink } from './_router';
 export function initMenu({ hidden = false }) {
   const element = document.querySelector('.app-grid__wrap');
   if (element && hidden) element.classList.add('app-grid__wrap--menu-hidden');
-  fetchContent('./pages/menu.html', document.querySelector('[app-menu]')).then(updateActiveLink);
+  const menu = document.querySelector('[app-menu]');
+  if (menu) fetchContent('./pages/menu.html', menu).then(updateActiveLink);
 }
 
 export function toggleMenu() {
@@ -14,5 +15,6 @@ export function toggleMenu() {
 }
 
 export function initToggleMenu() {
-  getAction('view_menu', document.querySelector('[app-menu-toggle]'), toggleMenu);
+  const toggle = document.querySelector('[app-menu-toggle]');
+  if (toggle) getAction('view_menu', toggle, toggleMenu);
 }

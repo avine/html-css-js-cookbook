@@ -3,12 +3,14 @@ import { updateActiveLink } from './_router';
 
 // eslint-disable-next-line import/prefer-default-export
 export function initMenu({ hidden = false }) {
-  if (hidden) document.querySelector('.app-grid__wrap').classList.add('app-grid__wrap--menu-hidden');
+  const element = document.querySelector('.app-grid__wrap');
+  if (element && hidden) element.classList.add('app-grid__wrap--menu-hidden');
   fetchContent('./pages/menu.html', document.querySelector('[app-menu]')).then(updateActiveLink);
 }
 
 export function toggleMenu() {
-  document.querySelector('.app-grid__wrap').classList.toggle('app-grid__wrap--menu-hidden');
+  const element = document.querySelector('.app-grid__wrap');
+  if (element) element.classList.toggle('app-grid__wrap--menu-hidden');
 }
 
 export function initToggleMenu() {

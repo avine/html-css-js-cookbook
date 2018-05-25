@@ -14,7 +14,7 @@ module.exports = {
   target: 'web',
 
   entry: {
-    app: './src/app.js',
+    app: './src/app.ts',
   },
 
   output: {
@@ -35,19 +35,19 @@ module.exports = {
       },
 
       {
-        test: /\.css$/,
-        use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-        ],
-      },
-
-      {
         test: /\.scss$/,
         use: [
           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader',
+        ],
+      },
+
+      {
+        test: /\.css$/,
+        use: [
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
         ],
       },
     ],

@@ -1,6 +1,6 @@
-import { initMenu, initToggleMenu } from './_menu';
+import { initMenu, initToggleMenu } from './_menu.ts';
 import { initRouter } from './_router';
-import { initTool } from './_tool';
+import { initTool } from './_tool.ts';
 
 window.addEventListener('DOMContentLoaded', () => {
   initMenu({ hidden: true });

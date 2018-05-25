@@ -3,17 +3,21 @@ import { highlight, languages } from 'prismjs';
 import { createNode, getAction, toggleNode, wrapNode } from './_helper';
 import { ON_NAVIGATE } from './_router';
 
-function getLinkIcon(icon, href = '#') {
+function getLinkIcon(icon: string, href = '#') {
   return createNode(`<a href="${href}"><i class="fas fa-${icon} fa-fw fa-lg"></i></a>`);
 }
 
-export function toggleCss() {
-  const selector = '[app-css-toggle]';
-  const headCss = document.querySelector('head').querySelectorAll(selector);
-  let contentCss;
+// TODO: MOVE THIS IN `_helper`...
+export function querySelectorAll<T>(selector: string, element?: Element): T[] {
+  return [].slice.call((element || document).querySelectorAll(selector));
+}
 
-  const toggle = cssArr => cssArr.forEach((css) => {
-    css.disabled = !css.disabled; // eslint-disable-line no-param-reassign
+export function toggleCss() {
+  const headCss = querySelectorAll<HTMLStyleElement>('head [app-css-toggle]');
+  let contentCss: HTMLStyleElement[];
+
+  const toggle = (styles: HTMLStyleElement[]) => styles.forEach((style) => {
+    style.disabled = !style.disabled; // eslint-disable-line no-param-reassign
   });
 
   const action = getAction('toggle_css', getLinkIcon('eye-slash'), () => {
@@ -22,21 +26,25 @@ export function toggleCss() {
   });
 
   window.addEventListener(ON_NAVIGATE, () => {
-    contentCss = document.querySelector('[app-content]').querySelectorAll(selector);
+    contentCss = querySelectorAll('[app-content] [app-css-toggle]');
     if (action.active) toggle(contentCss);
   });
 
   return action.link;
 }
 
-function formatHtml(node) {
-  const code = node.cloneNode(true);
-  code.querySelectorAll('[app-code-hidden]').forEach(hidden => hidden.parentNode.removeChild(hidden));
+function formatSource(source: Element) {
+  const code = source.cloneNode(true) as Element;
+  querySelectorAll<Element>('[app-code-hidden]', code).forEach((hidden) => {
+    if (hidden.parentNode) hidden.parentNode.removeChild(hidden);
+  });
   return code.innerHTML.trim().replace(/\n{2,}/g, '\n\n');
 }
 
 export function viewCode() {
   const source = document.querySelector('[app-content]');
+  if (!source) return;
+
   source.classList.add('app-code__source');
   const wrap = wrapNode(source, 'app-code');
   const code = createNode('<pre class="app-code__target language-html"><code></code></pre>');
@@ -47,7 +55,7 @@ export function viewCode() {
   });
 
   window.addEventListener(ON_NAVIGATE, () => {
-    code.firstChild.innerHTML = highlight(formatHtml(source), languages.html, 'html');
+    code.firstChild.innerHTML = highlight(formatSource(source), languages.html, languages.html);
   });
 
   return action.link;
@@ -55,6 +63,8 @@ export function viewCode() {
 
 export function initTool() {
   const tool = document.querySelector('[app-tool]');
+  if (!tool) return;
+
   tool.classList.add('app-tool');
 
   tool.appendChild(toggleCss());

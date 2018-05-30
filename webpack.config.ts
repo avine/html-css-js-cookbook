@@ -1,17 +1,17 @@
+import path from 'path';
+import webpack from 'webpack';
 
-const path = require('path');
+import CleanPlugin from 'clean-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import HtmlPlugin from 'html-webpack-plugin';
 
-const CleanPlugin = require('clean-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlPlugin = require('html-webpack-plugin');
-
-const devMode = false; // process.env.NODE_ENV !== 'production';
-
-module.exports = {
-  mode: devMode ? 'development' : 'production',
+module.exports = (env: IEnv) => ({
+  mode: env.dev ? 'development' : 'production',
 
   target: 'web',
+
+  context: __dirname,
 
   entry: {
     app: './src/front.ts',
@@ -19,7 +19,7 @@ module.exports = {
 
   output: {
     path: path.join(__dirname, './dist/front'),
-    filename: devMode ? '[name].js' : '[name].[hash].js',
+    filename: env.dev ? '[name].js' : '[name].[hash].js',
   },
 
   resolve: {
@@ -37,7 +37,7 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          env.dev ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader',
         ],
@@ -46,7 +46,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          env.dev ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
         ],
       },
@@ -61,13 +61,14 @@ module.exports = {
     ]),
 
     new MiniCssExtractPlugin({
-      filename: devMode ? '[name].css' : '[name].[hash].css',
-      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+      filename: env.dev ? '[name].css' : '[name].[hash].css',
+      chunkFilename: env.dev ? '[id].css' : '[id].[hash].css',
     }),
 
     new HtmlPlugin({ template: './src/front/index.html' }),
   ],
 
+  /*
   optimization: {
     splitChunks: {
       cacheGroups: {
@@ -79,6 +80,7 @@ module.exports = {
       },
     },
   },
+  */
 
   devtool: 'source-map',
 
@@ -86,11 +88,15 @@ module.exports = {
     contentBase: path.join(__dirname, './dist/front'),
     compress: true,
     host: '127.0.0.1',
-    port: 1234,
+    port: 9000,
     historyApiFallback: {
       rewrites: [
         { from: /^\/content/, to: '/index.html' },
       ],
     },
   },
-};
+});
+
+interface IEnv {
+  dev: boolean;
+}

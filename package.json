@@ -4,8 +4,9 @@
   "description": "Web cookbook",
   "main": "index.js",
   "scripts": {
-    "build": "webpack -d --watch",
+    "build:dev": "webpack --debug --watch --env.dev",
     "start:dev": "webpack-dev-server",
+    "build": "webpack",
     "start": "node src/back/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,7 +17,9 @@
   "keywords": [
     "html",
     "css",
-    "javascript"
+    "javascript",
+    "web",
+    "standard"
   ],
   "author": "Stéphane Francel <contact@avine.io>",
   "license": "MIT",
@@ -25,8 +28,13 @@
   },
   "homepage": "https://github.com/avine/web-explorer#readme",
   "devDependencies": {
+    "@types/clean-webpack-plugin": "^0.1.2",
+    "@types/copy-webpack-plugin": "^4.4.1",
+    "@types/html-webpack-plugin": "^2.30.3",
+    "@types/mini-css-extract-plugin": "^0.2.0",
     "@types/node": "^10.1.2",
     "@types/prismjs": "^1.9.0",
+    "@types/webpack": "^4.4.0",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
@@ -39,6 +47,7 @@
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
     "ts-loader": "^4.3.0",
+    "ts-node": "^6.0.5",
     "tslint": "^5.10.0",
     "tslint-eslint-rules": "^5.3.1",
     "typescript": "^2.8.3",

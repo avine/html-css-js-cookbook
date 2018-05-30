@@ -1,5 +1,4 @@
-/* eslint-disable quote-props */
-const contentTypes = {
+const contentTypes: { [ext: string]: string; } = {
   'aac': 'audio/aac',
   'abw': 'application/x-abiword',
   'arc': 'application/octet-stream',
@@ -68,6 +67,6 @@ const contentTypes = {
   '7z': 'application/x-7z-compressed',
 };
 
-module.exports = function getContentType(ext) {
+export function getContentType(ext: string) {
   return contentTypes[ext] || 'application/octet-stream';
-};
+}

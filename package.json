@@ -4,9 +4,9 @@
   "description": "Web cookbook",
   "main": "index.js",
   "scripts": {
-    "build:dev": "webpack --debug --watch --env.dev",
+    "build:dev": "webpack --config ./webpack-front.config.ts --debug --watch --env.dev",
     "start:dev": "webpack-dev-server",
-    "build": "webpack",
+    "build": "webpack --config ./webpack-front.config.ts",
     "start": "node src/back/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

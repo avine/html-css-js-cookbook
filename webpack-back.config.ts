@@ -11,6 +11,11 @@ export default {
 
   target: 'node',
 
+  node: {
+    __filename: false,
+    __dirname: false
+  },
+
   entry: {
     app: './src/back.ts',
   },

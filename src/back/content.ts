@@ -20,7 +20,7 @@ export const getResource = (pathfile: string): Promise<IResource> => new Promise
     });
   });
 
-export const getResource404 = () => getResource(path.join(__dirname, './error404.html'));
+export const getResource404 = () => getResource(path.join(__dirname, './pages/error404.html'));
 
 export const fillResponse = (response: ServerResponse, data: IResource) => {
   response.setHeader('Content-Type', data.contentType);

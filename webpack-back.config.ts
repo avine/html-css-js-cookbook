@@ -1,20 +1,19 @@
-
 import path from 'path';
 
 import CleanPlugin from 'clean-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 
-const devMode = false;
-
-export default {
-  mode: devMode ? 'development' : 'production',
+module.exports = (env: IEnv = {}) => ({
+  mode: env.dev ? 'development' : 'production',
 
   target: 'node',
 
   node: {
+    __dirname: false,
     __filename: false,
-    __dirname: false
   },
+
+  context: __dirname,
 
   entry: {
     app: './src/back.ts',
@@ -48,4 +47,8 @@ export default {
   ],
 
   devtool: 'source-map',
-};
+});
+
+interface IEnv {
+  dev?: boolean;
+}

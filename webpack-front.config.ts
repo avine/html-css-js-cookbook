@@ -6,7 +6,7 @@ import CopyPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HtmlPlugin from 'html-webpack-plugin';
 
-module.exports = (env: IEnv) => ({
+module.exports = (env: IEnv = {}) => ({
   mode: env.dev ? 'development' : 'production',
 
   target: 'web',
@@ -54,7 +54,7 @@ module.exports = (env: IEnv) => ({
   },
 
   plugins: [
-    new CleanPlugin('./dist'),
+    new CleanPlugin('./dist/front'),
 
     new CopyPlugin([
       { from: './src/front/pages', to: './pages' },
@@ -65,7 +65,9 @@ module.exports = (env: IEnv) => ({
       chunkFilename: env.dev ? '[id].css' : '[id].[hash].css',
     }),
 
-    new HtmlPlugin({ template: './src/front/index.html' }),
+    new HtmlPlugin({
+      template: './src/front/index.html',
+    }),
   ],
 
   /*
@@ -98,5 +100,5 @@ module.exports = (env: IEnv) => ({
 });
 
 interface IEnv {
-  dev: boolean;
+  dev?: boolean;
 }

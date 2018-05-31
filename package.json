@@ -4,10 +4,19 @@
   "description": "Web cookbook",
   "main": "index.js",
   "scripts": {
-    "build:dev": "webpack --config ./webpack-front.config.ts --debug --watch --env.dev",
+    "watch:front": "webpack --config ./webpack-front.config.ts --debug --watch --env.dev",
+    "watch:back": "webpack --config ./webpack-back.config.ts --debug --watch --env.dev",
+    "watch:start": "nodemon dist/back/app.js --watch ./dist/back",
+    "watch": "npm run watch:front && npm run watch:back && npm run watch:start",
+
+    "build:front": "webpack --config ./webpack-front.config.ts",
+    "build:back": "webpack --config ./webpack-back.config.ts",
+    "build": "npm run build:front && npm run build:back",
+
+    "watch:src": "nodemon --exec \"./node_modules/.bin/ts-node\" src/back/ts/app.ts --watch ./src/back",
     "start:dev": "webpack-dev-server",
-    "build": "webpack --config ./webpack-front.config.ts",
-    "start": "node src/back/server.js",
+
+    "start": "node dist/back/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -44,6 +53,7 @@
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.0",
     "node-sass": "^4.9.0",
+    "nodemon": "^1.17.5",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
     "ts-loader": "^4.3.0",

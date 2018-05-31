@@ -1,1 +1,1 @@
-import './back/app';
+import './back/ts/app';

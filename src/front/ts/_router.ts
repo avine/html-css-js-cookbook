@@ -2,10 +2,12 @@ import { fetchContent, insertHtml, querySelectorAll, resolveUrl } from './_helpe
 
 let content: Element;
 let baseContent: string;
-let baseUrl: string;
+let baseUrl: { root: string; index: string; };
 
 export function getBaseHref() {
-  return resolveUrl((document.querySelector('base') as HTMLBaseElement).href) as string;
+  const root = resolveUrl((document.querySelector('base') as HTMLBaseElement).href) as string;
+  const index = resolveUrl(`${root}index.html`) as string;
+  return { root, index };
 }
 
 export const ON_NAVIGATE = 'app-navigate';
@@ -40,11 +42,12 @@ function triggerEvent(appUrl: string) {
 }
 
 export function navigate(url: string) {
-  if (url && url !== baseUrl) {
+  if (url && url === baseUrl.index) replaceState(baseUrl.root);
+  if (url && url !== baseUrl.root && url !== baseUrl.index) {
     return fetchContent(url, content).then(() => triggerEvent(url));
   }
   insertHtml(baseContent, content);
-  triggerEvent(baseUrl);
+  triggerEvent(baseUrl.root);
   return Promise.resolve();
 }
 

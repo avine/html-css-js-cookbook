@@ -14,7 +14,7 @@ module.exports = (env: IEnv = {}) => ({
   context: __dirname,
 
   entry: {
-    app: './src/front.ts',
+    app: './src/front.entry.ts',
   },
 
   output: {

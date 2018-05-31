@@ -57,7 +57,7 @@ export function cloneScript(dummy: HTMLScriptElement) {
 }
 
 export function insertHtml(html: string, element: Element ) {
-  element.innerHTML = html; // eslint-disable-line no-param-reassign
+  element.innerHTML = html;
   querySelectorAll<HTMLScriptElement>('script', element).forEach((dummy) => {
     if (!dummy.hasAttribute('app-script-defer') && dummy.parentNode) {
       dummy.parentNode.insertBefore(cloneScript(dummy), dummy);

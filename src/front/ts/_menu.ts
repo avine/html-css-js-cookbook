@@ -1,7 +1,6 @@
 import { fetchContent, getAction } from './_helper';
 import { updateActiveLink } from './_router';
 
-// eslint-disable-next-line import/prefer-default-export
 export function initMenu({ hidden = false }) {
   const element = document.querySelector('.app-grid__wrap');
   if (element && hidden) element.classList.add('app-grid__wrap--menu-hidden');

@@ -12,7 +12,7 @@ export function toggleCss() {
   let contentCss: HTMLStyleElement[];
 
   const toggle = (styles: HTMLStyleElement[]) => styles.forEach((style) => {
-    style.disabled = !style.disabled; // eslint-disable-line no-param-reassign
+    style.disabled = !style.disabled;
   });
 
   const action = getAction('toggle_css', getLinkIcon('eye-slash'), () => {

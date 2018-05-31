@@ -1,11 +1,12 @@
 import http from 'http';
 
+import { STATE_PREFIX } from '../../front/ts/_router';
 import { fillResponse, getContent, getContent404, getPathfile } from './_helper';
 
 http
   .createServer((request, response) => {
     let { url } = request;
-    if (url && !url.startsWith('/content')) {
+    if (url && !url.startsWith(STATE_PREFIX)) {
       if (url === '/') url = '/index.html';
       const pathfile = getPathfile(url);
 

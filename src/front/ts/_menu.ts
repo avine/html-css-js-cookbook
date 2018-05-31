@@ -1,4 +1,5 @@
-import { fetchContent, getAction } from './_helper';
+import { getAction } from './_dom';
+import { fetchContent } from './_fetch';
 import { updateActiveLink } from './_router';
 
 export function initMenu({ hidden = false }) {

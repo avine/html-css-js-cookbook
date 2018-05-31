@@ -1,6 +1,6 @@
 import { highlight, languages } from 'prismjs';
 
-import { createNode, getAction, querySelectorAll, toggleNode, wrapNode } from './_helper';
+import { createNode, getAction, querySelectorAll, toggleNode, wrapNode } from './_dom';
 import { ON_NAVIGATE } from './_router';
 
 function getLinkIcon(icon: string, href = '#') {

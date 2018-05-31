@@ -1,4 +1,5 @@
-import { fetchContent, insertHtml, querySelectorAll, resolveUrl } from './_helper';
+import { insertHtml, querySelectorAll, resolveUrl } from './_dom';
+import { fetchContent } from './_fetch';
 
 let content: Element;
 let baseContent: string;

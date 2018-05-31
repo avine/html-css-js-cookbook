@@ -1,8 +1,4 @@
-let id = 0;
-export function getId() {
-  id += 1;
-  return id;
-}
+import { getId } from './_util';
 
 export function querySelectorAll<T>(selector: string, element?: Element): T[] {
   return [].slice.call((element || document).querySelectorAll(selector));
@@ -35,7 +31,6 @@ export function toggleNode(element: Element, parentElement?: Element) {
       return toggleId;
     }
   }
-
   let placeholder;
   if (element.parentNode) {
     placeholder = createNode(`<script type="placeholder" app-toggle-id="${toggleId}">`);
@@ -49,7 +44,7 @@ export function toggleNode(element: Element, parentElement?: Element) {
   return toggleId;
 }
 
-export function cloneScript(dummy: HTMLScriptElement) {
+export function makeScriptAlive(dummy: HTMLScriptElement) {
   const script = document.createElement('script');
   [].forEach.call(dummy.attributes, (attr: Attr) => script.setAttribute(attr.name, attr.value));
   script.innerHTML = dummy.innerHTML;
@@ -60,11 +55,18 @@ export function insertHtml(html: string, element: Element ) {
   element.innerHTML = html;
   querySelectorAll<HTMLScriptElement>('script', element).forEach((dummy) => {
     if (!dummy.hasAttribute('app-script-defer') && dummy.parentNode) {
-      dummy.parentNode.insertBefore(cloneScript(dummy), dummy);
+      dummy.parentNode.insertBefore(makeScriptAlive(dummy), dummy);
       dummy.parentNode.removeChild(dummy);
     }
   });
   return element.innerHTML;
+}
+
+export function resolveUrl(href: string) {
+  if (href === undefined || href === null) return undefined;
+  const a = document.createElement('a');
+  a.setAttribute('href', href);
+  return a.href;
 }
 
 export function getAction(name: string, link: Element, callback: any) {
@@ -82,26 +84,4 @@ export function getAction(name: string, link: Element, callback: any) {
   if (sessionStorage.getItem(name) === 'true') action.handler();
   link.addEventListener('click', action.handler);
   return action;
-}
-
-export function resolveUrl(href: string) {
-  if (href === undefined || href === null) return undefined;
-  const a = document.createElement('a');
-  a.setAttribute('href', href);
-  return a.href;
-}
-
-export function fetchContent404() {
-  return fetch(resolveUrl('/pages/error404.html')).then(response => response.text());
-}
-
-export function fetchContent(url: string, element: Element) {
-  return fetch(url)
-    .then((response) => {
-      if (response.status !== 200) {
-        return fetchContent404().then(html => html.replace('{{url}}', url));
-      }
-      return response.text();
-    })
-    .then(html => insertHtml(html, element));
 }

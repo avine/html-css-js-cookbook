@@ -12,13 +12,12 @@ body {
 }
 
 .app-grid__wrap {
-  --grid-gap: 1.25em;
+  --grid-gap: 1.25rem;
+  --grid-shadow: 0 0 0.75rem rgba(0, 0, 0, 0.4);
   height: 100%;
   display: grid;
   grid-template-columns: 280px 1fr;
   grid-template-rows: auto 1fr auto;
-  grid-column-gap: var(--grid-gap);
-  grid-row-gap: var(--grid-gap);
   grid-template-areas:
     "header header"
     "menu content"
@@ -27,19 +26,23 @@ body {
 }
 
 .app-grid__header {
+  z-index: 3;
   grid-area: header;
   padding: 0 var(--grid-gap);
+  box-shadow: var(--grid-shadow);
 }
 
 .app-grid__menu {
+  z-index: 2;
   grid-area: menu;
-  margin-left: var(--grid-gap);
+  padding: var(--grid-gap);
   overflow: auto;
 }
 
 .app-grid__content {
+  z-index: 1;
   grid-area: content;
-  margin-right: var(--grid-gap);
+  padding: var(--grid-gap);
   overflow: auto;
 }
 
@@ -59,18 +62,12 @@ body {
   .app-grid__menu {
     display: none;
   }
-
-  .app-grid__content {
-    margin-left: var(--grid-gap);
-  }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 720px) {
   .app-grid__wrap {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto 1fr auto;
-    grid-column-gap: 0;
-    grid-row-gap: 0;
     grid-template-areas:
       "header"
       "menu"
@@ -79,12 +76,6 @@ body {
   }
 
   .app-grid__menu {
-    margin: 0;
-    border-bottom: 1px solid var(--border-color);
-  }
-
-  .app-grid__content {
-    margin: 0 !important;
-    padding: var(--grid-gap);
+    box-shadow: var(--grid-shadow);
   }
 }

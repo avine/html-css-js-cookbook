@@ -70,7 +70,9 @@ function insertSource(playground: Element, type: SourceType) {
   code.innerHTML = highlight(source, languages[type], languages[type]);
   wrap.appendChild(code);
   wrap.appendChild(action);
-  const anchor = document.querySelector(`[app-playground-anchor-${type}]`);
+  let anchor: Element | null = null;
+  const anchorId = playground.getAttribute('app-playground') || '';
+  anchor = document.querySelector(`[app-playground-anchor="${anchorId}"]`);
   insertAfter(wrap, anchor || playground);
   return { wrap, code, action };
 }

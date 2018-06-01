@@ -1,27 +1,34 @@
 <h1>Playground</h1>
 
-<div app-playground>
+<div app-playground="1">
   <span id="demo">Click me</span>
 </div>
 
-<style app-playground>
+<style app-playground="2">
 #demo {
   background-color: yellow;
   cursor: pointer;
 }
 </style>
 
-<script app-playground app-script-defer>
+<script app-playground="3" app-script-defer>
 document.getElementById('demo').addEventListener('click', function (e) {
   e.preventDefault();
-  alert('You clicked!');
+  alert('You clicked after enabled!');
 });
 </script>
 
-<p app-playground-anchor-html>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<p app-playground-anchor="1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
-<p app-playground-anchor-css>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<p app-playground-anchor="2">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 
-<p app-playground-anchor-js>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+<p app-playground-anchor="3">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
 
 <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+<script app-playground>
+document.getElementById('demo').addEventListener('click', function (e) {
+  e.preventDefault();
+  alert('You clicked always!');
+});
+</script>

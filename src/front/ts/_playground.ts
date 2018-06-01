@@ -1,10 +1,22 @@
 import { highlight, languages } from 'prismjs';
 
-import { createNode, insertAfter, querySelectorAll } from './_dom';
+import { createNode, insertAfter, makeScriptAlive, querySelectorAll } from './_dom';
 import { ON_NAVIGATE } from './_router';
 
+function isDeferred(playground: HTMLScriptElement) {
+  return playground.hasAttribute('app-script-defer');
+}
+
 function playJs(playground: HTMLScriptElement, action: Element) {
-  // TODO...
+  if (!isDeferred(playground)) {
+    return;
+  }
+  action.addEventListener('click', () => {
+    if (playground.parentNode) {
+      playground.parentNode.insertBefore(makeScriptAlive(playground), playground);
+      playground.parentNode.removeChild(playground);
+    }
+  });
 }
 
 function playCss(playground: HTMLStyleElement, action: Element) {
@@ -26,19 +38,34 @@ function getLabel(type: SourceType) {
   return createNode(`<span class="app-playground__action app-playground__action--disabled">${type}</span>`);
 }
 
-function getAction(type: SourceType, wrap: Element) {
+function getAction(type: SourceType, wrap: Element, isJs = false) {
   const action = createNode(`<a href="#" class="app-playground__action">${type}</a>`);
+  if (isJs) {
+    wrap.classList.add('app-playground--disabled');
+  }
   action.addEventListener('click', (event) => {
     event.preventDefault();
-    wrap.classList.toggle('app-playground--disabled');
+    if (isJs) {
+      wrap.classList.remove('app-playground--disabled');
+    } else {
+      wrap.classList.toggle('app-playground--disabled');
+    }
   });
   return action;
+}
+
+function hasAction(playground: Element, type: SourceType) {
+  switch (type) {
+    case 'js': return isDeferred(playground as HTMLScriptElement);
+    case 'css': return true;
+    case 'html': return false;
+  }
 }
 
 function insertSource(playground: Element, type: SourceType) {
   const wrap = createNode('<pre class="app-playground"></pre>');
   const code = createNode('<code class="app-playground__code"></code>');
-  const action = type === 'css' ? getAction(type, wrap) : getLabel(type);
+  const action = hasAction(playground, type) ? getAction(type, wrap, type === 'js') : getLabel(type);
   const source = formatSource(playground.innerHTML);
   code.innerHTML = highlight(source, languages[type], languages[type]);
   wrap.appendChild(code);

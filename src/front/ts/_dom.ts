@@ -64,7 +64,7 @@ export function makeScriptAlive(dummy: HTMLScriptElement) {
 export function insertHtml(html: string, element: Element ) {
   element.innerHTML = html;
   querySelectorAll<HTMLScriptElement>('script', element).forEach((dummy) => {
-    if (/*!dummy.hasAttribute('app-playground') && */dummy.parentNode) {
+    if (!dummy.hasAttribute('app-script-defer') && dummy.parentNode) {
       dummy.parentNode.insertBefore(makeScriptAlive(dummy), dummy);
       dummy.parentNode.removeChild(dummy);
     }

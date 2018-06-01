@@ -1,14 +1,17 @@
 <h1>Playground</h1>
 
 <div app-playground>
-  <a href="#" id="demo">Click me</a>
+  <span id="demo">Click me</span>
 </div>
 
 <style app-playground>
-  #demo { background-color: yellow; }
+#demo {
+  background-color: yellow;
+  cursor: pointer;
+}
 </style>
 
-<script app-playground>
+<script app-playground app-script-defer>
 document.getElementById('demo').addEventListener('click', function (e) {
   e.preventDefault();
   alert('You clicked!');

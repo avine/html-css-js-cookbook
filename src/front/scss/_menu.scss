@@ -23,9 +23,8 @@
     }
   }
 
-  // TODO: refactorize...
   .app-link__active {
-    background-color: aliceblue;
+    background-color: var(--link-bg-color-active);
     color: var(--text-color);
   }
 }

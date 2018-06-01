@@ -90,7 +90,7 @@ module.exports = (env: IEnv = {}) => ({
     contentBase: path.join(__dirname, './dist/front'),
     compress: true,
     host: '127.0.0.1',
-    port: 9000,
+    port: 3000,
     historyApiFallback: {
       rewrites: [
         { from: /^\/content/, to: '/index.html' },

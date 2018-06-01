@@ -1,3 +1,3 @@
-# web-explorer
+# WebExplorer
 
-Web cookbook
+Front end developer playground

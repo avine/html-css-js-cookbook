@@ -1,0 +1,26 @@
+.app-playground {
+  margin: 2rem 0;
+  padding: 0;
+  position: relative;
+}
+
+.app-playground--demo {
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+}
+
+.app-playground__label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  opacity: 0.8;
+}
+
+.app-playground__code {
+  display: block;
+  overflow: auto;
+  max-height: 20vh;
+  padding: 1rem;
+}

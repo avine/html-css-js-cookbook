@@ -21,6 +21,16 @@ export function wrapNode(element: Element, wrapCss = '') {
   return wrap;
 }
 
+export function insertAfter(target: Element, source: Element) {
+  if (source.parentNode) {
+    if (source.nextSibling) {
+      source.parentNode.insertBefore(target, source.nextSibling);
+    } else {
+      source.parentNode.appendChild(target);
+    }
+  }
+}
+
 export function toggleNode(element: Element, parentElement?: Element) {
   let toggleId = parseInt(element.getAttribute('app-toggle-id') as any, 10);
   if (!toggleId) {
@@ -54,7 +64,7 @@ export function makeScriptAlive(dummy: HTMLScriptElement) {
 export function insertHtml(html: string, element: Element ) {
   element.innerHTML = html;
   querySelectorAll<HTMLScriptElement>('script', element).forEach((dummy) => {
-    if (!dummy.hasAttribute('app-script-defer') && dummy.parentNode) {
+    if (/*!dummy.hasAttribute('app-playground') && */dummy.parentNode) {
       dummy.parentNode.insertBefore(makeScriptAlive(dummy), dummy);
       dummy.parentNode.removeChild(dummy);
     }

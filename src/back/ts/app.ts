@@ -1,15 +1,12 @@
 import { createServer } from 'http';
 import { URL } from 'url';
 
-import { STATE_PREFIX } from '../../front/ts/_router';
-import { fillResponse, getContent, getContent404, getPathfile } from './_helper';
-
-const hostname = '127.0.0.1';
-const port = 3000;
+import { SERVER_HOST, SERVER_PORT, SPA_URL_STATE_PREFIX } from '../../config';
+import { fillResponse, getContent, getContent404, getPathfile } from './_content';
 
 createServer((request, response) => {
   const { url } = request;
-  if (url && !url.startsWith(STATE_PREFIX)) {
+  if (url && !url.startsWith(SPA_URL_STATE_PREFIX)) {
     let pathname = new URL(url, 'http://whatever/').pathname;
     if (pathname === '/') pathname = '/index.html';
     const pathfile = getPathfile(pathname);
@@ -36,8 +33,8 @@ createServer((request, response) => {
       log(`url: ${url}\npathfile: ${pathfile} [ROOT]\n`);
     });
   }
-}).listen(port, hostname, undefined, () => {
-  log(`Server is listening on port http://${hostname}:${port}/`);
+}).listen(SERVER_PORT, SERVER_HOST, undefined, () => {
+  log(`Server is listening on port http://${SERVER_HOST}:${SERVER_PORT}/`);
 });
 
 function log(...msg: any[]) {

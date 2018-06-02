@@ -1,3 +1,4 @@
+import { SPA_URL_STATE_PREFIX } from '../../config';
 import { insertHtml, querySelectorAll, resolveUrl } from './_dom';
 import { fetchContent } from './_fetch';
 
@@ -11,21 +12,19 @@ export function getBaseHref() {
   return { root, index };
 }
 
-export const ON_NAVIGATE = 'app-navigate';
-
-export const STATE_PREFIX = '/content';
+export const ON_NAVIGATE = 'appNavigate';
 
 export function addStatePrefix(url: string) {
   const a = document.createElement('a');
   a.setAttribute('href', url);
-  if (a.pathname !== '/') a.pathname = STATE_PREFIX + a.pathname;
+  if (a.pathname !== '/') a.pathname = SPA_URL_STATE_PREFIX + a.pathname;
   return a.href;
 }
 
 export function removeStatePrefix(url: string) {
   const a = document.createElement('a');
   a.setAttribute('href', url);
-  a.pathname = a.pathname.replace(new RegExp(`^${STATE_PREFIX}`), '');
+  a.pathname = a.pathname.replace(new RegExp(`^${SPA_URL_STATE_PREFIX}`), '');
   return a.href;
 }
 

@@ -6,6 +6,10 @@ html {
   color: var(--text-color);
 }
 
+.app-no-margin-top {
+  margin-top: 0 !important;
+}
+
 hr {
   margin: 1rem 0;
   border: none;
@@ -47,8 +51,8 @@ pre {
 }
 
 code {
-  font-size: 0.825rem;
   font-family: 'Roboto Mono', monospace;
+  font-size: 0.825rem;
 }
 
 pre, code {

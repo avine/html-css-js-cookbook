@@ -1,11 +1,11 @@
-import { initMenu, initToggleMenu } from './_menu';
+import { initSidebar, initToggleSidebar } from './_sidebar';
 import { initPlayground } from './_playground';
 import { initRouter } from './_router';
 import { initTool } from './_tool';
 
 window.addEventListener('DOMContentLoaded', () => {
-  initMenu({ hidden: true });
-  initToggleMenu();
+  initSidebar({ hidden: true });
+  initToggleSidebar();
   // initTool();
   initPlayground();
 

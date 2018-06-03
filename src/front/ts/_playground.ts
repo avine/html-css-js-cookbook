@@ -31,7 +31,17 @@ function playHtml(playground: Element, action: Element) {
 }
 
 function formatSource(html: string) {
-  return html.trim().replace(/\n{2,}/g, '\n\n');
+  // Remove useless indentation
+  let lines = html.split('\n');
+  const indent = lines.reduce((idt, currLine) => {
+    if (currLine) {
+      const currIndent = (currLine.match(/^[\s]+/) || [''])[0].length;
+      idt = idt === -1 ? currIndent : Math.min(idt, currIndent);
+    }
+    return idt;
+  }, -1);
+  if (indent > 0) lines = lines.map(line => line.substr(indent));
+  return lines.join('\n').trim().replace(/\n{2,}/g, '\n\n');
 }
 
 function getLabel(type: SourceType) {

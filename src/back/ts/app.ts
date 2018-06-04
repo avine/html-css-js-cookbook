@@ -1,7 +1,7 @@
 import { createServer } from 'http';
 import { URL } from 'url';
 
-import { SERVER_HOST, SERVER_PORT, SPA_URL_STATE_PREFIX } from '../../config';
+import { BACK_HOST, BACK_PORT, SPA_URL_STATE_PREFIX } from '../../config';
 import { isBinaryPath } from './_binary';
 import { fillResponse, getContent, getContent404, getPathfile } from './_content';
 
@@ -34,8 +34,8 @@ createServer((request, response) => {
       log(`url: ${url}\npathfile: ${pathfile} [ROOT]\n`);
     });
   }
-}).listen(SERVER_PORT, SERVER_HOST, undefined, () => {
-  log(`Server is listening on port http://${SERVER_HOST}:${SERVER_PORT}/`);
+}).listen(BACK_PORT, BACK_HOST, undefined, () => {
+  log(`Server is listening on port http://${BACK_HOST}:${BACK_PORT}/`);
 });
 
 function log(...msg: any[]) {

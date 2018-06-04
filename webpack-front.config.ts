@@ -1,10 +1,10 @@
-import path from 'path';
-import webpack from 'webpack';
-
 import CleanPlugin from 'clean-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HtmlPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import path from 'path';
+
+import { FRONT_PAGES_FOLDER } from './src/config';
 
 module.exports = (env: IEnv = {}) => ({
   mode: env.dev ? 'development' : 'production',
@@ -81,7 +81,7 @@ module.exports = (env: IEnv = {}) => ({
     new CleanPlugin('./dist/front'),
 
     new CopyPlugin([
-      { from: './src/front/pages', to: './pages' },
+      { from: './src/front/pages', to: `./${FRONT_PAGES_FOLDER}` },
     ]),
 
     new MiniCssExtractPlugin({

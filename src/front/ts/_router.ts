@@ -1,15 +1,15 @@
-import { SPA_URL_STATE_PREFIX } from '../../config';
-import { insertHtml, querySelectorAll, resolveUrl } from './_dom';
+import { FRONT_PAGES_FOLDER, SPA_URL_STATE_PREFIX } from '../../config';
+import { querySelectorAll, resolveUrl } from './_dom';
 import { fetchContent } from './_fetch';
 
 let content: Element;
-let baseContent: string;
-let baseUrl: { root: string; index: string; };
+let baseUrl: { root: string; index: string; home: string; };
 
 export function getBaseHref() {
   const root = resolveUrl((document.querySelector('base') as HTMLBaseElement).href) as string;
   const index = resolveUrl(`${root}index.html`) as string;
-  return { root, index };
+  const home = resolveUrl(`${root}${FRONT_PAGES_FOLDER}/index.html`) as string;
+  return { root, index, home };
 }
 
 export const ON_NAVIGATE = 'appNavigate';
@@ -42,13 +42,13 @@ function triggerEvent(appUrl: string) {
 }
 
 export function navigate(url: string) {
-  if (url && url === baseUrl.index) replaceState(baseUrl.root);
-  if (url && url !== baseUrl.root && url !== baseUrl.index) {
-    return fetchContent(url, content).then(() => triggerEvent(url));
+  if (url === baseUrl.home || url === baseUrl.index) {
+    replaceState(baseUrl.root);
   }
-  insertHtml(baseContent, content);
-  triggerEvent(baseUrl.root);
-  return Promise.resolve();
+  if (url === baseUrl.index || url === baseUrl.root) {
+    url = baseUrl.home;
+  }
+  return fetchContent(url, content).then(() => triggerEvent(url));
 }
 
 function stateHandler(event: PopStateEvent) {
@@ -80,7 +80,10 @@ function linkHandler(event: Event) {
 
 export function updateActiveLink() {
   querySelectorAll<Element>('[app-link]').forEach(((link) => {
-    const linkUrl = resolveUrl(link.getAttribute('app-link') || (link as HTMLAnchorElement).href);
+    let linkUrl = resolveUrl(link.getAttribute('app-link') || (link as HTMLAnchorElement).href);
+    if (linkUrl === baseUrl.home || linkUrl === baseUrl.index) {
+      linkUrl = baseUrl.root;
+    }
     link.classList[linkUrl === removeStatePrefix(window.location.href) ? 'add' : 'remove']('app-link__active');
   }));
 }
@@ -91,7 +94,6 @@ const activeLinkHandler = updateActiveLink;
 export function initRouter() {
   // Init
   content = document.querySelector('[app-content]') as Element;
-  baseContent = content.innerHTML;
   baseUrl = getBaseHref();
 
   // Bootstrap

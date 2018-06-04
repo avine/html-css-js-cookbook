@@ -2,6 +2,7 @@ import { createServer } from 'http';
 import { URL } from 'url';
 
 import { SERVER_HOST, SERVER_PORT, SPA_URL_STATE_PREFIX } from '../../config';
+import { isBinaryPath } from './_binary';
 import { fillResponse, getContent, getContent404, getPathfile } from './_content';
 
 createServer((request, response) => {
@@ -13,7 +14,7 @@ createServer((request, response) => {
 
     getContent(pathfile).then((data) => {
       response.statusCode = 200;
-      fillResponse(response, data);
+      fillResponse(response, data, isBinaryPath(pathfile));
       log(`url: ${url}\npathfile: ${pathfile}\n`);
     }).catch(() => {
       response.statusCode = 404;

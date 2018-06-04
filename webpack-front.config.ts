@@ -50,6 +50,30 @@ module.exports = (env: IEnv = {}) => ({
           'css-loader',
         ],
       },
+
+      {
+        test: /\.html$/,
+        use: {
+          loader: 'html-loader',
+          options: {
+            attrs: [':src', 'link:href'],
+          },
+        },
+      },
+
+      {
+        test: /\.(png|jpg|gif|ico)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'images/',
+              name: '[name].[hash].[ext]',
+            },
+          },
+        ],
+      },
+
     ],
   },
 

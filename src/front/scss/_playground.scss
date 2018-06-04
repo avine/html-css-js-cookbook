@@ -5,7 +5,7 @@
   border-radius: 0;
   border: 1px solid var(--border-color);
   border-left-color: var(--link-color);
-  background-color: transparent;
+  background-color: var(--bg-color);
   transition: opacity var(--transition-duration) ease;
 
   &:hover {

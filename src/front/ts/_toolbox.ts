@@ -54,12 +54,21 @@ export function viewCode() {
   return action.link;
 }
 
+export function toggleGridFixed() {
+  const html = document.querySelector('html') as Element;
+  const action = getAction('toggle_grid_fixed', getLinkIcon('angle-double-down'), () => {
+    html.classList.toggle('app-grid--fixed');
+  });
+  return action.link;
+}
+
 export function initTool() {
-  const tool = document.querySelector('[app-tool]');
-  if (!tool) return;
+  const toolbox = document.querySelector('[app-toolbox]');
+  if (!toolbox) return;
 
-  tool.classList.add('app-tool');
+  toolbox.classList.add('app-toolbox');
 
-  tool.appendChild(toggleCss());
-  tool.appendChild(viewCode());
+  // toolbox.appendChild(toggleCss());
+  toolbox.appendChild(viewCode());
+  toolbox.appendChild(toggleGridFixed());
 }

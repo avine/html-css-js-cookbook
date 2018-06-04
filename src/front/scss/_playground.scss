@@ -70,6 +70,7 @@
 }
 
 .app-playground--demo {
+  min-height: calc(var(--line-height) - 2 * 0.5rem);
   padding: 0.5rem 1rem;
   border: 1px solid var(--border-color);
   box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.05);

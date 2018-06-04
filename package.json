@@ -6,13 +6,17 @@
   "scripts": {
     "watch:front": "webpack --config ./webpack-front.config.ts --debug --watch --env.dev",
     "watch:back": "webpack --config ./webpack-back.config.ts --debug --watch --env.dev",
-    "watch:start": "nodemon dist/back/app.js --watch ./dist/back",
+    "watch": "npm run watch:front & npm run watch:back",
+
     "build:front": "webpack --config ./webpack-front.config.ts",
     "build:back": "webpack --config ./webpack-back.config.ts",
     "build": "npm run build:front && npm run build:back",
-    "watch:src": "nodemon --exec \"./node_modules/.bin/ts-node\" src/back/ts/app.ts --watch ./src/back",
-    "start:dev-server": "webpack-dev-server --config ./webpack-front.config.ts",
+
+    "start:watch": "nodemon dist/back/app.js --watch ./dist/back",
+    "start:watch:src": "nodemon --exec \"./node_modules/.bin/ts-node\" src/back/ts/app.ts --watch ./src/back",
+    "start:mock": "webpack-dev-server --config ./webpack-front.config.ts",
     "start": "node dist/back/app.js",
+
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

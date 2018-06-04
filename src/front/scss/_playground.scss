@@ -8,28 +8,32 @@
   background-color: transparent;
   transition: opacity var(--transition-duration) ease;
 
-  &:hover .app-playground__action {
+  &:hover {
+    .app-playground__action,
+    &.app-playground--demo::after {
+      opacity: 0.5;
+    }
+  }
+
+  &.app-playground--disabled {
     opacity: 0.5;
+
+    .app-playground__action {
+      opacity: 1;
+    }
   }
 
   .app-playground__action:hover {
     opacity: 1;
+
+    &.app-playground__action--disabled {
+      opacity: 0.5;
+    }
   }
 }
 
-.app-playground--demo {
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--border-color);
-  box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.05);
-
-  &::after {
-    @extend .app-playground__action;
-    content: "demo";
-    cursor: default !important;
-  }
-}
-
-.app-playground__action {
+.app-playground__action,
+.app-playground--demo::after {
   position: absolute;
   top: 0;
   right: 0;
@@ -42,22 +46,18 @@
   text-transform: uppercase;
   text-decoration: none !important;
   transition: all var(--transition-duration) ease;
+}
+
+.app-playground__action {
   cursor: pointer;
-}
 
-.app-playground__action--disabled {
-  cursor: default;
+  &:hover {
+    background-color: var(--link-color);
+    color: var(--bg-color);
+  }
 
-  /*&:hover {
-    opacity: 0.5 !important;
-  }*/
-}
-
-.app-playground--disabled {
-  opacity: 0.5; /*!important;*/
-  font-style: italic;
-
-  .app-playground__action {
+  &.app-playground__action--disabled {
+    background-color: var(--link-bg-color-active);
     color: var(--text-color);
   }
 }
@@ -67,4 +67,23 @@
   overflow: auto;
   max-height: 50vh;
   padding: 0.5rem 1rem;
+}
+
+.app-playground--demo {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-color);
+  box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.05);
+
+  &::after {
+    content: "demo";
+    cursor: default;
+  }
+}
+
+.app-playground--disabled {
+  font-style: italic;
+}
+
+.app-playground__action--disabled {
+  cursor: default;
 }

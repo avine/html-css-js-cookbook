@@ -57,6 +57,7 @@ function getAction(type: SourceType, wrap: Element, isJs = false) {
     event.preventDefault();
     if (isJs) {
       wrap.classList.remove('app-playground--disabled');
+      action.classList.add('app-playground__action--disabled');
     } else {
       wrap.classList.toggle('app-playground--disabled');
     }

@@ -1,12 +1,12 @@
 import { initSidebar, initToggleSidebar } from './_sidebar';
 import { initPlayground } from './_playground';
 import { initRouter } from './_router';
-import { initTool } from './_toolbox';
+import { initToolbox } from './_toolbox';
 
 window.addEventListener('DOMContentLoaded', () => {
   initSidebar({ hidden: true });
   initToggleSidebar();
-  initTool();
+  initToolbox();
   initPlayground();
 
   // Init the router at the end to let the previous

@@ -62,7 +62,7 @@ export function toggleGridFixed() {
   return action.link;
 }
 
-export function initTool() {
+export function initToolbox() {
   const toolbox = document.querySelector('[app-toolbox]');
   if (!toolbox) return;
 

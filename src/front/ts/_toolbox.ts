@@ -20,7 +20,7 @@ export function toggleCss() {
     if (contentCss) toggle(contentCss);
   });
 
-  window.addEventListener(ON_NAVIGATE, () => {
+  window.addEventListener(ON_NAVIGATE.END, () => {
     contentCss = querySelectorAll('[app-content] [app-css-toggle]');
     if (action.active) toggle(contentCss);
   });
@@ -47,7 +47,7 @@ export function viewCode() {
     toggleNode(code, wrap);
   });
 
-  window.addEventListener(ON_NAVIGATE, () => {
+  window.addEventListener(ON_NAVIGATE.END, () => {
     (code.firstChild as Element).innerHTML = highlight(formatSource(source), languages.html, languages.html);
   });
 

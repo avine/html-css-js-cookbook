@@ -1,9 +1,10 @@
 .app-content {
-  display: none;
+  opacity: 0;
+  transition: opacity 150ms ease;
 }
 
 .app-content--active {
-  display: block;
+  opacity: 1;
 }
 
 .app-content__error {

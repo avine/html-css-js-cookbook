@@ -1,6 +1,7 @@
-import { initSidebar, initToggleSidebar } from './_sidebar';
 import { initPlayground } from './_playground';
 import { initRouter } from './_router';
+import { initSidebar, initToggleSidebar } from './_sidebar';
+import { initSpinner } from './_spinner';
 import { initToolbox } from './_toolbox';
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -8,6 +9,7 @@ window.addEventListener('DOMContentLoaded', () => {
   initToggleSidebar();
   initToolbox();
   initPlayground();
+  initSpinner();
 
   // Init the router at the end to let the previous
   // modules react to the first `ON_NAVIGATE` event.

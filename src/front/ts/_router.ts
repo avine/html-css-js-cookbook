@@ -12,7 +12,10 @@ export function getBaseHref() {
   return { root, index, home };
 }
 
-export const ON_NAVIGATE = 'appNavigate';
+export enum ON_NAVIGATE {
+  START = 'appNavigateStart',
+  END = 'appNavigateEnd'
+}
 
 export function addStatePrefix(url: string) {
   const a = document.createElement('a');
@@ -36,19 +39,28 @@ function replaceState(url: string) {
   window.history.replaceState({ appUrl: url }, undefined, addStatePrefix(url));
 }
 
-function triggerEvent(appUrl: string) {
-  const event = new CustomEvent(ON_NAVIGATE, { detail: { appUrl } });
+function emitNavigation(type: ON_NAVIGATE, appUrl: string) {
+  const event = new CustomEvent(type, { detail: { appUrl } });
   window.dispatchEvent(event);
 }
 
+export function showContent(yes = true) {
+  content.classList[yes ? 'add' : 'remove']('app-content--active');
+}
+
 export function navigate(url: string) {
+  emitNavigation(ON_NAVIGATE.START, url);
+  showContent(false);
   if (url === baseUrl.home || url === baseUrl.index) {
     replaceState(baseUrl.root);
   }
   if (url === baseUrl.index || url === baseUrl.root) {
     url = baseUrl.home;
   }
-  return fetchContent(url, content).then(() => triggerEvent(url));
+  return fetchContent(url, content).then(() => {
+    emitNavigation(ON_NAVIGATE.END, url);
+    showContent();
+  });
 }
 
 function stateHandler(event: PopStateEvent) {
@@ -97,9 +109,9 @@ export function initRouter() {
   baseUrl = getBaseHref();
 
   // Bootstrap
-  navigate(removeStatePrefix(window.location.href)).then(() => content.classList.add('app-content--active'));
+  navigate(removeStatePrefix(window.location.href)).then(() => showContent());
 
   window.addEventListener('popstate', stateHandler);
   window.addEventListener('click', linkHandler);
-  window.addEventListener(ON_NAVIGATE, activeLinkHandler);
+  window.addEventListener(ON_NAVIGATE.END, activeLinkHandler);
 }

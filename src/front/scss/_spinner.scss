@@ -1,0 +1,27 @@
+.app-spinner {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+  transition: opacity 600ms ease;
+  animation: appSpinner 1800ms ease;
+}
+
+.app-spinner--hide {
+  opacity: 0;
+}
+
+.app-spinner__content {
+  margin: auto;
+  color: #aaa;
+}
+
+@keyframes appSpinner {
+  0% { opacity: 0; }
+  66% { opacity: 0; }
+  100% { opacity: 1; }
+}

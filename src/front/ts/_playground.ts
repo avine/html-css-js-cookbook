@@ -104,7 +104,7 @@ function playgroundHandler() {
 }
 
 export function initPlayground() {
-  window.addEventListener(ON_NAVIGATE, playgroundHandler);
+  window.addEventListener(ON_NAVIGATE.END, playgroundHandler);
 }
 
 type SourceType = 'js' | 'css' | 'html';

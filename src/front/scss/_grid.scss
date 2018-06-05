@@ -26,6 +26,7 @@ body {
 }
 
 .app-grid__header {
+  position: relative;
   z-index: 4;
   grid-area: header;
   padding: 0 var(--grid-gap);
@@ -33,6 +34,7 @@ body {
 }
 
 .app-grid__sidebar {
+  position: relative;
   z-index: 3;
   grid-area: sidebar;
   padding: var(--grid-gap);
@@ -41,6 +43,7 @@ body {
 }
 
 .app-grid__content {
+  position: relative;
   z-index: 1;
   grid-area: content;
   padding: var(--grid-gap);
@@ -50,6 +53,7 @@ body {
 }
 
 .app-grid__footer {
+  position: relative;
   z-index: 2;
   grid-area: footer;
   padding: 0 var(--grid-gap);

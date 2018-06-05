@@ -17,11 +17,19 @@ class Spinner {
   }
 
   show() {
-    this.pendingHide ? this.cancelHide() : this.scheduleShow();
+    if (!this.pendingShow) {
+      this.scheduleShow();
+    } else if (this.pendingHide) {
+      this.cancelHide();
+    }
   }
 
   hide() {
-    this.pendingShow ? this.cancelShow() : this.scheduleHide();
+    if (!this.pendingHide) {
+      this.scheduleHide();
+    } else if (this.pendingShow) {
+      this.cancelShow();
+    }
   }
 
   private scheduleShow() {

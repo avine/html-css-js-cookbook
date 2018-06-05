@@ -1,5 +1,5 @@
 import { FRONT_PAGES_FOLDER, SPA_URL_STATE_PREFIX } from '../../config';
-import { querySelectorAll, resolveUrl } from './_dom';
+import { insertHtml, querySelectorAll, resolveUrl } from './_dom';
 import { fetchContent } from './_fetch';
 
 let content: Element;
@@ -14,6 +14,7 @@ export function getBaseHref() {
 
 export enum ON_NAVIGATE {
   START = 'appNavigateStart',
+  CANCEL = 'appNavigateCancel',
   END = 'appNavigateEnd'
 }
 
@@ -48,16 +49,26 @@ export function showContent(yes = true) {
   content.classList[yes ? 'add' : 'remove']('app-content--active');
 }
 
+let pendingUrl = '';
 export function navigate(url: string) {
-  emitNavigation(ON_NAVIGATE.START, url);
-  showContent(false);
+  if (pendingUrl) {
+    emitNavigation(ON_NAVIGATE.CANCEL, pendingUrl);
+  }
   if (url === baseUrl.home || url === baseUrl.index) {
     replaceState(baseUrl.root);
   }
   if (url === baseUrl.index || url === baseUrl.root) {
     url = baseUrl.home;
   }
-  return fetchContent(url, content).then(() => {
+  pendingUrl = url;
+  emitNavigation(ON_NAVIGATE.START, url);
+  showContent(false);
+  return fetchContent(url).then((html) => {
+    if (url !== pendingUrl) {
+      return;
+    }
+    insertHtml(html, content);
+    pendingUrl = '';
     emitNavigation(ON_NAVIGATE.END, url);
     showContent();
   });

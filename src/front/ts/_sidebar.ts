@@ -1,5 +1,5 @@
 import { FRONT_PAGES_FOLDER } from '../../config';
-import { getAction } from './_dom';
+import { getAction, insertHtml } from './_dom';
 import { fetchContent } from './_fetch';
 import { updateActiveLink } from './_router';
 
@@ -7,7 +7,12 @@ export function initSidebar({ hidden = false }) {
   const element = document.querySelector('.app-grid__wrap');
   if (element && hidden) element.classList.add('app-grid__wrap--sidebar-hidden');
   const sidebar = document.querySelector('[app-sidebar]');
-  if (sidebar) fetchContent(`./${FRONT_PAGES_FOLDER}/sidebar.html`, sidebar).then(updateActiveLink);
+  if (sidebar) {
+    fetchContent(`./${FRONT_PAGES_FOLDER}/sidebar.html`).then((html) => {
+      insertHtml(html, sidebar);
+      updateActiveLink();
+    });
+  }
 }
 
 export function toggleSidebar() {

@@ -5,22 +5,14 @@
   right: 0;
   bottom: 0;
   left: 0;
-  opacity: 1;
-  transition: opacity 300ms ease;
-  animation: appSpinner 1200ms ease;
+  opacity: 0;
 }
 
-.app-spinner--hide {
-  opacity: 0;
+.app-spinner--show {
+  opacity: 1;
 }
 
 .app-spinner__content {
   margin: auto;
   color: #aaa;
-}
-
-@keyframes appSpinner {
-  0% { opacity: 0; }
-  75% { opacity: 0; }
-  100% { opacity: 1; }
 }

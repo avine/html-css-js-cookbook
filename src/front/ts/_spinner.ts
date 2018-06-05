@@ -2,31 +2,54 @@ import { createNode } from './_dom';
 import { ON_NAVIGATE } from './_router';
 
 class Spinner {
-
   spinner = createNode(
     '<div class="app-spinner"><i class="app-spinner__content fas fa-3x fa-spinner fa-pulse"></i></div>'
   ) as HTMLDivElement;
 
+  pendingShow: any;
   pendingHide: any;
 
-  constructor(private element: HTMLElement) {
+  constructor(
+    private element: HTMLElement,
+    private transition = { delay: 1000, duration: 400 }
+  ) {
+    this.spinner.style.transition = `opacity ${this.transition.duration}ms ease`;
   }
 
   show() {
-    if (this.pendingHide) {
-      this.pendingHide = null;
-      clearTimeout(this.pendingHide);
-    }
-    this.spinner.classList.remove('app-spinner--hide');
-    this.element.appendChild(this.spinner);
+    this.pendingHide ? this.cancelHide() : this.scheduleShow();
   }
 
   hide() {
-    this.spinner.classList.add('app-spinner--hide');
+    this.pendingShow ? this.cancelShow() : this.scheduleHide();
+  }
+
+  private scheduleShow() {
+    this.element.appendChild(this.spinner);
+    this.pendingShow = setTimeout(() => {
+      this.pendingShow = null;
+      this.spinner.classList.add('app-spinner--show');
+    }, this.transition.delay);
+  }
+
+  private cancelShow() {
+    clearTimeout(this.pendingShow);
+    this.pendingShow = null;
+    this.element.removeChild(this.spinner);
+  }
+
+  private scheduleHide() {
+    this.spinner.classList.remove('app-spinner--show');
     this.pendingHide = setTimeout(() => {
       this.pendingHide = null;
       this.element.removeChild(this.spinner);
-    }, 300);
+    }, this.transition.duration);
+  }
+
+  private cancelHide() {
+    clearTimeout(this.pendingHide);
+    this.pendingHide = null;
+    this.spinner.classList.add('app-spinner--show');
   }
 }
 

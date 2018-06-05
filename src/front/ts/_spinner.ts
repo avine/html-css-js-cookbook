@@ -26,7 +26,7 @@ class Spinner {
     this.pendingHide = setTimeout(() => {
       this.pendingHide = null;
       this.element.removeChild(this.spinner);
-    }, 600);
+    }, 300);
   }
 }
 

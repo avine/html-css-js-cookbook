@@ -17,23 +17,35 @@ class Spinner {
   }
 
   show() {
+    if (this.pendingHide) {
+      this.cancelHide();
+    }
     if (!this.pendingShow) {
       this.scheduleShow();
-    } else if (this.pendingHide) {
-      this.cancelHide();
     }
   }
 
   hide() {
+    if (this.pendingShow) {
+      this.cancelShow();
+    }
     if (!this.pendingHide) {
       this.scheduleHide();
-    } else if (this.pendingShow) {
-      this.cancelShow();
+    }
+  }
+
+  private addSpinner() {
+    this.element.appendChild(this.spinner);
+  }
+
+  private removeSpinner() {
+    if (this.spinner.parentNode === this.element) {
+      this.element.removeChild(this.spinner);
     }
   }
 
   private scheduleShow() {
-    this.element.appendChild(this.spinner);
+    this.addSpinner();
     this.pendingShow = setTimeout(() => {
       this.pendingShow = null;
       this.spinner.classList.add('app-spinner--show');
@@ -43,21 +55,20 @@ class Spinner {
   private cancelShow() {
     clearTimeout(this.pendingShow);
     this.pendingShow = null;
-    this.element.removeChild(this.spinner);
+    this.removeSpinner();
   }
 
   private scheduleHide() {
     this.spinner.classList.remove('app-spinner--show');
     this.pendingHide = setTimeout(() => {
       this.pendingHide = null;
-      this.element.removeChild(this.spinner);
+      this.removeSpinner();
     }, this.transition.duration);
   }
 
   private cancelHide() {
     clearTimeout(this.pendingHide);
     this.pendingHide = null;
-    this.spinner.classList.add('app-spinner--show');
   }
 }
 

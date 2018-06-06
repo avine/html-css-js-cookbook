@@ -62,13 +62,23 @@ export function toggleGridFixed() {
   return action.link;
 }
 
+export function toggleSettingsDark() {
+  const html = document.querySelector('html') as Element;
+  const action = getAction('toggle_settings_dark', getLinkIcon('image'), () => {
+    html.classList.toggle('app-settings--dark');
+  });
+  return action.link;
+}
+
 export function initToolbox() {
   const toolbox = document.querySelector('[app-toolbox]');
   if (!toolbox) return;
 
   toolbox.classList.add('app-toolbox');
 
+  toolbox.appendChild(toggleGridFixed());
+  toolbox.appendChild(toggleSettingsDark());
+
   // toolbox.appendChild(toggleCss());
   toolbox.appendChild(viewCode());
-  toolbox.appendChild(toggleGridFixed());
 }

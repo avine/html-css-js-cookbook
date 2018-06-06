@@ -7,9 +7,9 @@ import { initToolbox } from './_toolbox';
 window.addEventListener('DOMContentLoaded', () => {
   initSidebar({ hidden: true });
   initToggleSidebar();
+  initSpinner();
   initToolbox();
   initPlayground();
-  initSpinner();
 
   // Init the router at the end to let the previous
   // modules react to the first `ON_NAVIGATE` event.

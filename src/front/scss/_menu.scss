@@ -30,31 +30,32 @@
   }
 }
 
+[app-menu] {
+  .app-menu__header {
+    cursor: pointer;
+  }
+}
+
 .app-menu__header {
   display: block;
   padding: 0.5rem 0.75rem;
-  cursor: pointer;
 
   &::before {
     position: absolute;
     font-family: Font Awesome\ 5 Free;
     font-weight: 900;
-    content: "\f105";
+    content: "\f107";
     transition: transform var(--transition-duration) ease;
+  }
+}
+
+.app-menu__header--closed {
+  &::before {
+    transform: rotate(-90deg);
   }
 
   + .app-menu {
     display: none;
-  }
-}
-
-.app-menu__header--active {
-  &::before {
-    transform: rotate(90deg);
-  }
-
-  + .app-menu {
-    display: block;
   }
 }
 

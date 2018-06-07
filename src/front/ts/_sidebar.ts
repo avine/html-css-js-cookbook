@@ -1,7 +1,8 @@
 import { FRONT_PAGES_FOLDER } from '../../config';
 import { getAction, insertHtml } from './_dom';
 import { fetchContent } from './_fetch';
-import { updateActiveLink } from './_router';
+import { initMenu } from './_menu';
+import { updateActiveLinks } from './_router';
 
 export function initSidebar({ hidden = false }) {
   const element = document.querySelector('.app-grid__wrap');
@@ -10,7 +11,8 @@ export function initSidebar({ hidden = false }) {
   if (sidebar) {
     fetchContent(`./${FRONT_PAGES_FOLDER}/sidebar.html`).then((html) => {
       insertHtml(html, sidebar);
-      updateActiveLink();
+      initMenu(sidebar);
+      updateActiveLinks();
     });
   }
 }

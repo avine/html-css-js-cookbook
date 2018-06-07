@@ -1,5 +1,5 @@
 import { FRONT_PAGES_FOLDER } from '../../config';
-import { insertHtml, resolveUrl } from './_dom';
+import { resolveUrl } from './_dom';
 
 export function fetchContent404() {
   return fetch(resolveUrl(`/${FRONT_PAGES_FOLDER}/error404.html`)).then(response => response.text());

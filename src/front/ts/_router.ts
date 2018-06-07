@@ -101,18 +101,26 @@ function linkHandler(event: Event) {
   }
 }
 
-export function updateActiveLink() {
-  querySelectorAll<Element>('[app-link]').forEach(((link) => {
-    let linkUrl = resolveUrl(link.getAttribute('app-link') || (link as HTMLAnchorElement).href);
-    if (linkUrl === baseUrl.home || linkUrl === baseUrl.index) {
-      linkUrl = baseUrl.root;
+export function getLinks(container?: Element) {
+  return querySelectorAll<Element>('[app-link]', container).map((element) => {
+    let url = resolveUrl(element.getAttribute('app-link') || (element as HTMLAnchorElement).href);
+    if (url === baseUrl.home || url === baseUrl.index) {
+      url = baseUrl.root;
     }
-    link.classList[linkUrl === removeStatePrefix(window.location.href) ? 'add' : 'remove']('app-link__active');
-  }));
+    return { element, url, active: url === removeStatePrefix(window.location.href) };
+  });
+}
+
+export function getActiveLinks(container?: Element) {
+  return getLinks(container).filter(link => link.active).map(link => link.element);
+}
+
+export function updateActiveLinks() {
+  getLinks().forEach(link => link.element.classList[link.active ? 'add' : 'remove']('app-link__active'));
 }
 
 // The "handler" version is the same because we don't rely on the provided "event" parameter...
-const activeLinkHandler = updateActiveLink;
+const activeLinkHandler = updateActiveLinks;
 
 export function initRouter() {
   // Init

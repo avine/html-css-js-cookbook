@@ -1,4 +1,3 @@
-import { initMenu } from './_menu';
 import { initPlayground } from './_playground';
 import { initRouter } from './_router';
 import { initSidebar, initToggleSidebar } from './_sidebar';
@@ -6,7 +5,6 @@ import { initSpinner } from './_spinner';
 import { initToolbox } from './_toolbox';
 
 window.addEventListener('DOMContentLoaded', () => {
-  initMenu();
   initSidebar({ hidden: true });
   initToggleSidebar();
   initSpinner();

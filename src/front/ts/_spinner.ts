@@ -1,7 +1,7 @@
 import { createNode } from './_dom';
 import { ON_NAVIGATE } from './_router';
 
-class Spinner {
+export class Spinner {
   spinner = createNode(
     '<div class="app-spinner"><i class="app-spinner__content fas fa-3x fa-spinner fa-pulse"></i></div>'
   ) as HTMLDivElement;

@@ -33,12 +33,28 @@
 .app-menu__header {
   display: block;
   padding: 0.5rem 0.75rem;
+  cursor: pointer;
 
   &::before {
     position: absolute;
     font-family: Font Awesome\ 5 Free;
     font-weight: 900;
-    content: "\f107";
+    content: "\f105";
+    transition: transform var(--transition-duration) ease;
+  }
+
+  + .app-menu {
+    display: none;
+  }
+}
+
+.app-menu__header--active {
+  &::before {
+    transform: rotate(90deg);
+  }
+
+  + .app-menu {
+    display: block;
   }
 }
 

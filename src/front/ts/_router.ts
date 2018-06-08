@@ -49,16 +49,33 @@ function showContent(yes = true) {
   content.classList[yes ? 'add' : 'remove']('app-content--active');
 }
 
+function getMainUrl(url: string) {
+  const a = document.createElement('a');
+  a.setAttribute('href', url);
+  a.href = a.pathname; // remove "hash" and "search" from full "href"
+  return a.href;
+}
+
+function replacePathname(fromUrl: string, toUrl: string) {
+  const fromLink = document.createElement('a');
+  const toLink = document.createElement('a');
+  fromLink.setAttribute('href', fromUrl);
+  toLink.setAttribute('href', toUrl);
+  fromLink.pathname = toLink.pathname; // Overwrite "pathname" but preserve "hash" and "search"
+  return fromLink.href;
+}
+
 let pendingUrl = '';
 export function navigate(url: string) {
   if (pendingUrl) {
     emitNavigation(ON_NAVIGATE.CANCEL, pendingUrl);
   }
-  if (url === baseUrl.home || url === baseUrl.index) {
-    replaceState(baseUrl.root);
+  const mainUrl = getMainUrl(url);
+  if (mainUrl === baseUrl.home || mainUrl === baseUrl.index) {
+    replaceState(replacePathname(url, baseUrl.root));
   }
-  if (url === baseUrl.index || url === baseUrl.root) {
-    url = baseUrl.home;
+  if (mainUrl === baseUrl.index || mainUrl === baseUrl.root) {
+    url = replacePathname(url, baseUrl.home);
   }
   pendingUrl = url;
   emitNavigation(ON_NAVIGATE.START, url);

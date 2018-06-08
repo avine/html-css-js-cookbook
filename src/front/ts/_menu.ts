@@ -1,4 +1,4 @@
-import { getParents, querySelectorAll } from './_dom';
+import { getParents } from './_dom';
 import { getActiveLinks, ON_NAVIGATE } from './_router';
 
 export class Menu {
@@ -36,9 +36,7 @@ export class Menu {
   }
 
   closeChilds(menu: Element) {
-    querySelectorAll<Element>('.app-menu__header', menu).forEach(
-      header => header.classList.add('app-menu__header--closed')
-    );
+    menu.querySelectorAll('.app-menu__header').forEach(header => header.classList.add('app-menu__header--closed'));
   }
 
   openParents(activeLink: Element) {
@@ -54,5 +52,5 @@ export class Menu {
 }
 
 export function initMenu(container: Element) {
-  querySelectorAll<Element>('[app-menu]', container).forEach(menu => new Menu(menu));
+  container.querySelectorAll('[app-menu]').forEach(menu => new Menu(menu));
 }

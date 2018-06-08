@@ -102,7 +102,7 @@ function linkHandler(event: Event) {
 }
 
 export function getLinks(container?: Element) {
-  return querySelectorAll<Element>('[app-link]', container).map((element) => {
+  return querySelectorAll('[app-link]', container).map((element) => {
     let url = resolveUrl(element.getAttribute('app-link') || (element as HTMLAnchorElement).href);
     if (url === baseUrl.home || url === baseUrl.index) {
       url = baseUrl.root;

@@ -1,6 +1,6 @@
 import { getId } from './_util';
 
-export function querySelectorAll<T>(selector: string, element?: Element): T[] {
+export function querySelectorAll<T = Element>(selector: string, element?: Element): T[] {
   return [].slice.call((element || document).querySelectorAll(selector));
 }
 
@@ -77,7 +77,7 @@ export function makeScriptAlive(dummy: HTMLScriptElement) {
 
 export function insertHtml(html: string, element: Element ) {
   element.innerHTML = html;
-  querySelectorAll<HTMLScriptElement>('script', element).forEach((dummy) => {
+  element.querySelectorAll('script').forEach((dummy: HTMLScriptElement) => {
     if (!dummy.hasAttribute('app-script-defer') && dummy.parentNode) {
       dummy.parentNode.insertBefore(makeScriptAlive(dummy), dummy);
       dummy.parentNode.removeChild(dummy);

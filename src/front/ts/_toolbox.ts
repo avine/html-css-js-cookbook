@@ -30,7 +30,7 @@ export function toggleCss() {
 
 function formatSource(source: Element) {
   const code = source.cloneNode(true) as Element;
-  querySelectorAll<Element>('[app-code-hidden]', code).forEach((hidden) => {
+  code.querySelectorAll('[app-code-hidden]').forEach((hidden) => {
     if (hidden.parentNode) hidden.parentNode.removeChild(hidden);
   });
   return code.innerHTML.trim().replace(/\n{2,}/g, '\n\n');
@@ -40,7 +40,7 @@ export function viewCode() {
   const source = document.querySelector('[app-content]') as Element;
   source.classList.add('app-code__source');
   const wrap = wrapNode(source, 'app-code');
-  const code = createNode('<pre class="app-code__target language-html"><code></code></pre>');
+  const code = createNode('<pre class="app-code__target"><code></code></pre>');
 
   const action = getAction('view_code', getLinkIcon('code'), () => {
     wrap.classList.toggle('app-code--active');

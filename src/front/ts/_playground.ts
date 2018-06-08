@@ -1,6 +1,6 @@
 import { highlight, languages } from 'prismjs';
 
-import { createNode, insertAfter, makeScriptAlive, querySelectorAll } from './_dom';
+import { createNode, insertAfter, makeScriptAlive } from './_dom';
 import { ON_NAVIGATE } from './_router';
 
 function isDeferred(playground: HTMLScriptElement) {
@@ -100,7 +100,7 @@ function enablePlayground(playground: Element) {
 }
 
 function playgroundHandler() {
-  querySelectorAll<Element>('[app-content] [app-playground]').forEach(enablePlayground);
+  document.querySelectorAll('[app-content] [app-playground]').forEach(enablePlayground);
 }
 
 export function initPlayground() {

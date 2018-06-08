@@ -4,6 +4,20 @@ export function querySelectorAll<T>(selector: string, element?: Element): T[] {
   return [].slice.call((element || document).querySelectorAll(selector));
 }
 
+export function getParents(child: Element, until?: Element) {
+  const parents: Element[] = [];
+  let parent = child.parentNode;
+  while (parent) {
+    if (parent !== until && parent !== document) {
+      parents.unshift(parent as Element);
+    } else {
+      break;
+    }
+    parent = parent.parentNode;
+  }
+  return parents;
+}
+
 export function createNode(html: string) {
   const wrap = document.createElement('div');
   wrap.innerHTML = html || ' ';

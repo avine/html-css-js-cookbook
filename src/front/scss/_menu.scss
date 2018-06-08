@@ -33,6 +33,7 @@
 [app-menu] {
   .app-menu__header {
     cursor: pointer;
+    user-select: none;
   }
 }
 

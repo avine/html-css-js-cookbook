@@ -1,4 +1,4 @@
-import { querySelectorAll } from './_dom';
+import { getParents, querySelectorAll } from './_dom';
 import { getActiveLinks, ON_NAVIGATE } from './_router';
 
 export class Menu {
@@ -42,7 +42,14 @@ export class Menu {
   }
 
   openParents(activeLink: Element) {
-    // TODO...
+    getParents(activeLink, this.menu).forEach((menu) => {
+      if (menu.classList.contains('app-menu')) {
+        const header = menu.previousElementSibling;
+        if (header && header.classList.contains('app-menu__header')) {
+          header.classList.remove('app-menu__header--closed');
+        }
+      }
+    });
   }
 }
 

@@ -2,6 +2,7 @@ import { highlight, languages } from 'prismjs';
 
 import { createNode, getAction, querySelectorAll, toggleNode, wrapNode } from './_dom';
 import { ON_NAVIGATE } from './_router';
+import { formatCode } from './_util';
 
 function getLinkIcon(icon: string, href = '#') {
   return createNode(`<a href="${href}"><i class="fas fa-${icon} fa-fw fa-lg"></i></a>`);
@@ -28,12 +29,12 @@ export function toggleCss() {
   return action.link;
 }
 
-function formatSource(source: Element) {
+function getFormattedCode(source: Element) {
   const code = source.cloneNode(true) as Element;
   code.querySelectorAll('[app-code-hidden]').forEach((hidden) => {
     if (hidden.parentNode) hidden.parentNode.removeChild(hidden);
   });
-  return code.innerHTML.trim().replace(/\n{2,}/g, '\n\n');
+  return formatCode(code.innerHTML);
 }
 
 export function viewCode() {
@@ -48,7 +49,7 @@ export function viewCode() {
   });
 
   window.addEventListener(ON_NAVIGATE.END, () => {
-    (code.firstChild as Element).innerHTML = highlight(formatSource(source), languages.html, languages.html);
+    (code.firstChild as Element).innerHTML = highlight(getFormattedCode(source), languages.html, languages.html);
   });
 
   return action.link;

@@ -1,32 +1,31 @@
-import { getParents } from './_dom';
+import { getParentNodes } from './_dom';
 import { getActiveLinks, ON_NAVIGATE } from './_router';
 
 export class Menu {
-  activeLinkHandler = this.openActiveLink.bind(this);
+  private activeLinksHandler = this.openActiveLinks.bind(this);
 
   constructor(private menu: Element) {
     this.closeChilds(menu);
-    menu.addEventListener('click', this.handler.bind(this));
-
-    window.addEventListener(ON_NAVIGATE.END, this.activeLinkHandler);
+    menu.addEventListener('click', this.clickHandler.bind(this));
+    window.addEventListener(ON_NAVIGATE.END, this.activeLinksHandler);
   }
 
   destroy() {
-    window.removeEventListener(ON_NAVIGATE.END, this.activeLinkHandler);
+    window.removeEventListener(ON_NAVIGATE.END, this.activeLinksHandler);
   }
 
-  openActiveLink(event: Event) {
-    getActiveLinks(this.menu).forEach(this.openParents.bind(this));
+  openActiveLinks(event: Event) {
+    getActiveLinks(this.menu).forEach(activeLink => this.openParents(activeLink));
   }
 
-  handler(event: Event) {
+  clickHandler(event: Event) {
     const header = event.target as Element;
     if (header && header.classList.contains('app-menu__header')) {
-      this.toggle(header);
+      this.toggleMenu(header);
     }
   }
 
-  toggle(header: Element) {
+  toggleMenu(header: Element) {
     const isOpen = !header.classList.contains('app-menu__header--closed');
     if (isOpen) {
       const menu = header.nextElementSibling;
@@ -36,11 +35,13 @@ export class Menu {
   }
 
   closeChilds(menu: Element) {
-    menu.querySelectorAll('.app-menu__header').forEach(header => header.classList.add('app-menu__header--closed'));
+    menu.querySelectorAll('.app-menu__header').forEach(
+      header => header.classList.add('app-menu__header--closed')
+    );
   }
 
   openParents(activeLink: Element) {
-    getParents(activeLink, this.menu).forEach((menu) => {
+    getParentNodes(activeLink, this.menu).forEach((menu) => {
       if (menu.classList.contains('app-menu')) {
         const header = menu.previousElementSibling;
         if (header && header.classList.contains('app-menu__header')) {

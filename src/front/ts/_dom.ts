@@ -4,11 +4,11 @@ export function querySelectorAll<T = Element>(selector: string, element?: Elemen
   return [].slice.call((element || document).querySelectorAll(selector));
 }
 
-export function getParents(child: Element, until?: Element) {
+export function getParentNodes(child: Element, untilParent?: Element) {
   const parents: Element[] = [];
   let parent = child.parentNode;
   while (parent) {
-    if (parent !== until && parent !== document) {
+    if (parent !== untilParent && parent !== document) {
       parents.unshift(parent as Element);
     } else {
       break;
@@ -21,7 +21,7 @@ export function getParents(child: Element, until?: Element) {
 export function createNode(html: string) {
   const wrap = document.createElement('div');
   wrap.innerHTML = html || ' ';
-  // FIXME: if `html` is a string then wrap.firstChild is a `Text` and not a `Element`
+  // FIXME: if `html` is a string then wrap.firstChild is a `Text` and not an `Element`
   return wrap.removeChild(wrap.firstChild as Element);
 }
 
@@ -45,6 +45,31 @@ export function insertAfter(target: Element, source: Element) {
   }
 }
 
+export function makeScriptAlive(dummy: HTMLScriptElement) {
+  const script = document.createElement('script');
+  [].forEach.call(dummy.attributes, (attr: Attr) => script.setAttribute(attr.name, attr.value));
+  script.innerHTML = dummy.innerHTML;
+  return script;
+}
+
+export function insertHtml(html: string, element: Element) {
+  element.innerHTML = html;
+  element.querySelectorAll('script').forEach((dummy: HTMLScriptElement) => {
+    if (!dummy.hasAttribute('app-script-defer') && dummy.parentNode) {
+      dummy.parentNode.insertBefore(makeScriptAlive(dummy), dummy);
+      dummy.parentNode.removeChild(dummy);
+    }
+  });
+  return element.innerHTML;
+}
+
+export function resolveUrl(href: string) {
+  if (href === undefined || href === null) return undefined;
+  const a = document.createElement('a');
+  a.setAttribute('href', href);
+  return a.href;
+}
+
 export function toggleNode(element: Element, parentElement?: Element) {
   let toggleId = parseInt(element.getAttribute('app-toggle-id') as any, 10);
   if (!toggleId) {
@@ -66,31 +91,6 @@ export function toggleNode(element: Element, parentElement?: Element) {
     placeholder.parentNode.removeChild(placeholder);
   }
   return toggleId;
-}
-
-export function makeScriptAlive(dummy: HTMLScriptElement) {
-  const script = document.createElement('script');
-  [].forEach.call(dummy.attributes, (attr: Attr) => script.setAttribute(attr.name, attr.value));
-  script.innerHTML = dummy.innerHTML;
-  return script;
-}
-
-export function insertHtml(html: string, element: Element ) {
-  element.innerHTML = html;
-  element.querySelectorAll('script').forEach((dummy: HTMLScriptElement) => {
-    if (!dummy.hasAttribute('app-script-defer') && dummy.parentNode) {
-      dummy.parentNode.insertBefore(makeScriptAlive(dummy), dummy);
-      dummy.parentNode.removeChild(dummy);
-    }
-  });
-  return element.innerHTML;
-}
-
-export function resolveUrl(href: string) {
-  if (href === undefined || href === null) return undefined;
-  const a = document.createElement('a');
-  a.setAttribute('href', href);
-  return a.href;
 }
 
 export function getAction(name: string, link: Element, callback: any) {

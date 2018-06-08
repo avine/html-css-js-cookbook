@@ -2,6 +2,7 @@ import { highlight, languages } from 'prismjs';
 
 import { createNode, insertAfter, makeScriptAlive } from './_dom';
 import { ON_NAVIGATE } from './_router';
+import { formatCode } from './_util';
 
 function isDeferred(playground: HTMLScriptElement) {
   return playground.hasAttribute('app-script-defer');
@@ -28,20 +29,6 @@ function playCss(playground: HTMLStyleElement, action: Element) {
 function playHtml(playground: Element, action: Element) {
   playground.classList.add('app-playground');
   playground.classList.add('app-playground--demo');
-}
-
-function formatSource(html: string) {
-  // Remove useless indentation
-  let lines = html.split('\n');
-  const indent = lines.reduce((idt, currLine) => {
-    if (currLine) {
-      const currIndent = (currLine.match(/^[\s]+/) || [''])[0].length;
-      idt = idt === -1 ? currIndent : Math.min(idt, currIndent);
-    }
-    return idt;
-  }, -1);
-  if (indent > 0) lines = lines.map(line => line.substr(indent));
-  return lines.join('\n').trim().replace(/\n{2,}/g, '\n\n');
 }
 
 function getLabel(type: SourceType) {
@@ -77,7 +64,7 @@ function insertSource(playground: Element, type: SourceType) {
   const wrap = createNode('<pre class="app-playground"></pre>');
   const code = createNode('<code class="app-playground__code"></code>');
   const action = hasAction(playground, type) ? getAction(type, wrap, type === 'js') : getLabel(type);
-  const source = formatSource(playground.innerHTML);
+  const source = formatCode(playground.innerHTML);
   code.innerHTML = highlight(source, languages[type], languages[type]);
   wrap.appendChild(code);
   wrap.appendChild(action);

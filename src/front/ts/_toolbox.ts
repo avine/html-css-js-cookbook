@@ -8,7 +8,23 @@ function getLinkIcon(icon: string, href = '#') {
   return createNode(`<a href="${href}"><i class="fas fa-${icon} fa-fw fa-lg"></i></a>`);
 }
 
-export function toggleCss() {
+function toggleGridFixed() {
+  const html = document.querySelector('html') as Element;
+  const action = getAction('toggle_grid_fixed', getLinkIcon('arrows-alt-v'), () => {
+    html.classList.toggle('app-grid--fixed');
+  });
+  return action.link;
+}
+
+function toggleSettingsDark() {
+  const html = document.querySelector('html') as Element;
+  const action = getAction('toggle_settings_dark', getLinkIcon('image'), () => {
+    html.classList.toggle('app-settings--dark');
+  });
+  return action.link;
+}
+
+function toggleCss() {
   const headCss = querySelectorAll<HTMLStyleElement>('head [app-css-toggle]');
   let contentCss: HTMLStyleElement[];
 
@@ -37,7 +53,7 @@ function getFormattedCode(source: Element) {
   return formatCode(code.innerHTML);
 }
 
-export function viewCode() {
+function viewCode() {
   const source = document.querySelector('[app-content]') as Element;
   source.classList.add('app-code__source');
   const wrap = wrapNode(source, 'app-code');
@@ -55,22 +71,6 @@ export function viewCode() {
   return action.link;
 }
 
-export function toggleGridFixed() {
-  const html = document.querySelector('html') as Element;
-  const action = getAction('toggle_grid_fixed', getLinkIcon('angle-double-down'), () => {
-    html.classList.toggle('app-grid--fixed');
-  });
-  return action.link;
-}
-
-export function toggleSettingsDark() {
-  const html = document.querySelector('html') as Element;
-  const action = getAction('toggle_settings_dark', getLinkIcon('image'), () => {
-    html.classList.toggle('app-settings--dark');
-  });
-  return action.link;
-}
-
 export function initToolbox() {
   const toolbox = document.querySelector('[app-toolbox]');
   if (!toolbox) return;
@@ -79,7 +79,6 @@ export function initToolbox() {
 
   toolbox.appendChild(toggleGridFixed());
   toolbox.appendChild(toggleSettingsDark());
-
   // toolbox.appendChild(toggleCss());
   toolbox.appendChild(viewCode());
 }

@@ -1,15 +1,11 @@
 import { highlight, languages } from 'prismjs';
 
-import { createNode, insertAfter, makeScriptAlive } from './_dom';
+import { createNode, insertAfter, isScriptDeferred, makeScriptAlive } from './_dom';
 import { ON_NAVIGATE } from './_router';
 import { formatCode } from './_util';
 
-function isDeferred(playground: HTMLScriptElement) {
-  return playground.hasAttribute('app-script-defer');
-}
-
 function playJs(playground: HTMLScriptElement, action: Element) {
-  if (!isDeferred(playground)) {
+  if (!isScriptDeferred(playground)) {
     return;
   }
   action.addEventListener('click', () => {
@@ -54,7 +50,7 @@ function getAction(type: SourceType, wrap: Element, isJs = false) {
 
 function hasAction(playground: Element, type: SourceType) {
   switch (type) {
-    case 'js': return isDeferred(playground as HTMLScriptElement);
+    case 'js': return isScriptDeferred(playground as HTMLScriptElement);
     case 'css': return true;
     case 'html': return false;
   }

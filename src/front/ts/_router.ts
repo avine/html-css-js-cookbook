@@ -5,27 +5,27 @@ import { fetchContent } from './_fetch';
 let content: Element;
 let baseUrl: { root: string; index: string; home: string; };
 
-export function getBaseHref() {
-  const root = resolveUrl((document.querySelector('base') as HTMLBaseElement).href) as string;
-  const index = resolveUrl(`${root}index.html`) as string;
-  const home = resolveUrl(`${root}${FRONT_PAGES_FOLDER}/index.html`) as string;
-  return { root, index, home };
-}
-
 export enum ON_NAVIGATE {
   START = 'appNavigateStart',
   CANCEL = 'appNavigateCancel',
   END = 'appNavigateEnd'
 }
 
-export function addStatePrefix(url: string) {
+function getBaseHref() {
+  const root = resolveUrl((document.querySelector('base') as HTMLBaseElement).href) as string;
+  const index = resolveUrl(`${root}index.html`) as string;
+  const home = resolveUrl(`${root}${FRONT_PAGES_FOLDER}/index.html`) as string;
+  return { root, index, home };
+}
+
+function addStatePrefix(url: string) {
   const a = document.createElement('a');
   a.setAttribute('href', url);
   if (a.pathname !== '/') a.pathname = SPA_URL_STATE_PREFIX + a.pathname;
   return a.href;
 }
 
-export function removeStatePrefix(url: string) {
+function removeStatePrefix(url: string) {
   const a = document.createElement('a');
   a.setAttribute('href', url);
   a.pathname = a.pathname.replace(new RegExp(`^${SPA_URL_STATE_PREFIX}`), '');
@@ -45,7 +45,7 @@ function emitNavigation(type: ON_NAVIGATE, appUrl: string) {
   window.dispatchEvent(event);
 }
 
-export function showContent(yes = true) {
+function showContent(yes = true) {
   content.classList[yes ? 'add' : 'remove']('app-content--active');
 }
 
@@ -101,7 +101,7 @@ function linkHandler(event: Event) {
   }
 }
 
-export function getLinks(container?: Element) {
+function getLinks(container?: Element) {
   return querySelectorAll('[app-link]', container).map((element) => {
     let url = resolveUrl(element.getAttribute('app-link') || (element as HTMLAnchorElement).href);
     if (url === baseUrl.home || url === baseUrl.index) {

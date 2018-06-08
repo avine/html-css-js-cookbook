@@ -63,6 +63,10 @@ export function insertHtml(html: string, element: Element) {
   return element.innerHTML;
 }
 
+export function isScriptDeferred(element: HTMLScriptElement) {
+  return element.hasAttribute('app-script-defer');
+}
+
 export function resolveUrl(href: string) {
   if (href === undefined || href === null) return undefined;
   const a = document.createElement('a');

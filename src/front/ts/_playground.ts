@@ -27,12 +27,26 @@ function playHtml(playground: Element, action: Element) {
   playground.classList.add('app-playground--demo');
 }
 
+function getIcon(type: SourceType) {
+  let icon: string;
+  switch (type) {
+    case 'js': icon = 'js'; break;
+    case 'css': icon = 'css3'; break;
+    default: case 'html': icon = 'html5'; break;
+  }
+  return `<i class="app-playground__icon fab fa-${icon}"></i>`;
+}
+
 function getLabel(type: SourceType) {
-  return createNode(`<span class="app-playground__action app-playground__action--disabled">${type}</span>`);
+  return createNode(
+    `<span class="app-playground__action app-playground__action--disabled">${type} ${getIcon(type)}</span>`
+  );
 }
 
 function getAction(type: SourceType, wrap: Element, isJs = false) {
-  const action = createNode(`<a href="#" class="app-playground__action">${type}</a>`);
+  const action = createNode(
+    `<a href="#" class="app-playground__action">${type} ${getIcon(type)}</a>`
+  );
   if (isJs) {
     wrap.classList.add('app-playground--disabled');
   }

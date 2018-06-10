@@ -145,7 +145,7 @@ export function initRouter() {
 }
 
 export function bootstrapRouter() {
-  navigate(removeStatePrefix(window.location.href)).then(() => showContent());
+  navigate(removeStatePrefix(window.location.href));
 
   window.addEventListener('popstate', stateHandler);
   window.addEventListener('click', linkHandler);

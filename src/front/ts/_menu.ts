@@ -2,11 +2,17 @@ import { getParentNodes } from './_dom';
 import { getActiveLinks, ON_NAVIGATE } from './_router';
 
 export class Menu {
-  private activeLinksHandler = this.openActiveLinks.bind(this);
+  private activeLinksHandler: (event: Event) => void;
 
   constructor(private menu: Element) {
     this.closeChilds(menu);
     menu.addEventListener('click', this.clickHandler.bind(this));
+    this.openActiveLinks();
+    this.activeLinksHandler = (event: Event) => this.openActiveLinks();
+    this.init();
+  }
+
+  init() {
     window.addEventListener(ON_NAVIGATE.END, this.activeLinksHandler);
   }
 
@@ -14,7 +20,7 @@ export class Menu {
     window.removeEventListener(ON_NAVIGATE.END, this.activeLinksHandler);
   }
 
-  openActiveLinks(event: Event) {
+  openActiveLinks() {
     getActiveLinks(this.menu).forEach(activeLink => this.openParents(activeLink));
   }
 

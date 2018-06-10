@@ -1,4 +1,7 @@
 .app-playground {
+  --playground-action-gap: 0.25rem;
+  --playground-demo-gap: 0.5rem;
+
   position: relative;
   margin: 1rem 0;
   padding: 0;
@@ -37,7 +40,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  padding: 0 1rem;
+  padding: var(--playground-action-gap) 0.5rem;
   border: 1px solid var(--border-color);
   border-width: 0 0 1px 1px;
   background-color: var(--link-bg-color-active);
@@ -49,6 +52,7 @@
 }
 
 .app-playground__action {
+  z-index: 2;
   cursor: pointer;
 
   &:hover {
@@ -65,10 +69,11 @@
 .app-playground__icon {
   vertical-align: middle;
   font-size: 1rem;
-  margin-left: 0.5rem;
+  margin-left: 0.25rem;
 }
 
 .app-playground__code {
+  z-index: 1;
   display: block;
   overflow: auto;
   max-height: 50vh;
@@ -76,8 +81,8 @@
 }
 
 .app-playground--demo {
-  min-height: calc(var(--line-height) - 2 * 0.5rem);
-  padding: 0.5rem 1rem;
+  min-height: calc(var(--line-height) + 2 * (var(--playground-action-gap) - var(--playground-demo-gap)));
+  padding: var(--playground-demo-gap) 1rem;
   border: 1px solid var(--border-color);
   box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.05);
 

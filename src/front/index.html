@@ -16,6 +16,60 @@
     crossorigin="anonymous">
 </head>
 <body>
+  <style>
+    .app-splash-source {
+      z-index: 999;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      background-color: #fff;
+      transition: background-color 200ms ease;
+    }
+    .app-splash-source__content {
+      margin: auto;
+      font-size: 2rem;
+      color: #fff;
+      opacity: 0;
+      transition: opacity 200ms ease;
+    }
+    .app-splash-source--show {
+      background-color: dodgerblue;
+    }
+    .app-splash-source--show .app-splash-source__content {
+      opacity: 1;
+    }
+  </style>
+
+  <div app-splash class="app-splash-source">
+    <div class="app-splash-source__content">WebExplorer</div>
+  </div>
+
+  <script>
+    (function (){
+      const delay = 250;
+      let timeout;
+      let splash;
+
+      function showSplash() {
+        splash.classList.add('app-splash-source--show');
+      }
+
+      function removeSplash() {
+        clearTimeout(timeout);
+        if (splash.parentNode) {
+          splash.parentNode.removeChild(splash);
+        }
+        window.removeEventListener('appNavigateEnd', removeSplash);
+      }
+
+      splash = document.querySelector('[app-splash]');
+      timeout = setTimeout(showSplash, delay);
+      window.addEventListener('appNavigateEnd', removeSplash);
+    }());
+  </script>
 
   <div class="app-grid__wrap">
     <header class="app-grid__header app-header">

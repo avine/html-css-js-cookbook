@@ -6,10 +6,8 @@
   margin: 1rem 0;
   padding: 0;
   border-radius: 0;
-  border: 1px solid var(--border-color);
-  border-left-color: var(--link-color);
-  background-color: var(--bg-color);
-  transition: opacity var(--transition-duration) ease;
+  border: none;
+  background-color: transparent;
 
   &:hover {
     .app-playground__action,
@@ -19,10 +17,9 @@
   }
 
   &.app-playground--disabled {
-    opacity: 0.5;
-
-    .app-playground__action {
-      opacity: 1;
+    .app-playground__action,
+    .app-playground__code {
+      opacity: 0.5;
     }
   }
 
@@ -33,16 +30,17 @@
       opacity: 0.5;
     }
   }
+
+  .app-playground__code:hover {
+    opacity: 1;
+  }
 }
 
 .app-playground__action,
 .app-playground--demo::after {
   position: absolute;
-  top: 0;
-  right: 0;
   padding: var(--playground-action-gap) 0.5rem;
   border: 1px solid var(--border-color);
-  border-width: 0 0 1px 1px;
   background-color: var(--link-bg-color-active);
   font-family: 'Open Sans', sans-serif;
   font-size: 0.825rem;
@@ -53,6 +51,8 @@
 
 .app-playground__action {
   z-index: 2;
+  right: 0;
+  bottom: 0;
   cursor: pointer;
 
   &:hover {
@@ -74,20 +74,29 @@
 
 .app-playground__code {
   z-index: 1;
+  position: relative;
   display: block;
   overflow: auto;
   max-height: 50vh;
-  padding: 0.5rem 1rem;
+  padding: var(--playground-demo-gap) 1rem;
+  border-radius: 0;
+  border: 1px solid var(--border-color);
+  border-left-color: var(--link-color);
+  background-color: var(--bg-color);
+  transition: opacity var(--transition-duration) ease;
 }
 
 .app-playground--demo {
   min-height: calc(var(--line-height) + 2 * (var(--playground-action-gap) - var(--playground-demo-gap)));
   padding: var(--playground-demo-gap) 1rem;
-  border: 1px solid var(--border-color);
   box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
 
   &::after {
     content: "demo";
+    right: -1px;
+    bottom: -1px;
     cursor: default;
   }
 }
@@ -98,4 +107,11 @@
 
 .app-playground__action--disabled {
   cursor: default;
+}
+
+// HACKING PrismJS
+// which applies the rule "background: hsla(0, 0%, 100%, .5);"
+// that not plays nice when ".app-settings--dark" is enabled
+.token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string {
+  background: transparent;
 }

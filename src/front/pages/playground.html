@@ -3,6 +3,8 @@
 <p>To understand how the playground works, click on the button bellow
   <code><i class="fas fa-code"></i></code> to view the source code.</p>
 
+<h2>Demo</h2>
+
 <div app-playground="my-html">
   <span id="demo">Click me</span>
 </div>
@@ -14,36 +16,39 @@
   }
 </style>
 
-<script app-playground="my-js" app-script-defer>
+<script app-playground="my-js">
   document.getElementById('demo').addEventListener('click', function (e) {
     e.preventDefault();
-    alert('You clicked after enabled!');
+    alert('You clicked!');
   });
 </script>
 
-<p app-playground-anchor="my-html">After this anchor comes the <code>HTML</code> source code.</p>
+<h3 app-playground-anchor="my-html">After this anchor comes the <code>HTML</code> source code</h3>
 
-<p app-playground-anchor="my-css">After this anchor comes the <code>CSS</code> source code.</p>
+<h3 app-playground-anchor="my-css">After this anchor comes the <code>CSS</code> source code</h3>
 
 <p><em>Click on the action button to toggle the styles.</em></p>
 
-<p app-playground-anchor="my-js">After this anchor comes the <code>JS</code> source code.</p>
+<h3 app-playground-anchor="my-js">After this anchor comes the <code>JS</code> source code.</h3>
 
-<p><em>Notice that the previous <code>script</code> have a <code>app-script-defer</code> attribute.
-  Click on the action button to run it.</em></p>
+<p><em>Notice that this <code>script</code> does NOT have a <code>app-script-defer</code> attribute.
+  It runs immediately.</em></p>
 
-<p>The next <code>script</code> does not have any anchor, thus it is displayed in place.</p>
+<h3>The next <code>script</code> does not have any anchor, thus it is displayed in place.</h3>
 
-<script app-playground>
+<script app-playground app-script-defer>
   document.getElementById('demo').addEventListener('click', function (e) {
     e.preventDefault();
-    alert('You clicked always!');
+    alert('it works!');
   });
 </script>
 
-<p><em>Notice that the previous <code>script</code> does NOT have a <code>app-script-defer</code> attribute.
-  It runs immediately.</em></p>
+<p><em>Notice that this <code>script</code> have a <code>app-script-defer</code> attribute.
+  Click on the action button to run it.</em></p>
 
-<p>To add new playground, add a new file in the folder <code>/src/front/pages</code>.</p>
+<h2>What to do next ?</h2>
 
-<p>To add a link to your new playground, edit the file <code>/src/front/pages/sidebar.html</code>.</p>
+<ul>
+  <li>To add new playground, add a new file in the folder <code>/src/front/pages</code>.</li>
+  <li>To add a link to your new playground, edit the file <code>/src/front/pages/sidebar.html</code>.</li>
+</ul>

@@ -1,34 +1,49 @@
-<h1 class="app-no-margin-top">Playground</h1>
+<h1 class="app-no-margin-top">How it works ?</h1>
 
-<div app-playground="1">
+<p>To understand how the playground works, click on the button bellow
+  <code><i class="fas fa-code"></i></code> to view the source code.</p>
+
+<div app-playground="my-html">
   <span id="demo">Click me</span>
 </div>
 
-<style app-playground="2">
+<style app-playground="my-css">
   #demo {
     background-color: yellow;
     cursor: pointer;
   }
 </style>
 
-<script app-playground="3" app-script-defer>
-    document.getElementById('demo').addEventListener('click', function (e) {
-      e.preventDefault();
-      alert('You clicked after enabled!');
-    });
+<script app-playground="my-js" app-script-defer>
+  document.getElementById('demo').addEventListener('click', function (e) {
+    e.preventDefault();
+    alert('You clicked after enabled!');
+  });
 </script>
 
-<p app-playground-anchor="1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<p app-playground-anchor="my-html">After this anchor comes the <code>HTML</code> source code.</p>
 
-<p app-playground-anchor="2">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<p app-playground-anchor="my-css">After this anchor comes the <code>CSS</code> source code.</p>
 
-<p app-playground-anchor="3">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+<p><em>Click on the action button to toggle the styles.</em></p>
 
-<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p app-playground-anchor="my-js">After this anchor comes the <code>JS</code> source code.</p>
+
+<p><em>Notice that the previous <code>script</code> have a <code>app-script-defer</code> attribute.
+  Click on the action button to run it.</em></p>
+
+<p>The next <code>script</code> does not have any anchor, thus it is displayed in place.</p>
 
 <script app-playground>
-document.getElementById('demo').addEventListener('click', function (e) {
-  e.preventDefault();
-  alert('You clicked always!');
-});
+  document.getElementById('demo').addEventListener('click', function (e) {
+    e.preventDefault();
+    alert('You clicked always!');
+  });
 </script>
+
+<p><em>Notice that the previous <code>script</code> does NOT have a <code>app-script-defer</code> attribute.
+  It runs immediately.</em></p>
+
+<p>To add new playground, add a new file in the folder <code>/src/front/pages</code>.</p>
+
+<p>To add a link to your new playground, edit the file <code>/src/front/pages/sidebar.html</code>.</p>

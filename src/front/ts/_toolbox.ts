@@ -71,7 +71,7 @@ function viewCode() {
   return action.link;
 }
 
-export function initToolbox() {
+export function bootstrapToolbox() {
   const toolbox = document.querySelector('[app-toolbox]');
   if (!toolbox) return;
 

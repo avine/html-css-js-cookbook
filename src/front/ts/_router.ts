@@ -140,11 +140,11 @@ export function updateActiveLinks() {
 const activeLinkHandler = updateActiveLinks;
 
 export function initRouter() {
-  // Init
   content = document.querySelector('[app-content]') as Element;
   baseUrl = getBaseHref();
+}
 
-  // Bootstrap
+export function bootstrapRouter() {
   navigate(removeStatePrefix(window.location.href)).then(() => showContent());
 
   window.addEventListener('popstate', stateHandler);

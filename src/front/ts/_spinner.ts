@@ -72,7 +72,7 @@ export class Spinner {
   }
 }
 
-export function initSpinner() {
+export function bootstrapSpinner() {
   const spinner = new Spinner(document.querySelector('[app-spinner]') as HTMLElement);
 
   window.addEventListener(ON_NAVIGATE.START, () => {

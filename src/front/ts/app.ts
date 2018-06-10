@@ -1,19 +1,23 @@
-import { initPlayground } from './_playground';
-import { initRouter } from './_router';
-import { initSidebar, initToggleSidebar } from './_sidebar';
-import { initSpinner } from './_spinner';
-import { initToolbox } from './_toolbox';
+import { bootstrapPlayground } from './_playground';
+import { bootstrapRouter, initRouter } from './_router';
+import { bootstrapSidebar, bootstrapToggleSidebar } from './_sidebar';
+import { bootstrapSpinner } from './_spinner';
+import { bootstrapToolbox } from './_toolbox';
 
 window.addEventListener('DOMContentLoaded', () => {
-  initSidebar({ hidden: true });
-  initToggleSidebar();
-  initSpinner();
-  initToolbox();
-  initPlayground();
-
-  // Init the router at the end to let the previous
-  // modules react to the first `ON_NAVIGATE` event.
+  // Init the router at the begining to let the next modules use
+  // `getActiveLinks` which  requires `baseUrl` to be defined.
   initRouter();
+
+  bootstrapSidebar({ hidden: true });
+  bootstrapToggleSidebar();
+  bootstrapSpinner();
+  bootstrapToolbox();
+  bootstrapPlayground();
+
+  // Bootstrap the router at the end to let the previous
+  // modules react to the first `ON_NAVIGATE` event.
+  bootstrapRouter();
 });
 
 /*
@@ -21,7 +25,7 @@ window.addEventListener('DOMContentLoaded', () => {
 Naming convention
 -----------------
 
-initFoo
+bootstrapFoo
   A function that modifies the DOM or binds events on it.
   The function is exported by the module.
 

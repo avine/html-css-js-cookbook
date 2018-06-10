@@ -100,7 +100,7 @@ function playgroundHandler() {
   document.querySelectorAll('[app-content] [app-playground]').forEach(enablePlayground);
 }
 
-export function initPlayground() {
+export function bootstrapPlayground() {
   window.addEventListener(ON_NAVIGATE.END, playgroundHandler);
 }
 

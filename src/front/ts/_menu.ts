@@ -52,6 +52,6 @@ export class Menu {
   }
 }
 
-export function initMenu(container: Element) {
+export function bootstrapMenu(container: Element) {
   container.querySelectorAll('[app-menu]').forEach(menu => new Menu(menu));
 }

@@ -84,6 +84,10 @@ body {
       "footer";
   }
 
+  .app-grid__content {
+    box-shadow: none;
+  }
+
   .app-grid__sidebar {
     box-shadow: var(--grid-shadow);
   }

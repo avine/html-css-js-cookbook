@@ -1,14 +1,21 @@
 <h1 class="app-no-margin-top">How it works ?</h1>
 
-<p>To understand how the playground works, click on the button bellow
-  <code><i class="fas fa-code"></i></code> to view the source code.</p>
+<p>To understand how the playground works, click on the button
+  <code><i class="fas fa-code"></i></code>
+  bellow to view the source code.</p>
 
 <h2>Demo</h2>
 
+<!--
+  Here's the final demo area.
+  Because the playground is named (ie: "my-html"), the source
+  code is displayed after the associated anchor (see bellow).
+-->
 <div app-playground="my-html">
   <span id="demo">Click me</span>
 </div>
 
+<!-- Here's the demo styles -->
 <style app-playground="my-css">
   #demo {
     background-color: yellow;
@@ -16,6 +23,7 @@
   }
 </style>
 
+<!-- Here's the demo js -->
 <script app-playground="my-js">
   document.getElementById('demo').addEventListener('click', function (e) {
     e.preventDefault();
@@ -36,6 +44,10 @@
 
 <h3>The next <code>script</code> does not have any anchor, thus it is displayed in place.</h3>
 
+<!--
+  The following playground is not named, thus the
+  source code is displayed right after the script.
+-->
 <script app-playground app-script-defer>
   document.getElementById('demo').addEventListener('click', function (e) {
     e.preventDefault();

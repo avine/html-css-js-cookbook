@@ -8,7 +8,7 @@
 
     "watch:front": "webpack --config ./webpack-front.config.ts --debug --watch --env.dev",
     "watch:back": "webpack --config ./webpack-back.config.ts --debug --watch --env.dev",
-    "watch": "npm run watch:front & npm run watch:back",
+    "watch": "concurrently \"npm run watch:front\" \"npm run watch:back\"",
 
     "build:front": "webpack --config ./webpack-front.config.ts",
     "build:back": "webpack --config ./webpack-back.config.ts",
@@ -20,7 +20,7 @@
     "start": "node dist/back/app.js",
 
     "preserve:dev": "npm run clean && shx mkdir -p dist/back && shx touch dist/back/app.js",
-    "serve:dev": "concurrently \"npm run watch\" \"npm run start:watch\"",
+    "serve:dev": "concurrently \"npm run watch:front\" \"npm run watch:back\" \"npm run start:watch\"",
     "serve:prod": "npm run clean && npm run build && npm start",
 
     "test": "echo \"Error: no test specified\" && exit 1"

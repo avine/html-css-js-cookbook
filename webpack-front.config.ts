@@ -51,7 +51,8 @@ module.exports = (env: IEnv = {}) => ({
         ],
       },
 
-      {
+      // Removed: because of the <link rel="manifest" href="manifest.json">
+      /*{
         test: /\.html$/,
         use: {
           loader: 'html-loader',
@@ -59,7 +60,7 @@ module.exports = (env: IEnv = {}) => ({
             attrs: [':src', 'link:href'],
           },
         },
-      },
+      },*/
 
       {
         test: /\.(png|jpg|gif|ico)$/,
@@ -73,7 +74,6 @@ module.exports = (env: IEnv = {}) => ({
           },
         ],
       },
-
     ],
   },
 
@@ -82,6 +82,9 @@ module.exports = (env: IEnv = {}) => ({
 
     new CopyPlugin([
       { from: './src/front/pages', to: `./${FRONT_PAGES_FOLDER}` },
+      { from: './src/front/assets', to: `./assets` },
+      { from: './src/front/sw.js' },
+      { from: './src/front/manifest.json' },
     ]),
 
     new MiniCssExtractPlugin({

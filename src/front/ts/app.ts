@@ -2,7 +2,10 @@ import { bootstrapPlayground } from './_playground';
 import { bootstrapRouter, initRouter } from './_router';
 import { bootstrapSidebar, bootstrapToggleSidebar } from './_sidebar';
 import { bootstrapSpinner } from './_spinner';
+import { bootstrapServiceWorker } from './_sw';
 import { bootstrapToolbox } from './_toolbox';
+
+bootstrapServiceWorker();
 
 window.addEventListener('DOMContentLoaded', () => {
   // Init the router at the begining to let the next modules use

@@ -8,7 +8,7 @@ import ManifestPlugin from 'webpack-manifest-plugin';
 import { FRONT_PAGES_FOLDER } from './src/config';
 
 const excludedManifestAssets = [
-  'sw.js',
+  'service-worker.js',
   'manifest.json'
 ];
 
@@ -89,7 +89,7 @@ module.exports = (env: IEnv = {}) => ({
     new CopyPlugin([
       { from: './src/front/pages', to: `./${FRONT_PAGES_FOLDER}` },
       { from: './src/front/assets', to: `./assets` },
-      { from: './src/front/sw.js' },
+      { from: './src/front/service-worker.js' },
       { from: './src/front/manifest.json' },
     ]),
 

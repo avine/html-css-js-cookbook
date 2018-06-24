@@ -2,7 +2,7 @@ import { bootstrapPlayground } from './_playground';
 import { bootstrapRouter, initRouter } from './_router';
 import { bootstrapSidebar, bootstrapToggleSidebar } from './_sidebar';
 import { bootstrapSpinner } from './_spinner';
-import { bootstrapServiceWorker } from './_sw';
+import { bootstrapServiceWorker } from './_service-worker';
 import { bootstrapToolbox } from './_toolbox';
 
 bootstrapServiceWorker();

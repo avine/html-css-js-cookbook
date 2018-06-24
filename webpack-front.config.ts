@@ -26,6 +26,7 @@ module.exports = (env: IEnv = {}) => ({
   output: {
     path: path.join(__dirname, './dist/front'),
     filename: env.dev ? '[name].js' : '[name].[hash].js',
+    publicPath: './',
   },
 
   resolve: {

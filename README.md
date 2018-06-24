@@ -33,3 +33,21 @@ npm run watch:front # or: npm run build:front
 # Start webpack-dev-server instead of the real backend web server
 npm run start:mock
 ```
+
+## Service worker
+
+Open `src/front/service-worker.js` and update the cache version each time you upload a new version of the App.
+
+```js
+const cacheVersion = 1;
+```
+
+## HTML base setting
+
+For production:
+
+Open `src/front/index.html` and set the base `href` according to your public path. Then, run the npm scripts as described above.
+
+```html
+<base href="/">
+```

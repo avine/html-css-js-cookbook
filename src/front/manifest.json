@@ -1,9 +1,9 @@
 {
   "name": "WebExplorer",
   "short_name": "WebExplorer",
-  "start_url": "/",
+  "start_url": "./",
   "lang": "en",
-  "orientation": "natural",
+  "orientation": "any",
   "display": "standalone",
   "theme_color": "dodgerblue",
   "background_color": "dodgerblue",

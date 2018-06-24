@@ -4,7 +4,7 @@
   "start_url": "/",
   "lang": "en",
   "orientation": "natural",
-  "display": "fullscreen",
+  "display": "standalone",
   "theme_color": "dodgerblue",
   "background_color": "dodgerblue",
   "icons": [{

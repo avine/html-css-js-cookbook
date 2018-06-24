@@ -3,8 +3,14 @@ import CopyPlugin from 'copy-webpack-plugin';
 import HtmlPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
+import ManifestPlugin from 'webpack-manifest-plugin';
 
 import { FRONT_PAGES_FOLDER } from './src/config';
+
+const excludedManifestAssets = [
+  'sw.js',
+  'manifest.json'
+];
 
 module.exports = (env: IEnv = {}) => ({
   mode: env.dev ? 'development' : 'production',
@@ -94,6 +100,11 @@ module.exports = (env: IEnv = {}) => ({
 
     new HtmlPlugin({
       template: './src/front/index.html',
+    }),
+
+    new ManifestPlugin({
+      fileName: 'assets.json',
+      filter: options => excludedManifestAssets.indexOf(options.path) === -1
     }),
   ],
 

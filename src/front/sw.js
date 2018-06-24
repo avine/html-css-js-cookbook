@@ -1,20 +1,22 @@
 const enableLogs = true;
-const log = enableLogs ? (msg) => console.log(msg) : () => {};
+const log = enableLogs ? (...msg) => console.log(...msg) : () => {};
 
-const cacheVersion = 2;
+const cacheVersion = 1;
 const dataCacheName = `webexplorer-data-v${cacheVersion}`;
 const appShellCacheName = `webexplorer-appshell-v${cacheVersion}`;
-const appShellFiles = [
-  '/',
-  'pages/sidebar.html',
-  'pages/index.html',
+let appShellFiles = [
+  // You can add more file here...
 ];
 
 self.addEventListener('install', function(e) {
   log('[ServiceWorker] Install');
   e.waitUntil(
-    caches.open(appShellCacheName).then(function(cache) {
-      log('[ServiceWorker] Caching app shell');
+    Promise.all([
+      caches.open(appShellCacheName),
+      fetch('./assets.json').then(response => response.json())
+    ]).then(([cache, assets]) => {
+      appShellFiles = appShellFiles.concat(Object.values(assets));
+      log('[ServiceWorker] Caching app shell', appShellFiles);
       return cache.addAll(appShellFiles);
     })
   );

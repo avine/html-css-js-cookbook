@@ -6,19 +6,15 @@
 
 <h1>Demarcating edits</h1>
 
-<del>del</del>
-<ins>ins</ins>
+These elements let you provide indications that specific parts of the text have been altered.
 
-<script>
-  console.log('ok1');
-</script>
+<div app-playground>
+  The wall was painted
+  <del class="pink">pink</del>
+  <ins class="blue">blue</ins>.
+</div>
 
-<style app-css-toggle>
-  body {
-    color: red;
-  }
+<style app-playground>
+  .pink { background-color: lightpink; }
+  .blue { background-color: lightblue; }
 </style>
-
-<script>
-  console.log('ok2');
-</script>

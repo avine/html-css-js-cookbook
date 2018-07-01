@@ -3,6 +3,7 @@ import CopyPlugin from 'copy-webpack-plugin';
 import HtmlPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
+import { DefinePlugin } from 'webpack';
 import ManifestPlugin from 'webpack-manifest-plugin';
 
 import { FRONT_PAGES_FOLDER } from './src/config';
@@ -107,6 +108,10 @@ module.exports = (env: IEnv = {}) => ({
       fileName: 'assets.json',
       filter: options => excludedManifestAssets.indexOf(options.path) === -1
     }),
+
+    new DefinePlugin({
+      PRODUCTION: JSON.stringify(!env.dev),
+    })
   ],
 
   /*

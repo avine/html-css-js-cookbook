@@ -5,7 +5,16 @@ import { bootstrapSpinner } from './_spinner';
 import { bootstrapServiceWorker } from './_service-worker';
 import { bootstrapToolbox } from './_toolbox';
 
-bootstrapServiceWorker();
+// Global variable defined by `Webpack.DefinePlugin` in `webpack-front.config.ts`.
+declare const PRODUCTION: boolean;
+
+// To fully unregister the service worker, you need first to be in development mode (`PRODUCTION = false`).
+// But if a service worker is already activated, you also need to change the `cacheVersion` number in
+// `./src/front/service-worker.js`.
+//
+// Finally, to enable the service worker in development mode,
+// comment temporarily the argument `PRODUCTION`.
+bootstrapServiceWorker(PRODUCTION);
 
 window.addEventListener('DOMContentLoaded', () => {
   // Init the router at the begining to let the next modules use

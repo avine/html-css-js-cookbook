@@ -14,34 +14,45 @@
 
 <h1>Table</h1>
 
-<style app-css-toggle>
-  th, td { border: 1px solid #ddd; }
-  .special { background-color: #eee; }
+<p>The elements here are used to create and handle tabular data.</p>
+
+<div app-playground>
+  <table>
+    <caption>Caption</caption>
+    <colgroup>
+      <col>
+      <col class="special">
+    </colgroup>
+    <thead>
+      <tr><th colspan="2">The table header</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="2">The table body</td>
+        <td>with two columns 1</td>
+      </tr>
+      <tr>
+        <td>with two columns 2</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr><th colspan="2">The table footer</th></tr>
+    </tfoot>
+  </table>
+</div>
+
+<style app-playground>
+  th, td {
+    border: 1px solid #ccc;
+    padding: 0.25rem 0.5rem;
+  }
+  .special {
+    background-color: #eee;
+  }
 </style>
 
-<table>
-  <caption>Caption</caption>
-  <colgroup>
-    <col>
-    <col class="special">
-  </colgroup>
-  <thead>
-    <tr>
-      <th colspan="2">The table header</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td rowspan="2">The table body</td>
-      <td>with two columns 1</td>
-    </tr>
-    <tr>
-      <td>with two columns 2</td>
-    </tr>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="2">The table footer</td>
-    </tr>
-  </tfoot>
-</table>
+<style app-playground>
+  table {
+    border-collapse: collapse;
+  }
+</style>

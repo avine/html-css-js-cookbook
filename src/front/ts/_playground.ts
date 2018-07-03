@@ -76,6 +76,7 @@ function insertSource(playground: Element, type: SourceType) {
   const action = hasAction(playground, type) ? getAction(type, wrap, type === 'js') : getLabel(type);
   const source = formatCode(playground.innerHTML);
   code.innerHTML = highlight(source, languages[type], languages[type]);
+  code.addEventListener('dblclick', () => code.classList.toggle('app-playground__code--reduce'));
   wrap.appendChild(code);
   wrap.appendChild(action);
   let anchor: Element | null = null;

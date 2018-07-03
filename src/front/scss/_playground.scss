@@ -83,7 +83,13 @@
   border: 1px solid var(--border-color);
   border-left-color: var(--link-color);
   background-color: var(--bg-color);
-  transition: opacity var(--transition-duration) ease;
+  transition:
+    opacity var(--transition-duration) ease,
+    max-height var(--transition-duration) ease;
+}
+
+.app-playground__code--reduce {
+  max-height: 1rem;
 }
 
 .app-playground--demo {

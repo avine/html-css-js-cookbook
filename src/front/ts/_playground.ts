@@ -28,13 +28,14 @@ function playHtml(playground: Element, action: Element) {
 }
 
 function getIcon(type: SourceType) {
-  let icon: string;
+  let icon = '';
   switch (type) {
-    case 'js': icon = 'js'; break;
-    case 'css': icon = 'css3'; break;
-    default: case 'html': icon = 'html5'; break;
+    case 'js': icon = 'fab fa-js'; break;
+    case 'css': icon = 'fab fa-css3'; break;
+    case 'html': icon = 'fab fa-html5'; break;
+    case 'log': icon = 'fa fa-trash-alt'; break;
   }
-  return `<i class="app-playground__icon fab fa-${icon}"></i>`;
+  return `<i class="app-playground__icon ${icon}"></i>`;
 }
 
 function getLabel(type: SourceType) {
@@ -67,6 +68,7 @@ function hasAction(playground: Element, type: SourceType) {
     case 'js': return isScriptDeferred(playground as HTMLScriptElement);
     case 'css': return true;
     case 'html': return false;
+    // note: no need to handle the special case 'log'...
   }
 }
 
@@ -94,8 +96,39 @@ function enablePlayground(playground: Element) {
     case 'js': playJs(playground as HTMLScriptElement, source.action); break;
     case 'css': playCss(playground as HTMLStyleElement, source.action); break;
     case 'html': playHtml(playground as Element, source.action); break;
+    // note: no need to handle the special case 'log'...
   }
 }
+
+// Make available a global function `Playground.log` to log messages easily.
+declare global {
+  interface Window { Playground: any; } // tslint:disable-line:interface-name
+}
+window.Playground = window.Playground || {};
+window.Playground.log = (msgHtml: string, anchorId = '') => {
+  const playground = document.querySelector(`[app-content] [app-playground="${anchorId}"]`);
+  if (playground) {
+    let logWrap = playground.nextElementSibling;
+    if (!logWrap || !logWrap.classList.contains('app-playground--log')) {
+      logWrap = createNode(
+        '<div class="app-playground app-playground--log"><div class="app-playground__log"></div></div>'
+      );
+      const action = getAction('log', logWrap);
+      action.addEventListener('click', () => {
+        if (logWrap && logWrap.parentNode) {
+          logWrap.parentNode.removeChild(logWrap);
+        }
+      });
+      logWrap.appendChild(action);
+      insertAfter(logWrap, playground);
+    }
+    if (logWrap.firstElementChild) {
+      logWrap.firstElementChild.appendChild(
+        createNode(`<samp class="app-playground__log-item">${msgHtml}</samp>`)
+      );
+    }
+  }
+};
 
 function playgroundHandler() {
   document.querySelectorAll('[app-content] [app-playground]').forEach(enablePlayground);
@@ -105,4 +138,4 @@ export function bootstrapPlayground() {
   window.addEventListener(ON_NAVIGATE.END, playgroundHandler);
 }
 
-type SourceType = 'js' | 'css' | 'html';
+type SourceType = 'js' | 'css' | 'html' | 'log';

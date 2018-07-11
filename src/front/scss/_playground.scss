@@ -11,7 +11,8 @@
 
   &:hover {
     .app-playground__action,
-    &.app-playground--demo::after {
+    &.app-playground--demo::after,
+    &.app-playground--log::after {
       opacity: 0.5;
     }
   }
@@ -37,7 +38,8 @@
 }
 
 .app-playground__action,
-.app-playground--demo::after {
+.app-playground--demo::after,
+.app-playground--log::after {
   position: absolute;
   padding: var(--playground-action-gap) 0.5rem;
   border: 1px solid var(--border-color);
@@ -104,6 +106,30 @@
     right: -1px;
     bottom: -1px;
     cursor: default;
+  }
+}
+
+.app-playground--log {
+  min-height: calc(var(--line-height) + 2 * (var(--playground-action-gap) - var(--playground-demo-gap)));
+  margin-top: -1rem;
+  box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
+  border-top-width: 0;
+}
+
+.app-playground__log {
+  overflow: auto;
+  max-height: 50vh;
+}
+
+.app-playground__log-item {
+  display: block;
+  padding: var(--playground-demo-gap) 1rem;
+  border-bottom: 1px dotted var(--border-color);
+  background-color: var(--highlight-color);
+
+  &:last-child {
+    border-bottom: none;
   }
 }
 

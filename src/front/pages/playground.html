@@ -27,7 +27,7 @@
 <script app-playground="my-js">
   document.getElementById('demo').addEventListener('click', function (e) {
     e.preventDefault();
-    alert('You clicked!');
+    Playground.log('Hello...', 'my-html');
   });
 </script>
 
@@ -42,6 +42,8 @@
 <p><em>Notice that this <code>script</code> does NOT have a <code>app-script-defer</code> attribute.
   It runs immediately.</em></p>
 
+<p><em>Also notice that the global function <code>Playground.log</code> is available to let you log messages easily.</em></p>
+
 <h3>The next <code>script</code> does not have any anchor, thus it is displayed in place.</h3>
 
 <!--
@@ -51,7 +53,7 @@
 <script app-playground app-script-defer>
   document.getElementById('demo').addEventListener('click', function (e) {
     e.preventDefault();
-    alert('it works!');
+    Playground.log('...World!', 'my-html');
   });
 </script>
 

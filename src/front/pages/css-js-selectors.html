@@ -1,0 +1,17 @@
+<h1 class="app-no-margin-top">CSS and JS selectors</h1>
+
+<h2>Inline style and script</h2>
+
+<div app-playground>
+  <p
+    style="font-style:italic; cursor:pointer;"
+    onclick="toggleHighlight(this, event);">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  </p>
+</div>
+
+<script app-playground>
+  function toggleHighlight(element, event) {
+    Playground.log(`Element: "${element.nodeName}" / Event: "${event.type}"`);
+  }
+</script>

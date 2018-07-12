@@ -1,0 +1,71 @@
+<h1 class="app-no-margin-top">DOM selectors</h1>
+
+
+
+<h2>Inline selectors</h2>
+
+<p>
+  You can attach CSS and JavaScript behaviors directly on tags.
+  In this case, you don't need a selector for targeting the element you want to attach the behavior to.
+</p>
+
+<div app-playground="demo1">
+  <button
+    style="color:red;"
+    onclick="
+      Playground.log(`Element: ${this.nodeName}`, 'demo1');
+      Playground.log(`Event: ${event.type}`, 'demo1');
+    ">
+    Click me!
+  </button>
+</div>
+
+<p>
+  Here we are using the <code>style</code> attribute to define the button style,
+  and the <code>onclick</code> attribute to define the click event handler.
+</p>
+
+<p>
+  Notice the <code>onclick</code> attribute value:
+  <code>this</code> refers to the <em>button</em> tag itself and <code>event</code> refers to the <em>click</em> event that occured.
+</p>
+
+
+
+<h2>Internal selectors</h2>
+
+<p>You can attach CSS and JavaScript behaviors using DOM selectors.</p>
+
+<div app-playground="demo2">
+  <button id="button2">
+    Click me!
+  </button>
+</div>
+
+<p>Here we define an <code>id</code> attribute that will allow us to select the tag.</p>
+
+<style app-playground>
+  #button2 { color: red; }
+</style>
+
+<p>In CSS, the <code>id</code> selector is <code>#button2</code>.</p>
+
+<script app-playground>
+  var button2 = document.getElementById('button2');
+  button2.addEventListener('click', function (event) {
+    Playground.log(`Element: ${this.nodeName}`, 'demo2');
+    Playground.log(`Event: ${event.type}`, 'demo2');
+  });
+</script>
+
+<p>
+  In JavaScript, the equivalent <code>id</code> selector is <code>document.getElementById('button2')</code>.
+  Then we use the <code>.addEventListener</code> method to handle the <em>click</em> event.
+  Notice that in the callback function <code>this</code> refers to the selected <em>button</em>.
+</p>
+
+
+
+<h2>External selectors</h2>
+
+<p>TODO...</p>

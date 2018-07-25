@@ -25,6 +25,16 @@ function playCss(playground: HTMLStyleElement, action: Element) {
 function playHtml(playground: Element, action: Element) {
   playground.classList.add('app-playground');
   playground.classList.add('app-playground--demo');
+
+  // Add demo label based on `app-playground` attribute.
+  const content = playground.getAttribute('app-playground') || 'demo';
+  playground.appendChild(contentToLabel(content));
+}
+
+function contentToLabel(content: string) {
+  return createNode(
+    `<span class="app-playground__action app-playground__action--disabled">${content}</span>`
+  );
 }
 
 function getIcon(type: SourceType) {
@@ -39,9 +49,7 @@ function getIcon(type: SourceType) {
 }
 
 function getLabel(type: SourceType) {
-  return createNode(
-    `<span class="app-playground__action app-playground__action--disabled">${type} ${getIcon(type)}</span>`
-  );
+  return contentToLabel(`${type} ${getIcon(type)}`);
 }
 
 function getAction(type: SourceType, wrap: Element, isJs = false) {

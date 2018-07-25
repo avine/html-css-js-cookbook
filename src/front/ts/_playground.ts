@@ -28,7 +28,8 @@ function playHtml(playground: Element, action: Element) {
 
   // Add demo label based on `app-playground` attribute.
   const content = playground.getAttribute('app-playground') || 'demo';
-  playground.appendChild(contentToLabel(content));
+  const icon = cssToIcon('fa fa-coffee'); // Hum... It's coffee time!
+  playground.appendChild(contentToLabel(`${content} ${icon}`));
 }
 
 function contentToLabel(content: string) {
@@ -37,15 +38,19 @@ function contentToLabel(content: string) {
   );
 }
 
+function cssToIcon(css: string) {
+  return `<i class="app-playground__icon ${css}"></i>`;
+}
+
 function getIcon(type: SourceType) {
-  let icon = '';
+  let css = '';
   switch (type) {
-    case 'js': icon = 'fab fa-js'; break;
-    case 'css': icon = 'fab fa-css3'; break;
-    case 'html': icon = 'fab fa-html5'; break;
-    case 'log': icon = 'fa fa-trash-alt'; break;
+    case 'js': css = 'fab fa-js'; break;
+    case 'css': css = 'fab fa-css3'; break;
+    case 'html': css = 'fab fa-html5'; break;
+    case 'log': css = 'fa fa-trash-alt'; break;
   }
-  return `<i class="app-playground__icon ${icon}"></i>`;
+  return cssToIcon(css);
 }
 
 function getLabel(type: SourceType) {

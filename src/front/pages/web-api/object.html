@@ -1,0 +1,25 @@
+<h1>Everything is Object</h1>
+
+<div app-playground>
+  <span id="hello">Hello world!</span>
+</div>
+
+<script app-playground app-script-defer>
+  var hello = document.getElementById('hello');
+
+  // Set property
+  hello.world = {
+    hello: 'Hello',
+    world: 'World!',
+    now: new Date()
+  };
+
+  // Get property
+  var value = hello.world;
+
+  Playground.log(JSON.stringify(value, undefined, 2));
+</script>
+
+<p>In this script, we check that the JavaScript property <code>world</code> we have set on the DOM element <code>hello</code> is accessible.</p>
+  
+<p>Finally, any DOM element inherits from JavaScript Object interface!</p>

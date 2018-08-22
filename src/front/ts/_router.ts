@@ -98,7 +98,15 @@ function stateHandler(event: PopStateEvent) {
 }
 
 function linkHandler(event: Event) {
-  const target = event.target as Element;
+  let target = (event.target as Element);
+  try {
+    const appLink = target.closest('[app-link]');
+    if (appLink) {
+      target = appLink;
+    }
+  } catch (ignore) {
+    // Note Element.closest NOT supported on IE11
+  }
   if (target.hasAttribute('app-link')) {
     const link = target.getAttribute('app-link');
     let url;

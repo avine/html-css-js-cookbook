@@ -1,6 +1,11 @@
-<h1 class="app-no-margin-top">Node</h1>
+<h1 class="app-no-margin-top">Node (traversal)</h1>
 
-<div app-playground>
+<p>
+  The <code>Node</code> interface is about relations between DOM elements.
+  In this section you will learn how to implement DOM traversal.
+</p>
+
+<div app-playground="demo">
   <div id="root">
     Level 1
     <div>
@@ -30,6 +35,17 @@
   </div>
 </div>
 
+<p>
+  In this demo, the <code>#root</code> part is the DOM fragment we want to traverse.
+  The <code>#actions</code> part lets you use <code>button</code> elements to navigate inside this DOM fragment.
+</p>
+
+<div app-playground-anchor="demo"></div>
+
+<p>
+  Let's add some style...
+</p>
+
 <style app-playground>
   #root, #root * {
     margin: 0.3rem 0.6rem;
@@ -47,6 +63,19 @@
   .highlight { background-color: yellow; }
 </style>
 
+<p>This is the list of Node interface properties that allows you travsere the DOM:</p>
+<ul>
+  <li><code>Node.parentNode</code></li>
+  <li><code>Node.parentElement</code></li>
+  <li><code>Node.childNodes</code></li>
+  <li><code>Node.previousSibling</code></li>
+  <li><code>Node.nextSibling</code></li>
+  <li><code>Node.firstChild</code></li>
+  <li><code>Node.lastChild</code></li>
+</ul>
+
+<p>The following script uses some of these properties.</p>
+
 <script app-playground>
   var root = document.getElementById('root');
   var node = root;
@@ -55,11 +84,12 @@
   function moveTo(target) {
     node.classList.remove('highlight');
     target.classList.add('highlight');
+    Playground.log(`Moved to "${target.firstChild.textContent.trim()}"`, 'demo');
     node = target;
   }
 
   function noMoveTo(direction) {
-    Playground.log(`Can't go ${direction}!`);
+    Playground.log(`Can't move to ${direction}!`, 'demo');
   }
 
   document.getElementById('actions').addEventListener('click', function(event) {
@@ -98,24 +128,3 @@
     }
   });
 </script>
-
-<pre>parentNode (parentElement)
-previousSibling
-nextSibling
-childNodes
-firstChild
-lastChild
-
-isConnected
-hasChildNodes
-contains
-
-appendChild
-inserBefore
-removeChild
-replaceChild
-cloneNode
-
-textContent
-getRootNode
-normalize</pre>

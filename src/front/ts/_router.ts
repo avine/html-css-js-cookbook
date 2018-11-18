@@ -12,23 +12,29 @@ export enum ON_NAVIGATE {
 }
 
 function getBaseHref() {
-  const root = resolveUrl((document.querySelector('base') as HTMLBaseElement).href) as string;
+  const baseElement = document.querySelector('base') as HTMLBaseElement;
+  const base = (baseElement.getAttribute('href') as string).replace(/\/$/, '');
+  const root = resolveUrl(baseElement.href) as string;
   const index = resolveUrl(`${root}index.html`) as string;
   const home = resolveUrl(`${root}${FRONT_PAGES_FOLDER}/index.html`) as string;
-  return { root, index, home };
+  return { base, root, index, home };
 }
 
 function addStatePrefix(url: string) {
   const a = document.createElement('a');
   a.setAttribute('href', url);
-  if (a.pathname !== '/') a.pathname = SPA_URL_STATE_PREFIX + a.pathname;
+  if (a.pathname !== '/') {
+    const { base } = getBaseHref();
+    a.pathname = a.pathname.replace(new RegExp(`^${base}`), base + SPA_URL_STATE_PREFIX);
+  }
   return a.href;
 }
 
 function removeStatePrefix(url: string) {
   const a = document.createElement('a');
   a.setAttribute('href', url);
-  a.pathname = a.pathname.replace(new RegExp(`^${SPA_URL_STATE_PREFIX}`), '');
+  const { base } = getBaseHref();
+  a.pathname = a.pathname.replace(new RegExp(`^${base + SPA_URL_STATE_PREFIX}`), base);
   return a.href;
 }
 

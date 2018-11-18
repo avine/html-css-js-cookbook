@@ -6,6 +6,8 @@
   "scripts": {
     "clean": "shx rm -rf dist/",
 
+    "docs": "webpack --config ./webpack-docs.config.ts --env.dev",
+
     "watch:front": "webpack --config ./webpack-front.config.ts --debug --watch --env.dev",
     "watch:back": "webpack --config ./webpack-back.config.ts --debug --watch --env.dev",
     "watch": "concurrently \"npm run watch:front\" \"npm run watch:back\"",

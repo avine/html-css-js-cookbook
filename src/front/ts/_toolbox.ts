@@ -29,7 +29,15 @@ function toggleCss() {
   let contentCss: HTMLStyleElement[];
 
   const toggle = (styles: HTMLStyleElement[]) => styles.forEach((style) => {
+    /*
+    // TODO: It seems that the property `HTMLStyleElement.disabled`
+    // has been removed from the TypeScript dom interface!
+    // But actually the property is valid:
+    // https://www.w3.org/TR/cssom-1/#dom-stylesheet-disabled
+
     style.disabled = !style.disabled;
+    */
+   (style as any).disabled = !(style as any).disabled;
   });
 
   const action = getAction('toggle_css', getLinkIcon('eye-slash'), () => {

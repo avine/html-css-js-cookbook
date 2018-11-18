@@ -11,7 +11,7 @@ const noInternetAccess =
 </p>`;
 
 export function fetchContent404() {
-  return fetch(resolveUrl(`/${FRONT_PAGES_FOLDER}/error404.html`)).then(response => response.text());
+  return fetch(resolveUrl(`/${FRONT_PAGES_FOLDER}/error404.html`) as string).then(response => response.text());
 }
 
 export function fetchContent(url: string) {

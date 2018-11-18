@@ -33,11 +33,11 @@ function removeStatePrefix(url: string) {
 }
 
 function pushState(url: string) {
-  window.history.pushState({ appUrl: url }, undefined, addStatePrefix(url));
+  window.history.pushState({ appUrl: url }, '', addStatePrefix(url));
 }
 
 function replaceState(url: string) {
-  window.history.replaceState({ appUrl: url }, undefined, addStatePrefix(url));
+  window.history.replaceState({ appUrl: url }, '', addStatePrefix(url));
 }
 
 function emitNavigation(type: ON_NAVIGATE, appUrl: string) {

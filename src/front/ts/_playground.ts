@@ -18,7 +18,15 @@ function playJs(playground: HTMLScriptElement, action: Element) {
 
 function playCss(playground: HTMLStyleElement, action: Element) {
   action.addEventListener('click', (event) => {
+    /*
+    // TODO: It seems that the property `HTMLStyleElement.disabled`
+    // has been removed from the TypeScript dom interface!
+    // But actually the property is valid:
+    // https://www.w3.org/TR/cssom-1/#dom-stylesheet-disabled
+
     playground.disabled = !playground.disabled;
+    */
+    (playground as any).disabled = !(playground as any).disabled;
   });
 }
 

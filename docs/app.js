@@ -1887,7 +1887,7 @@ const noInternetAccess = `<p class="app-content__error">
   No internet access
 </p>`;
 function fetchContent404() {
-    return fetch(_dom_1.resolveUrl(`/${config_1.FRONT_PAGES_FOLDER}/error404.html`)).then(response => response.text());
+    return fetch(_dom_1.resolveUrl(`./${config_1.FRONT_PAGES_FOLDER}/error404.html`)).then(response => response.text());
 }
 exports.fetchContent404 = fetchContent404;
 function fetchContent(url) {

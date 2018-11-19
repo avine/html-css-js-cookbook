@@ -23,7 +23,8 @@
     "serve:dev": "concurrently \"npm run watch:front\" \"npm run watch:back\" \"npm run start:watch\"",
     "serve:prod": "npm run clean && npm run build && npm start",
 
-    "docs": "webpack --config ./webpack-docs.config.ts --env.dev && node set-docs-base",
+    "docs": "webpack --config ./webpack-docs.config.ts --env.dev",
+    "postdocs": "node docs-post-process",
 
     "test": "echo \"Error: no test specified\" && exit 1"
   },

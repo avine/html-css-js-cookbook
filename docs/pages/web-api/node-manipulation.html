@@ -1,9 +1,45 @@
 <h1 class="app-no-margin-top">Node (manipulation)</h1>
 
-TODO...
+<div app-playground="demo">
+  <div id="root">
+    <div id="hello" style="color:red">Hello</div>
+    <div id="world">World!</div>
+  </div>
+</div>
 
+<script app-playground app-script-defer>
+  var root = document.getElementById('root');
 
-<pre>
+  var hello = document.getElementById('hello');
+  Playground.log('Before remove, "hello" is connected to the DOM: ' + hello.isConnected);
+
+  root.removeChild(hello);
+  Playground.log('After remove, "hello" is connected to the DOM: ' + hello.isConnected);
+</script>
+
+<script app-playground app-script-defer>
+  root.appendChild(hello);
+</script>
+
+<script app-playground app-script-defer>
+  var world = document.getElementById('world');
+  root.insertBefore(hello, world);
+</script>
+
+<script app-playground app-script-defer>
+  var hi = document.createElement('div');
+  hi.textContent = 'Hi';
+  hi.style.color = 'green';
+  root.replaceChild(hi, hello);
+</script>
+
+<script app-playground app-script-defer>
+  var clone = hi.cloneNode(true);
+  clone.style.color = 'orange';
+  root.appendChild(clone);
+</script>
+
+<!--<pre>
 parentNode (parentElement)
 previousSibling
 nextSibling
@@ -24,4 +60,8 @@ cloneNode
 >textContent
 getRootNode
 normalize</pre>
-    
+
+Il faut aussi parler de document.createElement...
+
+Il faut aussi un page pour DOM selection...
+-->

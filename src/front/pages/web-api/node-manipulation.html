@@ -1,5 +1,21 @@
 <h1 class="app-no-margin-top">Node (manipulation)</h1>
 
+<p>
+  The <code>Node</code> interface is about relations between DOM elements.
+  In this section you will learn how to implement DOM manipulation.
+</p>
+
+<p>Here is the list of properties of the Node interface that allow you to manipulate the DOM:</p>
+<ul>
+  <li><code>Node.appendChild</code></li>
+  <li><code>Node.inserBefore</code></li>
+  <li><code>Node.removeChild</code></li>
+  <li><code>Node.replaceChild</code></li>
+  <li><code>Node.cloneNode</code></li>
+</ul>
+
+<p>Let's use them to manipulate the following DOM.</p>
+
 <div app-playground="demo">
   <div id="root">
     <div id="hello" style="color:red">Hello</div>
@@ -7,24 +23,37 @@
   </div>
 </div>
 
+<p>
+  Remove the <code>#hello</code> element.
+  By the way, notice the <code>.isConnected</code> property that indicate if the element is connected to the DOM or not.
+</p>
+
 <script app-playground app-script-defer>
   var root = document.getElementById('root');
 
   var hello = document.getElementById('hello');
-  Playground.log('Before remove, "hello" is connected to the DOM: ' + hello.isConnected);
+  Playground.log('Before remove, "hello" is connected to the DOM: ' + hello.isConnected, 'demo');
 
-  root.removeChild(hello);
-  Playground.log('After remove, "hello" is connected to the DOM: ' + hello.isConnected);
+  var helloRef = root.removeChild(hello);
+  Playground.log('After remove, "hello" is connected to the DOM: ' + hello.isConnected, 'demo');
+
+  Playground.log('"removeChild" returns the removed element: ' + (hello === hello), 'demo');
 </script>
+
+<p>Let's insert back the <code>#hello</code> element in the DOM.</p>
 
 <script app-playground app-script-defer>
   root.appendChild(hello);
 </script>
 
+<p>Let's move the <code>#world</code> element, by simply telling what is its new location in the DOM.</p>
+
 <script app-playground app-script-defer>
   var world = document.getElementById('world');
   root.insertBefore(hello, world);
 </script>
+
+<p>Let's replace <code>#hello</code> by another element.</p>
 
 <script app-playground app-script-defer>
   var hi = document.createElement('div');
@@ -33,35 +62,11 @@
   root.replaceChild(hi, hello);
 </script>
 
+<p>Let's clone the <code>#hi</code> element.</p>
+
 <script app-playground app-script-defer>
-  var clone = hi.cloneNode(true);
+  var deep = true; // clone the node's descendants if any
+  var clone = hi.cloneNode(deep);
   clone.style.color = 'orange';
   root.appendChild(clone);
 </script>
-
-<!--<pre>
-parentNode (parentElement)
-previousSibling
-nextSibling
->childNodes
-firstChild
->lastChild
-
->isConnected
->hasChildNodes
->contains
-
-appendChild
-inserBefore
-removeChild
-replaceChild
-cloneNode
-
->textContent
-getRootNode
-normalize</pre>
-
-Il faut aussi parler de document.createElement...
-
-Il faut aussi un page pour DOM selection...
--->

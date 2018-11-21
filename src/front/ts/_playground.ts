@@ -38,6 +38,17 @@ function playHtml(playground: Element, action: Element) {
   const content = playground.getAttribute('app-playground') || 'demo';
   const icon = cssToIcon('fa fa-coffee'); // Hum... It's coffee time!
   playground.appendChild(contentToLabel(`${content} ${icon}`));
+
+  /*
+  const playAction = createNode(
+    `<a href="#" class="app-playground__action">${content} ${icon}</a>`
+  );
+  playAction.addEventListener('click', (event) => {
+    event.preventDefault();
+    playground.classList.toggle('app-playground--sticky');
+  });
+  playground.appendChild(playAction);
+  */
 }
 
 function contentToLabel(content: string) {

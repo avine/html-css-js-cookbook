@@ -92,13 +92,25 @@
   max-height: 1rem;
 }
 
+.app-playground-wrap {
+  margin: 1rem 0;
+  transition: box-shadow var(--transition-duration) ease;
+}
+
+.app-playground-wrap--sticky {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  box-shadow: 0 0rem 0.3rem 1px var(--link-color);
+}
+
 .app-playground--demo {
   min-height: calc(var(--line-height) + 2 * (var(--playground-action-gap) - var(--playground-demo-gap)));
+  margin: 0;
   padding: var(--playground-demo-gap) 1rem;
   box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.05);
   border: 1px solid var(--border-color);
   background-color: var(--bg-color);
-  //transition: border-color var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
 
   .app-playground__action {
     right: -1px;
@@ -106,17 +118,9 @@
   }
 }
 
-/*.app-playground--sticky {
-  position: sticky;
-  top: 0;
-  z-index: 3;
-  border-color: var(--link-color);
-  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.25);
-}*/
-
 .app-playground--log {
   min-height: calc(var(--line-height) + 2 * (var(--playground-action-gap) - var(--playground-demo-gap)));
-  margin-top: -1rem;
+  margin: 0;
   box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.05);
   border: 1px solid var(--border-color);
   border-top-width: 0;

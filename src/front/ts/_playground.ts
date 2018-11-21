@@ -1,6 +1,6 @@
 import { highlight, languages } from 'prismjs';
 
-import { createNode, insertAfter, isScriptDeferred, makeScriptAlive } from './_dom';
+import { createNode, insertAfter, isScriptDeferred, makeScriptAlive, wrapNode } from './_dom';
 import { ON_NAVIGATE } from './_router';
 import { formatCode } from './_util';
 
@@ -34,21 +34,21 @@ function playHtml(playground: Element, action: Element) {
   playground.classList.add('app-playground');
   playground.classList.add('app-playground--demo');
 
+  const wrap = wrapNode(playground, 'app-playground-wrap');
+
   // Add demo label based on `app-playground` attribute.
   const content = playground.getAttribute('app-playground') || 'demo';
   const icon = cssToIcon('fa fa-coffee'); // Hum... It's coffee time!
-  playground.appendChild(contentToLabel(`${content} ${icon}`));
-
-  /*
   const playAction = createNode(
     `<a href="#" class="app-playground__action">${content} ${icon}</a>`
   );
+
+  // Add sticky behavior on demand
   playAction.addEventListener('click', (event) => {
     event.preventDefault();
-    playground.classList.toggle('app-playground--sticky');
+    wrap.classList.toggle('app-playground-wrap--sticky');
   });
   playground.appendChild(playAction);
-  */
 }
 
 function contentToLabel(content: string) {

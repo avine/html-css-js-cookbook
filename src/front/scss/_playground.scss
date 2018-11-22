@@ -92,16 +92,21 @@
   max-height: 1rem;
 }
 
-.app-playground-wrap {
+.app-playground-demo {
   margin: 1rem 0;
   transition: box-shadow var(--transition-duration) ease;
 }
 
-.app-playground-wrap--sticky {
+.app-playground-demo--sticky {
   position: sticky;
   top: 0;
   z-index: 3;
-  box-shadow: 0 0rem 0.3rem 1px var(--link-color);
+  box-shadow: 0 0 0 0.5rem rgba(130, 130, 130, 0.5);
+
+  .app-playground--demo .app-playground__action {
+    background-color: var(--link-color);
+    color: var(--bg-color);
+  }
 }
 
 .app-playground--demo {

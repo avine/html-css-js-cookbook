@@ -34,7 +34,7 @@ function playHtml(playground: Element, action: Element) {
   playground.classList.add('app-playground');
   playground.classList.add('app-playground--demo');
 
-  const wrap = wrapNode(playground, 'app-playground-wrap');
+  const wrap = wrapNode(playground, 'app-playground-demo');
 
   // Add demo label based on `app-playground` attribute.
   const content = playground.getAttribute('app-playground') || 'demo';
@@ -46,7 +46,7 @@ function playHtml(playground: Element, action: Element) {
   // Add sticky behavior on demand
   playAction.addEventListener('click', (event) => {
     event.preventDefault();
-    wrap.classList.toggle('app-playground-wrap--sticky');
+    wrap.classList.toggle('app-playground-demo--sticky');
   });
   playground.appendChild(playAction);
 }

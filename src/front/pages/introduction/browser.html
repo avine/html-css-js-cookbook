@@ -1,0 +1,41 @@
+<h1 class="app-no-margin-top">Browser</h1>
+
+<p>On Wikipedia you can find the following definition:</p>
+
+<blockquote>
+  A browser is a software application for accessing information on the World Wide Web.
+  Each individual web page, image, and video is identified by a distinct URL, enabling browsers to retrieve and display them on the user's device.
+  <br><cite>(Wikipedia)</cite>
+</blockquote>
+
+<p>However, our goal is to focus on how the browser allows <b>HTML</b>, <b>CSS</b> or <b>JavaScript</b> to interact with it.</p>
+
+<p>So, here's my definition of the browser:</p>
+
+<blockquote>
+  The browser is an engine capable of interpreting an <b>HTML</b> document in order to build the DOM (Document Object Model), that is to say the web page.
+  <br><cite>(Me ;-)</cite>
+</blockquote>
+
+<p>The DOM can then be accessed and manipulated by <b>CSS</b> and <b>JavaScript</b> through an API made available by the browser.</p>
+
+<p>But the DOM only represent the rendered document on the user's device!
+Does the browser give us information about itself as a software, or possibly about the user's device?</p>
+
+<p>The answer is, yes!</p>
+
+<p>It's called the BOM (Browser Object Model). In other words, the DOM is just a part the BOM.</p>
+
+<p>The BOM is the context, aka the <code>window</code>, aka what <code>this</code> refers to, in which JavaScript is executed.</p>
+
+<p>Here are the main properties of the window context:</p>
+
+<ul>
+  <li>screen (the user's device - not the browser window)</li>
+  <li>navigator (the browser as a software)</li>
+  <li>location (the url)</li>
+  <li>history (the history of visited pages)</li>
+  <li>document (the current rendered page - the DOM)</li>
+</ul>
+
+<p>Enough talking, let's code!</p>

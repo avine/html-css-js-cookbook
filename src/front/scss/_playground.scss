@@ -99,7 +99,7 @@
 
 .app-playground-demo--fixed {
   position: fixed;
-  width: calc(100% - 2.5rem - 280px); // When the sidebar is open
+  width: calc(100% - 3.5rem - 280px); // When the sidebar is open
   top: 3.25rem;
   z-index: 3;
   box-shadow: 0 0 0 0.5rem rgba(130, 130, 130, 0.5);

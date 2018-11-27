@@ -46,7 +46,7 @@ function playHtml(playground: Element, action: Element) {
   // Add sticky behavior on demand
   playAction.addEventListener('click', (event) => {
     event.preventDefault();
-    wrap.classList.toggle('app-playground-demo--sticky');
+    wrap.classList.toggle('app-playground-demo--fixed');
   });
   playground.appendChild(playAction);
 }

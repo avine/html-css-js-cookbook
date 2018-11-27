@@ -97,15 +97,28 @@
   transition: box-shadow var(--transition-duration) ease;
 }
 
-.app-playground-demo--sticky {
-  position: sticky;
-  top: 0;
+.app-playground-demo--fixed {
+  position: fixed;
+  width: calc(100% - 2.5rem - 280px); // When the sidebar is open
+  top: 3.25rem;
   z-index: 3;
   box-shadow: 0 0 0 0.5rem rgba(130, 130, 130, 0.5);
 
   .app-playground--demo .app-playground__action {
     background-color: var(--link-color);
     color: var(--bg-color);
+  }
+}
+
+.app-grid__wrap--sidebar-hidden {
+  .app-playground-demo--fixed {
+    width: calc(100% - 2.5rem); // When the sidebar is closed
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .app-playground-demo--fixed {
+    width: calc(100% - 2.5rem); // When the sidebar is NOT affecting the fixed demo width
   }
 }
 

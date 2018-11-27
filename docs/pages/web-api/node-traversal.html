@@ -26,12 +26,12 @@
   </div>
 
   <div id="actions">
-    <button data-direction="up">&uparrow;</button>
+    <button data-direction="previous" title="Previous sibling">&uparrow;</button>
     <br>
-    <button data-direction="left">&leftarrow;</button>
-    <button data-direction="right">&rightarrow;</button>
+    <button data-direction="parent" title="Parent node">&leftarrow;</button>
+    <button data-direction="child" title="Child node">&rightarrow;</button>
     <br>
-    <button data-direction="down">&downarrow;</button>
+    <button data-direction="next" title="Next sibling">&downarrow;</button>
   </div>
 </div>
 
@@ -102,34 +102,34 @@
   }
 
   function noMoveTo(direction) {
-    Playground.log(`Can not go ${direction}!`, 'demo');
+    Playground.log(`No ${direction} node!`, 'demo');
   }
 
   document.getElementById('actions').addEventListener('click', function(event) {
     if (event.target.nodeName === 'BUTTON') {
       const direction = event.target.dataset.direction; // Get the value of `data-direction` attribute
-      if (node === root && direction !== 'down') {
+      if (node === root && direction !== 'child') {
         noMoveTo(direction);
         return;
       }
       switch (direction) {
-        case 'up': {
+        case 'parent': {
           moveTo(node.parentNode);
           break;
         }
-        case 'left': {
+        case 'previous': {
           let target = node;
           while ((target = target.previousSibling) && (target.nodeType !== Node.ELEMENT_NODE)) {}
           target ? moveTo(target) : noMoveTo(direction);
           break;
         }
-        case 'right': {
+        case 'next': {
           let target = node;
           while ((target = target.nextSibling) && (target.nodeType !== Node.ELEMENT_NODE)) {}
           target ? moveTo(target) : noMoveTo(direction);
           break;
         }
-        case 'down': {
+        case 'child': {
           const childs = node.childNodes;
           let target;
           for (let i = 0; i < childs.length; i++) {

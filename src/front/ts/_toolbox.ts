@@ -24,35 +24,6 @@ function toggleSettingsDark() {
   return action.link;
 }
 
-function toggleCss() {
-  const headCss = querySelectorAll<HTMLStyleElement>('head [app-css-toggle]');
-  let contentCss: HTMLStyleElement[];
-
-  const toggle = (styles: HTMLStyleElement[]) => styles.forEach((style) => {
-    /*
-    // TODO: It seems that the property `HTMLStyleElement.disabled`
-    // has been removed from the TypeScript dom interface!
-    // But actually the property is valid:
-    // https://www.w3.org/TR/cssom-1/#dom-stylesheet-disabled
-
-    style.disabled = !style.disabled;
-    */
-   (style as any).disabled = !(style as any).disabled;
-  });
-
-  const action = getAction('toggle_css', getLinkIcon('eye-slash'), () => {
-    toggle(headCss);
-    if (contentCss) toggle(contentCss);
-  });
-
-  window.addEventListener(ON_NAVIGATE.END, () => {
-    contentCss = querySelectorAll('[app-content] [app-css-toggle]');
-    if (action.active) toggle(contentCss);
-  });
-
-  return action.link;
-}
-
 function getFormattedCode(source: Element) {
   const code = source.cloneNode(true) as Element;
   code.querySelectorAll('[app-code-hidden]').forEach((hidden) => {
@@ -87,6 +58,5 @@ export function bootstrapToolbox() {
 
   toolbox.appendChild(toggleGridFixed());
   toolbox.appendChild(toggleSettingsDark());
-  // toolbox.appendChild(toggleCss());
   toolbox.appendChild(viewCode());
 }

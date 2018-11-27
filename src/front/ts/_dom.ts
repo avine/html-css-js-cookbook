@@ -18,10 +18,12 @@ export function getParentNodes(child: Element, untilParent?: Element) {
   return parents;
 }
 
+/**
+ * @param html Should be a string that represents DOM fragment with single root-level node
+ */
 export function createNode(html: string) {
   const wrap = document.createElement('div');
-  wrap.innerHTML = html || ' ';
-  // FIXME: if `html` is a string then wrap.firstChild is a `Text` and not an `Element`
+  wrap.innerHTML = html;
   return wrap.removeChild(wrap.firstChild as Element);
 }
 

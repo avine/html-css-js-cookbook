@@ -10,17 +10,20 @@ const noInternetAccess =
   No internet access
 </p>`;
 
-export function fetchContent404() {
-  return fetch(resolveUrl(`./${FRONT_PAGES_FOLDER}/error404.html`) as string).then(response => response.text());
+export async function fetchContent404() {
+  const response = await fetch((resolveUrl(`./${FRONT_PAGES_FOLDER}/error404.html`) as string));
+  return response.text();
 }
 
-export function fetchContent(url: string) {
-  return fetch(url)
-    .then((response) => {
-      if (response.status !== 200) {
-        return fetchContent404().then(html => html.replace('{{url}}', url));
-      }
-      return response.text();
-    })
-    .catch(() => noInternetAccess);
+export async function fetchContent(url: string) {
+  try {
+    const response = await fetch(url);
+    if (response.status !== 200) {
+      const html = await fetchContent404();
+      return html.replace('{{url}}', url);
+    }
+    return response.text();
+  } catch (e) {
+    return noInternetAccess;
+  }
 }

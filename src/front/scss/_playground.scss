@@ -162,6 +162,10 @@
   border-bottom: 1px dotted var(--border-color);
   background-color: var(--highlight-color);
 
+  &:nth-child(2n) {
+    background-image: linear-gradient(rgba(120, 120, 120, 0.075), rgba(120, 120, 120, 0.075));
+  }
+
   &:last-child {
     border-bottom: none;
   }

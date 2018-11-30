@@ -1,3 +1,22 @@
 <h1 class="app-no-margin-top">The Document</h1>
 
-TODO...
+<p>The <code>document</code> is the entry point of the DOM.</p>
+
+<p>Click on the following link, to see the value of some properties...</p>
+
+<div app-playground="demo">
+  <a id="check" href="#">Check the document properties</a>
+</div>
+
+<script app-playground>
+  const intro = (data) => data.replace(/\n+/g, '\n').substr(0, 200).trim()
+    .replace(/</g, '&lt;').replace(/>/g, '&gt;') + '...';
+
+  document.getElementById('check').addEventListener('click', (e) => {
+    e.preventDefault();
+    Playground.log(document.title, 'demo');
+    Playground.log(intro(document.documentElement.outerHTML), 'demo');
+    Playground.log(intro(document.head.outerHTML), 'demo');
+    Playground.log(intro(document.body.outerHTML), 'demo');
+  });
+</script>

@@ -86,15 +86,15 @@ export function toggleNode(element: Element, parentElement?: Element) {
       return toggleId;
     }
   }
-  let placeholder;
+  let placeholder: Element;
   if (element.parentNode) {
     placeholder = createNode(`<script type="placeholder" app-toggle-id="${toggleId}">`);
     element.parentNode.insertBefore(placeholder, element);
     element.parentNode.removeChild(element);
   } else {
-    placeholder = document.querySelector(`[app-toggle-id="${toggleId}"]`);
-    placeholder.parentNode.insertBefore(element, placeholder);
-    placeholder.parentNode.removeChild(placeholder);
+    placeholder = document.querySelector(`[app-toggle-id="${toggleId}"]`) as Element;
+    (placeholder.parentNode as Element).insertBefore(element, placeholder);
+    (placeholder.parentNode as Element).removeChild(placeholder);
   }
   return toggleId;
 }

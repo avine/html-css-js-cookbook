@@ -33,6 +33,12 @@
 
   .app-playground__code:hover {
     opacity: 1;
+
+    // Hack: due to a strange bug in Chrome,
+    // just don't set the following value to `0.5` like above...
+    & + .app-playground__action {
+      opacity: 0.4;
+    }
   }
 }
 

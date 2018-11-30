@@ -1,6 +1,8 @@
 {
-  "app.js": "/web-explorer/app.js",
-  "app.js.map": "/web-explorer/app.js.map",
+  "app.css": "/web-explorer/app.65141fc155d13c560d11.css",
+  "app.js": "/web-explorer/app.65141fc155d13c560d11.js",
+  "app.css.map": "/web-explorer/app.65141fc155d13c560d11.css.map",
+  "app.js.map": "/web-explorer/app.65141fc155d13c560d11.js.map",
   "assets/favicon.ico": "/web-explorer/assets/favicon.ico",
   "assets/logo.png": "/web-explorer/assets/logo.png",
   "assets/offline.html": "/web-explorer/assets/offline.html",
